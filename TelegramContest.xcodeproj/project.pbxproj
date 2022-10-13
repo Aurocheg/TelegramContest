@@ -7,23 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */; };
+		DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */; };
 		DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39CE28F6E62300D3548C /* AppDelegate.swift */; };
 		DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39D028F6E62300D3548C /* SceneDelegate.swift */; };
-		DEDC39D328F6E62300D3548C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39D228F6E62300D3548C /* ViewController.swift */; };
-		DEDC39D628F6E62300D3548C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEDC39D428F6E62300D3548C /* Main.storyboard */; };
 		DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDC39D728F6E62300D3548C /* Assets.xcassets */; };
-		DEDC39DB28F6E62300D3548C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEDC39D928F6E62300D3548C /* LaunchScreen.storyboard */; };
+		DEDC39E828F6E76A00D3548C /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39E728F6E76A00D3548C /* GalleryController.swift */; };
+		DEDC39EA28F6E77700D3548C /* AccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39E928F6E77700D3548C /* AccessController.swift */; };
+		DEDC39ED28F6E78F00D3548C /* AccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39EC28F6E78F00D3548C /* AccessView.swift */; };
+		DEDC39EF28F6E79A00D3548C /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39EE28F6E79A00D3548C /* GalleryView.swift */; };
+		DEDC39F128F6E7A400D3548C /* GalleryConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39F028F6E7A400D3548C /* GalleryConstraints.swift */; };
+		DEDC39F328F6E7AE00D3548C /* AccessConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39F228F6E7AE00D3548C /* AccessConstraints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionCell.swift; sourceTree = "<group>"; };
+		DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCellConstraints.swift; sourceTree = "<group>"; };
 		DEDC39CB28F6E62300D3548C /* TelegramContest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramContest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDC39CE28F6E62300D3548C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEDC39D028F6E62300D3548C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DEDC39D228F6E62300D3548C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DEDC39D528F6E62300D3548C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DEDC39D728F6E62300D3548C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DEDC39DA28F6E62300D3548C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEDC39DC28F6E62300D3548C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEDC39E728F6E76A00D3548C /* GalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
+		DEDC39E928F6E77700D3548C /* AccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessController.swift; sourceTree = "<group>"; };
+		DEDC39EC28F6E78F00D3548C /* AccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessView.swift; sourceTree = "<group>"; };
+		DEDC39EE28F6E79A00D3548C /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		DEDC39F028F6E7A400D3548C /* GalleryConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryConstraints.swift; sourceTree = "<group>"; };
+		DEDC39F228F6E7AE00D3548C /* AccessConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessConstraints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE59C85828F7EB0A000B1D7D /* Gallery Collection Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */,
+				DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */,
+			);
+			path = "Gallery Collection Cell";
+			sourceTree = "<group>";
+		};
 		DEDC39C228F6E62300D3548C = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +75,59 @@
 		DEDC39CD28F6E62300D3548C /* TelegramContest */ = {
 			isa = PBXGroup;
 			children = (
+				DEDC39E428F6E6D300D3548C /* Model */,
+				DEDC39E228F6E6C500D3548C /* View */,
+				DEDC39E328F6E6CE00D3548C /* Controller */,
 				DEDC39CE28F6E62300D3548C /* AppDelegate.swift */,
 				DEDC39D028F6E62300D3548C /* SceneDelegate.swift */,
-				DEDC39D228F6E62300D3548C /* ViewController.swift */,
-				DEDC39D428F6E62300D3548C /* Main.storyboard */,
 				DEDC39D728F6E62300D3548C /* Assets.xcassets */,
-				DEDC39D928F6E62300D3548C /* LaunchScreen.storyboard */,
 				DEDC39DC28F6E62300D3548C /* Info.plist */,
 			);
 			path = TelegramContest;
+			sourceTree = "<group>";
+		};
+		DEDC39E228F6E6C500D3548C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DEDC39E628F6E75100D3548C /* Access */,
+				DEDC39E528F6E74C00D3548C /* Gallery */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DEDC39E328F6E6CE00D3548C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DEDC39E928F6E77700D3548C /* AccessController.swift */,
+				DEDC39E728F6E76A00D3548C /* GalleryController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DEDC39E428F6E6D300D3548C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DEDC39E528F6E74C00D3548C /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				DE59C85828F7EB0A000B1D7D /* Gallery Collection Cell */,
+				DEDC39EE28F6E79A00D3548C /* GalleryView.swift */,
+				DEDC39F028F6E7A400D3548C /* GalleryConstraints.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		DEDC39E628F6E75100D3548C /* Access */ = {
+			isa = PBXGroup;
+			children = (
+				DEDC39EC28F6E78F00D3548C /* AccessView.swift */,
+				DEDC39F228F6E7AE00D3548C /* AccessConstraints.swift */,
+			);
+			path = Access;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEDC39DB28F6E62300D3548C /* LaunchScreen.storyboard in Resources */,
 				DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */,
-				DEDC39D628F6E62300D3548C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,32 +199,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEDC39D328F6E62300D3548C /* ViewController.swift in Sources */,
+				DEDC39E828F6E76A00D3548C /* GalleryController.swift in Sources */,
+				DEDC39EF28F6E79A00D3548C /* GalleryView.swift in Sources */,
+				DEDC39F128F6E7A400D3548C /* GalleryConstraints.swift in Sources */,
 				DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */,
+				DEDC39F328F6E7AE00D3548C /* AccessConstraints.swift in Sources */,
 				DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */,
+				DEDC39ED28F6E78F00D3548C /* AccessView.swift in Sources */,
+				DEDC39EA28F6E77700D3548C /* AccessController.swift in Sources */,
+				DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */,
+				DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		DEDC39D428F6E62300D3548C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DEDC39D528F6E62300D3548C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		DEDC39D928F6E62300D3548C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DEDC39DA28F6E62300D3548C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DEDC39DD28F6E62300D3548C /* Debug */ = {
@@ -292,9 +341,10 @@
 				INFOPLIST_FILE = TelegramContest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,9 +370,10 @@
 				INFOPLIST_FILE = TelegramContest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
