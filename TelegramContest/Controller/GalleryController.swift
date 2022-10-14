@@ -38,7 +38,7 @@ final class GalleryController: UIViewController {
                 if status == .authorized {
                     let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
                     
-                    assets.enumerateObjects { (object,_, _) in
+                    assets.enumerateObjects { (object, _, _) in
                         self?.images.append(object)
                     }
                     
@@ -58,7 +58,30 @@ final class GalleryController: UIViewController {
 }
 
 extension GalleryController: UICollectionViewDelegate {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let image = images[indexPath.row]
+        let editorController = EditorController()
+        
+        let manager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        options.isSynchronous = true
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .exact
+        var thumbnail = UIImage()
+        
+        let screenWidth = UIScreen.main.bounds.width
+        
+        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth, height: 600), contentMode: .aspectFill, options: options) {(result, info) in
+            if let result = result {
+                thumbnail = result
+            }
+        }
+        
+        editorController.galleryImage = thumbnail
+        
+        let navController = UINavigationController(rootViewController: editorController)
+        present(navController, animated: true)
+    }
 }
 
 extension GalleryController: UICollectionViewDataSource {
@@ -74,7 +97,6 @@ extension GalleryController: UICollectionViewDataSource {
         let asset = images[indexPath.row]
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
-        options.resizeMode = .none
         
         manager.requestImage(for: asset, targetSize: CGSize(width: 129.0, height: 129.0), contentMode: .aspectFit, options: options) {(image, _) in
             DispatchQueue.main.async {
@@ -84,10 +106,4 @@ extension GalleryController: UICollectionViewDataSource {
         
         return cell
     }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    
-    
 }
