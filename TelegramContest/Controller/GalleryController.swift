@@ -9,14 +9,18 @@ import UIKit
 import Photos
 
 final class GalleryController: UIViewController {
+    // MARK: - Gallery View
     private let galleryView = GalleryView()
     
+    // MARK: - UI Elements
     private var galleryCollectionView: UICollectionView {
         galleryView.galleryCollectionView
     }
     
+    // MARK: - Variables
     private var images = [PHAsset]()
         
+    // MARK: - Life Cycle Methods
     override func loadView() {
         view = galleryView
     }
@@ -32,6 +36,7 @@ final class GalleryController: UIViewController {
         populatePhotos()
     }
     
+    // MARK: - Populate Photos Method
     private func populatePhotos() {
         if #available(iOS 14, *) {
             PHPhotoLibrary.requestAuthorization(for: .addOnly) { [weak self] status in
@@ -57,21 +62,22 @@ final class GalleryController: UIViewController {
 
 }
 
+// MARK: - UICollectionViewDelegate
 extension GalleryController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let image = images[indexPath.row]
+        var thumbnail = UIImage()
         let editorController = EditorController()
+        let screenWidth = UIScreen.main.bounds.width
         
         let manager = PHImageManager.default()
+        
         let options = PHImageRequestOptions()
         options.isSynchronous = true
         options.deliveryMode = .highQualityFormat
         options.resizeMode = .exact
-        var thumbnail = UIImage()
         
-        let screenWidth = UIScreen.main.bounds.width
-        
-        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth, height: 600), contentMode: .aspectFill, options: options) {(result, info) in
+        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth, height: 520), contentMode: .aspectFill, options: options) {(result, info) in
             if let result = result {
                 thumbnail = result
             }
@@ -80,10 +86,12 @@ extension GalleryController: UICollectionViewDelegate {
         editorController.galleryImage = thumbnail
         
         let navController = UINavigationController(rootViewController: editorController)
+        navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
     }
 }
 
+// MARK: - UI CollectionViewDataSource
 extension GalleryController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         images.count

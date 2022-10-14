@@ -10,6 +10,8 @@
 		DE334EDF28F94785001D5359 /* EditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EDE28F94785001D5359 /* EditorController.swift */; };
 		DE334EE228F947A2001D5359 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE128F947A2001D5359 /* EditorView.swift */; };
 		DE334EE428F947B3001D5359 /* EditorConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE328F947B3001D5359 /* EditorConstraints.swift */; };
+		DE334EE728F97B01001D5359 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE628F97B01001D5359 /* UIButton.swift */; };
+		DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE828F9F20A001D5359 /* EditorModel.swift */; };
 		DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */; };
 		DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */; };
 		DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39CE28F6E62300D3548C /* AppDelegate.swift */; };
@@ -27,6 +29,8 @@
 		DE334EDE28F94785001D5359 /* EditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorController.swift; sourceTree = "<group>"; };
 		DE334EE128F947A2001D5359 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		DE334EE328F947B3001D5359 /* EditorConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorConstraints.swift; sourceTree = "<group>"; };
+		DE334EE628F97B01001D5359 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		DE334EE828F9F20A001D5359 /* EditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModel.swift; sourceTree = "<group>"; };
 		DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionCell.swift; sourceTree = "<group>"; };
 		DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCellConstraints.swift; sourceTree = "<group>"; };
 		DEDC39CB28F6E62300D3548C /* TelegramContest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramContest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +66,14 @@
 			path = Editor;
 			sourceTree = "<group>";
 		};
+		DE334EE528F97AF5001D5359 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DE334EE628F97B01001D5359 /* UIButton.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DE59C85828F7EB0A000B1D7D /* Gallery Collection Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +102,7 @@
 		DEDC39CD28F6E62300D3548C /* TelegramContest */ = {
 			isa = PBXGroup;
 			children = (
+				DE334EE528F97AF5001D5359 /* Extensions */,
 				DEDC39E428F6E6D300D3548C /* Model */,
 				DEDC39E228F6E6C500D3548C /* View */,
 				DEDC39E328F6E6CE00D3548C /* Controller */,
@@ -124,6 +137,7 @@
 		DEDC39E428F6E6D300D3548C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DE334EE828F9F20A001D5359 /* EditorModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,7 +236,9 @@
 				DE334EDF28F94785001D5359 /* EditorController.swift in Sources */,
 				DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */,
 				DEDC39F328F6E7AE00D3548C /* AccessConstraints.swift in Sources */,
+				DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */,
 				DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */,
+				DE334EE728F97B01001D5359 /* UIButton.swift in Sources */,
 				DEDC39ED28F6E78F00D3548C /* AccessView.swift in Sources */,
 				DEDC39EA28F6E77700D3548C /* AccessController.swift in Sources */,
 				DE334EE228F947A2001D5359 /* EditorView.swift in Sources */,
