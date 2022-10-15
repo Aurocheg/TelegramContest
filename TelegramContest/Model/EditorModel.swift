@@ -17,7 +17,7 @@ struct BrushesModel: BrushesProtocol {
     
     static func getBrushes() -> [BrushesModel] {
         return [
-            BrushesModel(brush: ""),
+            BrushesModel(brush: "pencil"),
             BrushesModel(brush: ""),
             BrushesModel(brush: ""),
             BrushesModel(brush: ""),

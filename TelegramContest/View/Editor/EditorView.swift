@@ -115,13 +115,13 @@ final class EditorView: UIView {
         
         editorConstraints.addConstraintsToImage(imageView, view: self, parent: clearAllButton)
         
-        editorConstraints.addConstraintsToBottomButton(colorPickerButton, view: self, parent: imageView, topConstant: 72.0, position: .left)
-        editorConstraints.addConstraintsToBrushesCollection(brushesCollectionView, parent: colorPickerButton, imageView: imageView, view: self)
-        editorConstraints.addConstraintsToBottomButton(addButton, view: self, parent: imageView, topConstant: 72.0, position: .right)
+        editorConstraints.addConstraintsToBottomButton(colorPickerButton, view: self, parent: cancelButton, bottomConstant: -16.0, position: .left)
+        editorConstraints.addConstraintsToBrushesCollection(brushesCollectionView, parent: colorPickerButton, segmentedControl: segmentedControl, view: self)
+        editorConstraints.addConstraintsToBottomButton(addButton, view: self, parent: downloadButton, bottomConstant: -16.0, position: .right)
         
-        editorConstraints.addConstraintsToBottomButton(cancelButton, view: self, parent: colorPickerButton, topConstant: 16.0, position: .left)
+        editorConstraints.addConstraintsToBottomButton(cancelButton, view: self, bottomConstant: -42.0, position: .left)
         editorConstraints.addConstraintsToSegmentedControl(segmentedControl, view: self, collectionView: brushesCollectionView, parent: cancelButton)
-        editorConstraints.addConstraintsToBottomButton(downloadButton, view: self, parent: addButton, topConstant: 16.0, position: .right)
+        editorConstraints.addConstraintsToBottomButton(downloadButton, view: self, bottomConstant: -42.0, position: .right)
     }
     
 }

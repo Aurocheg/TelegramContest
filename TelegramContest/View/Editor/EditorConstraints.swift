@@ -32,13 +32,17 @@ final class EditorConstraints: UIView {
         imageView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 42.0).isActive = true
         imageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         imageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
+        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.59).isActive = true
     }
     
-    public func addConstraintsToBottomButton(_ button: UIButton, view: UIView, parent: AnyObject, topConstant: CGFloat, position: ButtonsPosition) {
+    public func addConstraintsToBottomButton(_ button: UIButton, view: UIView, parent: AnyObject? = nil, bottomConstant: CGFloat, position: ButtonsPosition) {
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: topConstant).isActive = true
+        if let parent = parent {
+            button.bottomAnchor.constraint(equalTo: parent.topAnchor, constant: bottomConstant).isActive = true
+        } else {
+            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomConstant).isActive = true
+        }
         
         switch position {
         case .left:
@@ -46,13 +50,16 @@ final class EditorConstraints: UIView {
         case .right:
             button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8.0).isActive = true
         }
+        
+        button.widthAnchor.constraint(equalToConstant: 33.0).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 33.0).isActive = true
     }
     
-    public func addConstraintsToBrushesCollection(_ collectionView: UICollectionView, parent: AnyObject, imageView: UIImageView, view: UIView) {
+    public func addConstraintsToBrushesCollection(_ collectionView: UICollectionView, parent: AnyObject, segmentedControl: UISegmentedControl, view: UIView) {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.leftAnchor.constraint(equalTo: parent.rightAnchor, constant: 35.5).isActive = true
-        collectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40.0).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: segmentedControl.topAnchor, constant: 40.0).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.61).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 85.0).isActive = true
     }
@@ -61,7 +68,7 @@ final class EditorConstraints: UIView {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
         segmentedControl.leftAnchor.constraint(equalTo: parent.rightAnchor, constant: 18.0).isActive = true
-        segmentedControl.topAnchor.constraint(equalTo: collectionView.bottomAnchor).isActive = true
+        segmentedControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -44.5).isActive = true
         segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
     }
