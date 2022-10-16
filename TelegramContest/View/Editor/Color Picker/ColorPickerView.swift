@@ -91,13 +91,13 @@ final class ColorPickerView: UIView {
         addSubview(segmentedControl)
         
         // MARK: - Grid
-//        addSubview(gridColorsCollectionView)
+        addSubview(gridColorsCollectionView)
 //
 //        // MARK: - Spectrum
 //        addSubview(spectrumView)
 //
 //        // MARK: - Sliders
-        addSubview(slidersView)
+//        addSubview(slidersView)
 
         // MARK: - Opacity
         addSubview(opacityLabel)
@@ -120,11 +120,14 @@ final class ColorPickerView: UIView {
         colorPickerConstraints.addConstraintsToToolButton(closeButton, view: self, position: .right)
         colorPickerConstraints.addConstraintsToSegmentedControl(segmentedControl, view: self, parent: mainTitleLabel)
         
+        // MARK: - Grid
+        colorPickerConstraints.addConstraintsToGridColors(gridColorsCollectionView, view: self, parent: segmentedControl)
+        
         // MARK: - Sliders
-        colorPickerConstraints.addConstraintsToSlidersView(slidersView, view: self, parent: segmentedControl)
+//        colorPickerConstraints.addConstraintsToSlidersView(slidersView, view: self, parent: segmentedControl)
         
         // MARK: - Opacity
-        slidersConstraints.addConstraintsToSliderLabel(opacityLabel, view: self, parent: slidersView, topConstant: 20.0, leftConstant: 20.0)
+        slidersConstraints.addConstraintsToSliderLabel(opacityLabel, view: self, parent: gridColorsCollectionView, topConstant: 20.0, leftConstant: 20.0)
         slidersConstraints.addConstraintsToSlider(opacitySlider, view: self, parent: opacityLabel, leftConstant: 16.0)
         slidersConstraints.addConstraintsToSliderTF(opacityTF, view: self, parent: opacityLabel, rightConstant: -16.0)
         

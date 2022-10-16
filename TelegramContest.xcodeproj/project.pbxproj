@@ -26,9 +26,10 @@
 		DE94C68828FC1263008E3494 /* PresentAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68728FC1263008E3494 /* PresentAnimation.swift */; };
 		DE94C68A28FC1276008E3494 /* DismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68928FC1276008E3494 /* DismissAnimation.swift */; };
 		DE94C68D28FC3AFD008E3494 /* SlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68C28FC3AFD008E3494 /* SlidersView.swift */; };
-		DE94C69128FC3B66008E3494 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69028FC3B66008E3494 /* GridView.swift */; };
+		DE94C69128FC3B66008E3494 /* GridCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69028FC3B66008E3494 /* GridCollectionCell.swift */; };
 		DE94C69328FC3B7C008E3494 /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69228FC3B7C008E3494 /* SpectrumView.swift */; };
 		DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */; };
+		DE94C69928FC7DA2008E3494 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE94C69828FC7DA2008E3494 /* colorPalette.plist */; };
 		DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39CE28F6E62300D3548C /* AppDelegate.swift */; };
 		DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39D028F6E62300D3548C /* SceneDelegate.swift */; };
 		DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDC39D728F6E62300D3548C /* Assets.xcassets */; };
@@ -60,9 +61,10 @@
 		DE94C68728FC1263008E3494 /* PresentAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimation.swift; sourceTree = "<group>"; };
 		DE94C68928FC1276008E3494 /* DismissAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimation.swift; sourceTree = "<group>"; };
 		DE94C68C28FC3AFD008E3494 /* SlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidersView.swift; sourceTree = "<group>"; };
-		DE94C69028FC3B66008E3494 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		DE94C69028FC3B66008E3494 /* GridCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionCell.swift; sourceTree = "<group>"; };
 		DE94C69228FC3B7C008E3494 /* SpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
 		DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidersConstraints.swift; sourceTree = "<group>"; };
+		DE94C69828FC7DA2008E3494 /* colorPalette.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = colorPalette.plist; sourceTree = "<group>"; };
 		DEDC39CB28F6E62300D3548C /* TelegramContest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramContest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDC39CE28F6E62300D3548C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEDC39D028F6E62300D3548C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,7 +161,7 @@
 		DE94C68F28FC3B5A008E3494 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
-				DE94C69028FC3B66008E3494 /* GridView.swift */,
+				DE94C69028FC3B66008E3494 /* GridCollectionCell.swift */,
 			);
 			path = Grid;
 			sourceTree = "<group>";
@@ -192,6 +194,7 @@
 				DEDC39D028F6E62300D3548C /* SceneDelegate.swift */,
 				DEDC39D728F6E62300D3548C /* Assets.xcassets */,
 				DEDC39DC28F6E62300D3548C /* Info.plist */,
+				DE94C69828FC7DA2008E3494 /* colorPalette.plist */,
 			);
 			path = TelegramContest;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE94C69928FC7DA2008E3494 /* colorPalette.plist in Resources */,
 				DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,7 +330,7 @@
 				DEDC39F328F6E7AE00D3548C /* AccessConstraints.swift in Sources */,
 				DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */,
 				DE94C67228FB0E18008E3494 /* ColorPresentationController.swift in Sources */,
-				DE94C69128FC3B66008E3494 /* GridView.swift in Sources */,
+				DE94C69128FC3B66008E3494 /* GridCollectionCell.swift in Sources */,
 				DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */,
 				DE94C67728FB0E46008E3494 /* ColorPickerConstraints.swift in Sources */,
 				DE94C68628FC1246008E3494 /* PanelTransition.swift in Sources */,

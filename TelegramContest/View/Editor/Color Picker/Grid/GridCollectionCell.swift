@@ -7,15 +7,14 @@
 
 import UIKit
 
-final class GridView: UIView {
-
+final class GridCollectionCell: UICollectionViewCell {
     // MARK: - Constraints
     
     // MARK: - UI Elements
     
     // MARK: - Init Method
-    init() {
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         initViews()
         initConstraints()

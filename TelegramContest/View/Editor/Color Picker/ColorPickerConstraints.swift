@@ -43,6 +43,15 @@ final class ColorPickerConstraints: UIView {
         segmentedControl.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
     }
     
+    public func addConstraintsToGridColors(_ gridColorsCollectionView: UICollectionView, view: UIView, parent: AnyObject) {
+        gridColorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        gridColorsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0).isActive = true
+        gridColorsCollectionView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
+        gridColorsCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32.0).isActive = true
+        gridColorsCollectionView.heightAnchor.constraint(equalToConstant: 296.0).isActive = true
+    }
+    
     public func addConstraintsToSlidersView(_ slidersView: UIView, view: UIView, parent: UISegmentedControl) {
         slidersView.translatesAutoresizingMaskIntoConstraints = false
         
