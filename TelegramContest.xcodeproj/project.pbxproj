@@ -14,9 +14,14 @@
 		DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE828F9F20A001D5359 /* EditorModel.swift */; };
 		DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */; };
 		DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */; };
-		DE94C67228FB0E18008E3494 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C67128FB0E18008E3494 /* ColorPickerController.swift */; };
+		DE94C67228FB0E18008E3494 /* ColorPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C67128FB0E18008E3494 /* ColorPresentationController.swift */; };
 		DE94C67528FB0E3A008E3494 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C67428FB0E3A008E3494 /* ColorPickerView.swift */; };
 		DE94C67728FB0E46008E3494 /* ColorPickerConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C67628FB0E46008E3494 /* ColorPickerConstraints.swift */; };
+		DE94C67928FB1385008E3494 /* UISlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C67828FB1385008E3494 /* UISlider.swift */; };
+		DE94C67B28FB138F008E3494 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C67A28FB138F008E3494 /* UITextField.swift */; };
+		DE94C67D28FB13A9008E3494 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C67C28FB13A9008E3494 /* UILabel.swift */; };
+		DE94C68128FBF224008E3494 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68028FBF224008E3494 /* ColorPickerController.swift */; };
+		DE94C68328FBF332008E3494 /* DimmPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68228FBF332008E3494 /* DimmPresentationController.swift */; };
 		DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39CE28F6E62300D3548C /* AppDelegate.swift */; };
 		DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39D028F6E62300D3548C /* SceneDelegate.swift */; };
 		DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDC39D728F6E62300D3548C /* Assets.xcassets */; };
@@ -36,9 +41,14 @@
 		DE334EE828F9F20A001D5359 /* EditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModel.swift; sourceTree = "<group>"; };
 		DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionCell.swift; sourceTree = "<group>"; };
 		DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCellConstraints.swift; sourceTree = "<group>"; };
-		DE94C67128FB0E18008E3494 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
+		DE94C67128FB0E18008E3494 /* ColorPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPresentationController.swift; sourceTree = "<group>"; };
 		DE94C67428FB0E3A008E3494 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		DE94C67628FB0E46008E3494 /* ColorPickerConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerConstraints.swift; sourceTree = "<group>"; };
+		DE94C67828FB1385008E3494 /* UISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISlider.swift; sourceTree = "<group>"; };
+		DE94C67A28FB138F008E3494 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		DE94C67C28FB13A9008E3494 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		DE94C68028FBF224008E3494 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
+		DE94C68228FBF332008E3494 /* DimmPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmPresentationController.swift; sourceTree = "<group>"; };
 		DEDC39CB28F6E62300D3548C /* TelegramContest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramContest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDC39CE28F6E62300D3548C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEDC39D028F6E62300D3548C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				DE334EE628F97B01001D5359 /* UIButton.swift */,
+				DE94C67828FB1385008E3494 /* UISlider.swift */,
+				DE94C67A28FB138F008E3494 /* UITextField.swift */,
+				DE94C67C28FB13A9008E3494 /* UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -146,7 +159,9 @@
 				DEDC39E928F6E77700D3548C /* AccessController.swift */,
 				DEDC39E728F6E76A00D3548C /* GalleryController.swift */,
 				DE334EDE28F94785001D5359 /* EditorController.swift */,
-				DE94C67128FB0E18008E3494 /* ColorPickerController.swift */,
+				DE94C67128FB0E18008E3494 /* ColorPresentationController.swift */,
+				DE94C68028FBF224008E3494 /* ColorPickerController.swift */,
+				DE94C68228FBF332008E3494 /* DimmPresentationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -255,13 +270,18 @@
 				DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */,
 				DEDC39F328F6E7AE00D3548C /* AccessConstraints.swift in Sources */,
 				DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */,
-				DE94C67228FB0E18008E3494 /* ColorPickerController.swift in Sources */,
+				DE94C67228FB0E18008E3494 /* ColorPresentationController.swift in Sources */,
 				DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */,
 				DE94C67728FB0E46008E3494 /* ColorPickerConstraints.swift in Sources */,
+				DE94C67B28FB138F008E3494 /* UITextField.swift in Sources */,
 				DE334EE728F97B01001D5359 /* UIButton.swift in Sources */,
 				DEDC39ED28F6E78F00D3548C /* AccessView.swift in Sources */,
 				DEDC39EA28F6E77700D3548C /* AccessController.swift in Sources */,
+				DE94C68128FBF224008E3494 /* ColorPickerController.swift in Sources */,
 				DE334EE228F947A2001D5359 /* EditorView.swift in Sources */,
+				DE94C68328FBF332008E3494 /* DimmPresentationController.swift in Sources */,
+				DE94C67D28FB13A9008E3494 /* UILabel.swift in Sources */,
+				DE94C67928FB1385008E3494 /* UISlider.swift in Sources */,
 				DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */,
 				DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */,
 				DE334EE428F947B3001D5359 /* EditorConstraints.swift in Sources */,
