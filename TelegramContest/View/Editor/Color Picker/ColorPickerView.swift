@@ -10,23 +10,14 @@ import UIKit
 final class ColorPickerView: UIView {
     // MARK: - Constraints
     private let colorPickerConstraints = ColorPickerConstraints()
+    private let slidersConstraints = SlidersConstraints()
     
     // MARK: - Top Elements
-    public let eyeDropperButton: UIButton = {
-        let button = UIButton()
-        return button.createButton(image: UIImage(named: "eyeDropper"), background: .no)
-    }()
+    public let eyeDropperButton = Button(image: UIImage(named: "eyeDropper"), background: .no)
     
-    private let mainTitleLabel: UILabel = {
-        let label = UILabel()
-        return label.createLabel(text: "Colors", size: 17.0, weight: .semibold)
-    }()
+    private let mainTitleLabel = Label(text: "Colors", size: 17.0, weight: .semibold)
     
-    public let closeButton: UIButton = {
-        let button = UIButton()
-        let size = CGSize(width: 30.0, height: 30.0)
-        return button.createButton(size: size, image: UIImage(named: "cancel"), background: .yes)
-    }()
+    public let closeButton = Button(image: UIImage(named: "cancel"), background: .dark)
     
     public let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Grid", "Spectrum", "Sliders"])
@@ -46,77 +37,16 @@ final class ColorPickerView: UIView {
         return collectionView
     }()
     
-    // MARK: - Slider
-    private let redLabel: UILabel = {
-        let label = UILabel()
-        return label.createLabel(text: "RED", size: 13.0, weight: .semibold)
-    }()
+    // MARK: - Spectrum
+    public let spectrumView = SpectrumView()
     
-    public let redSlider: UISlider = {
-        let slider = UISlider()
-        return slider.createSlider(minValue: 0.0, maxValue: 255.0)
-    }()
-    
-    public let redTF: UITextField = {
-        let tf = UITextField()
-        return tf.createTF(currentText: "255")
-    }()
-    
-    private let greenLabel: UILabel = {
-        let label = UILabel()
-        return label.createLabel(text: "GREEN", size: 13.0, weight: .semibold)
-    }()
-    
-    public let greenSlider: UISlider = {
-        let slider = UISlider()
-        return slider.createSlider(minValue: 0.0, maxValue: 255.0)
-    }()
-    
-    public let greenTF: UITextField = {
-        let tf = UITextField()
-        return tf.createTF(currentText: "145")
-    }()
-    
-    private let blueLabel: UILabel = {
-        let label = UILabel()
-        return label.createLabel(text: "BLUE", size: 13.0, weight: .semibold)
-    }()
-    
-    public let blueSlider: UISlider = {
-        let slider = UISlider()
-        return slider.createSlider(minValue: 0.0, maxValue: 255.0)
-    }()
-    
-    public let blueTF: UITextField = {
-        let tf = UITextField()
-        return tf.createTF(currentText: "255")
-    }()
-    
-    private let hexColorLabel: UILabel = {
-        let label = UILabel()
-        return label.createLabel(text: "Display P3 Hex Color #", size: 17.0, weight: .regular)
-    }()
-    
-    public let hexColorTF: UITextField = {
-        let tf = UITextField()
-        return tf.createTF(currentText: "FF91FF")
-    }()
+    // MARK: - Sliders
+    public let slidersView = SlidersView()
     
     // MARK: - Opacity
-    private let opacityLabel: UILabel = {
-        let label = UILabel()
-        return label.createLabel(text: "OPACITY", size: 13.0, weight: .semibold)
-    }()
-    
-    public let opacitySlider: UISlider = {
-        let slider = UISlider()
-        return slider.createSlider(minValue: 0.0, maxValue: 100.0)
-    }()
-    
-    public let opacityTF: UITextField = {
-        let tf = UITextField()
-        return tf.createTF(currentText: "100%")
-    }()
+    private let opacityLabel = Label(text: "OPACITY", size: 13.0, weight: .semibold, color: UIColor(red: 0.922, green: 0.922, blue: 0.961, alpha: 0.6))
+    public let opacitySlider = ColorSlider(minValue: 0.0, maxValue: 100.0)
+    public let opacityTF = ColorTF()
     
     // MARK: - Colors
     private let separatingLineView: UIView = {
@@ -127,7 +57,8 @@ final class ColorPickerView: UIView {
     
     public let currentColorView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10.0
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .systemPurple
         return view
     }()
     
@@ -141,7 +72,7 @@ final class ColorPickerView: UIView {
     init() {
         super.init(frame: .zero)
         
-        backgroundColor = .systemGray6
+        backgroundColor = .systemGray5
         
         initViews()
         initConstraints()
@@ -159,36 +90,26 @@ final class ColorPickerView: UIView {
         addSubview(closeButton)
         addSubview(segmentedControl)
         
-        // MARK: - RED
-//        addSubview(redLabel)
-//        addSubview(redSlider)
-//        addSubview(redTF)
+        // MARK: - Grid
+//        addSubview(gridColorsCollectionView)
 //
-//        // MARK: - GREEN
-//        addSubview(greenLabel)
-//        addSubview(greenSlider)
-//        addSubview(greenTF)
+//        // MARK: - Spectrum
+//        addSubview(spectrumView)
 //
-//        // MARK: - BLUE
-//        addSubview(blueLabel)
-//        addSubview(blueSlider)
-//        addSubview(blueTF)
-        
-        // MARK: Hex
-//        addSubview(hexColorLabel)
-//        addSubview(hexColorTF)
-//
-//        // MARK: - Opacity
-//        addSubview(opacityLabel)
-//        addSubview(opacitySlider)
-//        addSubview(opacityTF)
-//
-//        // MARK: - Separator
-//        addSubview(separatingLineView)
-//
-//        // MARK: - Colors
-//        addSubview(currentColorView)
-//        addSubview(colorsCollectionView)
+//        // MARK: - Sliders
+        addSubview(slidersView)
+
+        // MARK: - Opacity
+        addSubview(opacityLabel)
+        addSubview(opacitySlider)
+        addSubview(opacityTF)
+
+        // MARK: - Separator
+        addSubview(separatingLineView)
+
+        // MARK: - Colors
+        addSubview(currentColorView)
+        addSubview(colorsCollectionView)
     }
     
     // MARK: - Init Constraints Method
@@ -198,5 +119,19 @@ final class ColorPickerView: UIView {
         colorPickerConstraints.addConstraintsToMainTitle(mainTitleLabel, view: self)
         colorPickerConstraints.addConstraintsToToolButton(closeButton, view: self, position: .right)
         colorPickerConstraints.addConstraintsToSegmentedControl(segmentedControl, view: self, parent: mainTitleLabel)
+        
+        // MARK: - Sliders
+        colorPickerConstraints.addConstraintsToSlidersView(slidersView, view: self, parent: segmentedControl)
+        
+        // MARK: - Opacity
+        slidersConstraints.addConstraintsToSliderLabel(opacityLabel, view: self, parent: slidersView, topConstant: 20.0, leftConstant: 20.0)
+        slidersConstraints.addConstraintsToSlider(opacitySlider, view: self, parent: opacityLabel, leftConstant: 16.0)
+        slidersConstraints.addConstraintsToSliderTF(opacityTF, view: self, parent: opacityLabel, rightConstant: -16.0)
+        
+        // MARK: - Separator
+        colorPickerConstraints.addConstraintsToSeparator(separatingLineView, view: self, parent: opacitySlider)
+        
+        // MARK: - Colors
+        colorPickerConstraints.addConstraintsToCurrentColor(currentColorView, view: self, parent: separatingLineView)
     }
 }

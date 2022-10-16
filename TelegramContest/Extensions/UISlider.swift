@@ -8,22 +8,26 @@
 import Foundation
 import UIKit
 
-extension UISlider {
-    func createSlider(minValue: Float, maxValue: Float) -> UISlider {
-        let slider = UISlider()
+final class ColorSlider: UISlider {
+    init(minValue: Float, maxValue: Float) {
+        super.init(frame: .zero)
         
-        slider.minimumValue = minValue
-        slider.maximumValue = maxValue
+        self.layer.cornerRadius = 18.0
+        
+        self.minimumValue = minValue
+        self.maximumValue = maxValue
         
         let thumbView = UIView()
-        thumbView.backgroundColor = .systemYellow
+        thumbView.backgroundColor = .clear
         thumbView.layer.borderWidth = 0.4
         thumbView.layer.borderColor = UIColor.darkGray.cgColor
         
-        let thumb = thumbImage(radius: 20.0, thumbView: thumbView)
-        slider.setThumbImage(thumb, for: .normal)
-        
-        return slider
+        let thumb = thumbImage(radius: 40.0, thumbView: thumbView)
+        self.setThumbImage(thumb, for: .normal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func thumbImage(radius: CGFloat, thumbView: UIView) -> UIImage {

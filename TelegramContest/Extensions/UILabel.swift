@@ -8,19 +8,21 @@
 import Foundation
 import UIKit
 
-extension UILabel {
-    func createLabel(text: String, size: CGFloat, weight: UIFont.Weight, color: UIColor? = nil) -> UILabel {
-        let label = UILabel()
+final class Label: UILabel {
+    init(text: String, size: CGFloat, weight: UIFont.Weight, color: UIColor? = nil) {
+        super.init(frame: .zero)
         
-        label.font = .systemFont(ofSize: size, weight: weight)
-        label.text = text
+        self.font = .systemFont(ofSize: size, weight: weight)
+        self.text = text
         
         if let color = color {
-            label.textColor = color
+            self.textColor = color
         } else {
-            label.textColor = .white
+            self.textColor = .white
         }
-        
-        return label
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

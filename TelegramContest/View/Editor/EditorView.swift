@@ -12,21 +12,10 @@ final class EditorView: UIView {
     private let editorConstraints = EditorConstraints()
     
     // MARK: - Init UI Elements
-    public let undoButton: UIButton = {
-        let button = UIButton()
-        let size = CGSize(width: 16.0, height: 16.0)
-        
-        if let image = UIImage(named: "undo") {
-            return button.createButton(size: size, image: image, background: .no)
-        }
-        
-        return button
-    }()
+    public let undoButton = Button(image: UIImage(named: "undo"), background: .no)
     
     public let clearAllButton: UIButton = {
-        var button = UIButton()
-        let size = CGSize(width: 64.0, height: 22.0)
-        button = button.createButton(size: size, background: .no)
+        let button = Button(background: .no)
         button.tintColor = .white
         button.setTitle("Clear All", for: .normal)
         return button
@@ -38,17 +27,9 @@ final class EditorView: UIView {
         return imageView
     }()
     
-    public let colorPickerButton: UIButton = {
-        let button = UIButton()
-        let size = CGSize(width: 30.0, height: 30.0)
-        
-        return button.createButton(size: size, image: UIImage(named: "colorPicker"), background: .no)
-    }()
+    public let colorPickerButton = Button(image: UIImage(named: "colorPicker"), background: .no)
     
-    public let addButton: UIButton = {
-        let button = UIButton()
-        return button.createButton(image: UIImage(named: "add"), background: .yes)
-    }()
+    public let addButton = Button(image: UIImage(named: "add"), background: .dark)
     
     public let brushesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -61,10 +42,7 @@ final class EditorView: UIView {
         return collectionView
     }()
     
-    public let cancelButton: UIButton = {
-        let button = UIButton()
-        return button.createButton(image: UIImage(named: "cancel"), background: .no)
-    }()
+    public let cancelButton = Button(image: UIImage(named: "cancel"), background: .no)
     
     public let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Draw", "Text"])
@@ -73,10 +51,7 @@ final class EditorView: UIView {
         return segmentedControl
     }()
     
-    public let downloadButton: UIButton = {
-        let button = UIButton()
-        return button.createButton(image: UIImage(named: "download"), background: .no)
-    }()
+    public let downloadButton = Button(image: UIImage(named: "download"), background: .no)
     
     // MARK: - Init Method
     init() {

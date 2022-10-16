@@ -42,4 +42,31 @@ final class ColorPickerConstraints: UIView {
         segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -36.0).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
     }
+    
+    public func addConstraintsToSlidersView(_ slidersView: UIView, view: UIView, parent: UISegmentedControl) {
+        slidersView.translatesAutoresizingMaskIntoConstraints = false
+        
+        slidersView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20.0).isActive = true
+        slidersView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
+        slidersView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40.0).isActive = true
+        slidersView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
+    }
+    
+    public func addConstraintsToSeparator(_ separatorView: UIView, view: UIView, parent: UISlider) {
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        separatorView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 24.0).isActive = true
+        separatorView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0).isActive = true
+        separatorView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32.0).isActive = true
+        separatorView.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
+    }
+    
+    public func addConstraintsToCurrentColor(_ currentColorView: UIView, view: UIView, parent: AnyObject) {
+        currentColorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        currentColorView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 22.0).isActive = true
+        currentColorView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0).isActive = true
+        currentColorView.widthAnchor.constraint(equalToConstant: 82.0).isActive = true
+        currentColorView.heightAnchor.constraint(equalToConstant: 82.0).isActive = true
+    }
 }

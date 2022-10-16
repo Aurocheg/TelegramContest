@@ -22,6 +22,13 @@
 		DE94C67D28FB13A9008E3494 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C67C28FB13A9008E3494 /* UILabel.swift */; };
 		DE94C68128FBF224008E3494 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68028FBF224008E3494 /* ColorPickerController.swift */; };
 		DE94C68328FBF332008E3494 /* DimmPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68228FBF332008E3494 /* DimmPresentationController.swift */; };
+		DE94C68628FC1246008E3494 /* PanelTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68528FC1246008E3494 /* PanelTransition.swift */; };
+		DE94C68828FC1263008E3494 /* PresentAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68728FC1263008E3494 /* PresentAnimation.swift */; };
+		DE94C68A28FC1276008E3494 /* DismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68928FC1276008E3494 /* DismissAnimation.swift */; };
+		DE94C68D28FC3AFD008E3494 /* SlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68C28FC3AFD008E3494 /* SlidersView.swift */; };
+		DE94C69128FC3B66008E3494 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69028FC3B66008E3494 /* GridView.swift */; };
+		DE94C69328FC3B7C008E3494 /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69228FC3B7C008E3494 /* SpectrumView.swift */; };
+		DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */; };
 		DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39CE28F6E62300D3548C /* AppDelegate.swift */; };
 		DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39D028F6E62300D3548C /* SceneDelegate.swift */; };
 		DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDC39D728F6E62300D3548C /* Assets.xcassets */; };
@@ -49,6 +56,13 @@
 		DE94C67C28FB13A9008E3494 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		DE94C68028FBF224008E3494 /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		DE94C68228FBF332008E3494 /* DimmPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmPresentationController.swift; sourceTree = "<group>"; };
+		DE94C68528FC1246008E3494 /* PanelTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelTransition.swift; sourceTree = "<group>"; };
+		DE94C68728FC1263008E3494 /* PresentAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimation.swift; sourceTree = "<group>"; };
+		DE94C68928FC1276008E3494 /* DismissAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimation.swift; sourceTree = "<group>"; };
+		DE94C68C28FC3AFD008E3494 /* SlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidersView.swift; sourceTree = "<group>"; };
+		DE94C69028FC3B66008E3494 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		DE94C69228FC3B7C008E3494 /* SpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
+		DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidersConstraints.swift; sourceTree = "<group>"; };
 		DEDC39CB28F6E62300D3548C /* TelegramContest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramContest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDC39CE28F6E62300D3548C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEDC39D028F6E62300D3548C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,10 +120,48 @@
 		DE94C67328FB0E2B008E3494 /* Color Picker */ = {
 			isa = PBXGroup;
 			children = (
+				DE94C68F28FC3B5A008E3494 /* Grid */,
+				DE94C68E28FC3B51008E3494 /* Spectrum */,
+				DE94C68B28FC3AE9008E3494 /* Sliders */,
 				DE94C67428FB0E3A008E3494 /* ColorPickerView.swift */,
 				DE94C67628FB0E46008E3494 /* ColorPickerConstraints.swift */,
 			);
 			path = "Color Picker";
+			sourceTree = "<group>";
+		};
+		DE94C68428FC121E008E3494 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				DE94C68528FC1246008E3494 /* PanelTransition.swift */,
+				DE94C68728FC1263008E3494 /* PresentAnimation.swift */,
+				DE94C68928FC1276008E3494 /* DismissAnimation.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
+		DE94C68B28FC3AE9008E3494 /* Sliders */ = {
+			isa = PBXGroup;
+			children = (
+				DE94C68C28FC3AFD008E3494 /* SlidersView.swift */,
+				DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */,
+			);
+			path = Sliders;
+			sourceTree = "<group>";
+		};
+		DE94C68E28FC3B51008E3494 /* Spectrum */ = {
+			isa = PBXGroup;
+			children = (
+				DE94C69228FC3B7C008E3494 /* SpectrumView.swift */,
+			);
+			path = Spectrum;
+			sourceTree = "<group>";
+		};
+		DE94C68F28FC3B5A008E3494 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				DE94C69028FC3B66008E3494 /* GridView.swift */,
+			);
+			path = Grid;
 			sourceTree = "<group>";
 		};
 		DEDC39C228F6E62300D3548C = {
@@ -131,6 +183,7 @@
 		DEDC39CD28F6E62300D3548C /* TelegramContest */ = {
 			isa = PBXGroup;
 			children = (
+				DE94C68428FC121E008E3494 /* Transition */,
 				DE334EE528F97AF5001D5359 /* Extensions */,
 				DEDC39E428F6E6D300D3548C /* Model */,
 				DEDC39E228F6E6C500D3548C /* View */,
@@ -262,25 +315,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE94C69328FC3B7C008E3494 /* SpectrumView.swift in Sources */,
 				DEDC39E828F6E76A00D3548C /* GalleryController.swift in Sources */,
 				DEDC39EF28F6E79A00D3548C /* GalleryView.swift in Sources */,
 				DEDC39F128F6E7A400D3548C /* GalleryConstraints.swift in Sources */,
 				DE94C67528FB0E3A008E3494 /* ColorPickerView.swift in Sources */,
+				DE94C68D28FC3AFD008E3494 /* SlidersView.swift in Sources */,
 				DE334EDF28F94785001D5359 /* EditorController.swift in Sources */,
 				DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */,
 				DEDC39F328F6E7AE00D3548C /* AccessConstraints.swift in Sources */,
 				DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */,
 				DE94C67228FB0E18008E3494 /* ColorPresentationController.swift in Sources */,
+				DE94C69128FC3B66008E3494 /* GridView.swift in Sources */,
 				DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */,
 				DE94C67728FB0E46008E3494 /* ColorPickerConstraints.swift in Sources */,
+				DE94C68628FC1246008E3494 /* PanelTransition.swift in Sources */,
 				DE94C67B28FB138F008E3494 /* UITextField.swift in Sources */,
 				DE334EE728F97B01001D5359 /* UIButton.swift in Sources */,
 				DEDC39ED28F6E78F00D3548C /* AccessView.swift in Sources */,
 				DEDC39EA28F6E77700D3548C /* AccessController.swift in Sources */,
 				DE94C68128FBF224008E3494 /* ColorPickerController.swift in Sources */,
+				DE94C68A28FC1276008E3494 /* DismissAnimation.swift in Sources */,
+				DE94C68828FC1263008E3494 /* PresentAnimation.swift in Sources */,
 				DE334EE228F947A2001D5359 /* EditorView.swift in Sources */,
 				DE94C68328FBF332008E3494 /* DimmPresentationController.swift in Sources */,
 				DE94C67D28FB13A9008E3494 /* UILabel.swift in Sources */,
+				DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */,
 				DE94C67928FB1385008E3494 /* UISlider.swift in Sources */,
 				DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */,
 				DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */,

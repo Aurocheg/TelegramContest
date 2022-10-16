@@ -8,16 +8,19 @@
 import Foundation
 import UIKit
 
-extension UITextField {
-    func createTF(textSize: CGFloat = 17.0, textColor: UIColor = .white, weight: UIFont.Weight = .semibold, currentText: String = "0") -> UITextField {
-        let tf = UITextField()
+final class ColorTF: UITextField {
+    init(textSize: CGFloat = 17.0, textColor: UIColor = .white, weight: UIFont.Weight = .semibold, currentText: String = "0") {
+        super.init(frame: .zero)
         
-        tf.font = .systemFont(ofSize: textSize, weight: weight)
-        tf.textColor = textColor
-        tf.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
-        tf.layer.cornerRadius = 8.0
-        tf.text = text
-        
-        return tf
+        self.font = .systemFont(ofSize: textSize, weight: weight)
+        self.text = text
+        self.textColor = textColor
+        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.layer.cornerRadius = 8.0
+        self.textAlignment = .center
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

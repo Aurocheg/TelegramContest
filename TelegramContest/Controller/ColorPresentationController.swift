@@ -11,7 +11,7 @@ class ColorPresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         let bounds = containerView!.bounds
         let halfHeight = bounds.height / 2
-        return CGRect(x: 0, y: halfHeight, width: bounds.width, height: halfHeight)
+        return CGRect(x: 0, y: halfHeight / 2, width: bounds.width, height: halfHeight * 2)
     }
     
     override func presentationTransitionWillBegin() {

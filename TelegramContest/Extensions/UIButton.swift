@@ -8,31 +8,31 @@
 import Foundation
 import UIKit
 
-enum ButtonBackground {
-    case yes
-    case no
-}
+final class Button: UIButton {
+    enum ButtonBackground {
+        case dark
+        case no
+    }
+    
+    init(image: UIImage? = nil, background: ButtonBackground) {
+        super.init(frame: .zero)
+        
+        self.titleLabel?.font = .systemFont(ofSize: 17.0)
 
-extension UIButton {
-    func createButton(size: CGSize = CGSize(width: 33.0, height: 33.0), image: UIImage? = nil, background: ButtonBackground) -> UIButton {
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-        
-        button.frame.size = size
-        
         if let image = image {
-            button.setBackgroundImage(image, for: .normal)
+            self.setBackgroundImage(image, for: .normal)
         }
         
         switch background {
         case .no:
-            button.backgroundColor = .clear
-        case .yes:
-            let color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.1)
-            button.backgroundColor = color
-            button.layer.cornerRadius = 15.0
+            self.backgroundColor = .clear
+        case .dark:
+            self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.1)
+            self.layer.cornerRadius = 15.0
         }
-        
-        return button
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
