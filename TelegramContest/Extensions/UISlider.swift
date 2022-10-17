@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 final class ColorSlider: UISlider {
+    private var trackHeight: CGFloat = 36.0
+
     init(minValue: Float, maxValue: Float) {
         super.init(frame: .zero)
         
@@ -19,15 +21,19 @@ final class ColorSlider: UISlider {
         
         let thumbView = UIView()
         thumbView.backgroundColor = .clear
-        thumbView.layer.borderWidth = 0.4
-        thumbView.layer.borderColor = UIColor.darkGray.cgColor
+        thumbView.layer.borderWidth = 2.0
+        thumbView.layer.borderColor = UIColor.black.cgColor
         
-        let thumb = thumbImage(radius: 40.0, thumbView: thumbView)
+        let thumb = thumbImage(radius: trackHeight, thumbView: thumbView)
         self.setThumbImage(thumb, for: .normal)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func trackRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(origin: bounds.origin, size: CGSize(width: bounds.width, height: trackHeight))
     }
     
     private func thumbImage(radius: CGFloat, thumbView: UIView) -> UIImage {

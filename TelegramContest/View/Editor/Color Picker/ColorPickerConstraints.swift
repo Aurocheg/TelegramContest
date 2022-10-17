@@ -43,22 +43,40 @@ final class ColorPickerConstraints: UIView {
         segmentedControl.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
     }
     
-    public func addConstraintsToGridColors(_ gridColorsCollectionView: UICollectionView, view: UIView, parent: AnyObject) {
-        gridColorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    public func addConstraintsToToolsView(_ toolsView: UIView, view: UIView, parent: UISegmentedControl) {
+        toolsView.translatesAutoresizingMaskIntoConstraints = false
         
-        gridColorsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0).isActive = true
-        gridColorsCollectionView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
-        gridColorsCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32.0).isActive = true
-        gridColorsCollectionView.heightAnchor.constraint(equalToConstant: 296.0).isActive = true
+        toolsView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
+        toolsView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0).isActive = true
+        toolsView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32.0).isActive = true
+        toolsView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
     }
     
-    public func addConstraintsToSlidersView(_ slidersView: UIView, view: UIView, parent: UISegmentedControl) {
+    public func addConstraintsToGridColors(_ gridColorsCollectionView: UICollectionView, view: UIView) {
+        gridColorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        gridColorsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        gridColorsCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        gridColorsCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        gridColorsCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+    }
+    
+    public func addConstraintsToSpectrumView(_ spectrumView: UIView, view: UIView) {
+        spectrumView.translatesAutoresizingMaskIntoConstraints = false
+        
+        spectrumView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        spectrumView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        spectrumView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        spectrumView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+    }
+    
+    public func addConstraintsToSlidersView(_ slidersView: UIView, view: UIView) {
         slidersView.translatesAutoresizingMaskIntoConstraints = false
         
-        slidersView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20.0).isActive = true
-        slidersView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
-        slidersView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40.0).isActive = true
-        slidersView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
+        slidersView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        slidersView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        slidersView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        slidersView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
     }
     
     public func addConstraintsToSeparator(_ separatorView: UIView, view: UIView, parent: UISlider) {

@@ -29,7 +29,7 @@
 		DE94C69128FC3B66008E3494 /* GridCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69028FC3B66008E3494 /* GridCollectionCell.swift */; };
 		DE94C69328FC3B7C008E3494 /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69228FC3B7C008E3494 /* SpectrumView.swift */; };
 		DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */; };
-		DE94C69928FC7DA2008E3494 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE94C69828FC7DA2008E3494 /* colorPalette.plist */; };
+		DEB3F9CC28FD42DE00FFAC08 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB3F9CB28FD42DE00FFAC08 /* colorPalette.plist */; };
 		DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39CE28F6E62300D3548C /* AppDelegate.swift */; };
 		DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39D028F6E62300D3548C /* SceneDelegate.swift */; };
 		DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDC39D728F6E62300D3548C /* Assets.xcassets */; };
@@ -64,7 +64,7 @@
 		DE94C69028FC3B66008E3494 /* GridCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionCell.swift; sourceTree = "<group>"; };
 		DE94C69228FC3B7C008E3494 /* SpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
 		DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidersConstraints.swift; sourceTree = "<group>"; };
-		DE94C69828FC7DA2008E3494 /* colorPalette.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = colorPalette.plist; sourceTree = "<group>"; };
+		DEB3F9CB28FD42DE00FFAC08 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
 		DEDC39CB28F6E62300D3548C /* TelegramContest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramContest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDC39CE28F6E62300D3548C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEDC39D028F6E62300D3548C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 				DEDC39D028F6E62300D3548C /* SceneDelegate.swift */,
 				DEDC39D728F6E62300D3548C /* Assets.xcassets */,
 				DEDC39DC28F6E62300D3548C /* Info.plist */,
-				DE94C69828FC7DA2008E3494 /* colorPalette.plist */,
+				DEB3F9CB28FD42DE00FFAC08 /* colorPalette.plist */,
 			);
 			path = TelegramContest;
 			sourceTree = "<group>";
@@ -307,7 +307,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE94C69928FC7DA2008E3494 /* colorPalette.plist in Resources */,
+				DEB3F9CC28FD42DE00FFAC08 /* colorPalette.plist in Resources */,
 				DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

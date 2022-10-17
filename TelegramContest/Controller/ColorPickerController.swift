@@ -10,17 +10,29 @@ import UIKit
 final class ColorPickerController: UIViewController {
     private let colorPickerView = ColorPickerView()
     
-    // MARK: - Global Variables
-    var tag = 0
-    var color = UIColor.gray
-    
     // MARK: - UI Elements
     private var closeButton: UIButton {
         colorPickerView.closeButton
     }
     
+    private var segmentedControl: UISegmentedControl {
+        colorPickerView.segmentedControl
+    }
+    
     private var gridColorsCollectionView: UICollectionView {
         colorPickerView.gridColorsCollectionView
+    }
+    
+    private var spectrumView: UIView {
+        colorPickerView.spectrumView
+    }
+    
+    private var slidersView: UIView {
+        colorPickerView.slidersView
+    }
+    
+    private var currentColorView: UIView {
+        colorPickerView.currentColorView
     }
     
     override func loadView() {
@@ -30,36 +42,20 @@ final class ColorPickerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: - Connections
-        gridColorsCollectionView.dataSource = self
-        gridColorsCollectionView.delegate = self
-        
         // MARK: - Register
         gridColorsCollectionView.register(GridCollectionCell.self, forCellWithReuseIdentifier: "gridCollectionCell")
         
         // MARK: - Targets
         closeButton.addTarget(self, action: #selector(closeButtonTapped(_:)), for: .touchUpInside)
-    }
-    
-    // MARK: - Methods
-    private func hexStringToUIColor(_ hex: String) -> UIColor {
-        var cString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        segmentedControl.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
         
-        if cString.hasPrefix("#") {
-            cString.remove(at: cString.startIndex)
+        // MARK: - Dispatc
+        let spectrumView = SpectrumView.self
+        spectrumView.onColorDidChange = {[weak self] color in
+            DispatchQueue.main.async {
+                self!.currentColorView.backgroundColor = color
+            }
         }
-        
-        if cString.count != 6 {
-            return UIColor.gray
-        }
-        
-        var rgbValue: UInt64 = 0
-        Scanner(string: cString).scanHexInt64(&rgbValue)
-        
-        return UIColor(red: CGFloat((rgbValue & 0xFF0000 >> 16) / 255),
-                       green: CGFloat((rgbValue & 0x00FF00 >> 8) / 255),
-                       blue: CGFloat((rgbValue & 0x0000FF) / 255),
-                       alpha: CGFloat(1.0))
     }
     
     // MARK: - @objc
@@ -68,42 +64,25 @@ final class ColorPickerController: UIViewController {
             dismiss(animated: true)
         }
     }
-}
-
-// MARK: - UICollectionViewDelegate
-extension ColorPickerController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 16
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "gridCollectionCell", for: indexPath)
-        cell.backgroundColor = .clear
-        cell.tag = tag
-        tag = tag + 1
-        return cell
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-extension ColorPickerController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var colorPalette: Array<String>
-        
-        let path = Bundle.main.path(forResource: "colorPalette", ofType: "plist")
-        let pListArray = NSArray(contentsOfFile: path!)
-        
-        if let colorPalettePlistFile = pListArray {
-            colorPalette = colorPalettePlistFile as! [String]
-            
-            let cell = collectionView.cellForItem(at: indexPath)! as UICollectionViewCell
-            let hexString = colorPalette[cell.tag]
-            color = hexStringToUIColor(hexString)
-            self.view.backgroundColor = color
+    @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
+        if sender == segmentedControl {
+            switch segmentedControl.selectedSegmentIndex {
+            case 0:
+                gridColorsCollectionView.isHidden = false
+                spectrumView.isHidden = true
+                slidersView.isHidden = true
+            case 1:
+                gridColorsCollectionView.isHidden = true
+                spectrumView.isHidden = false
+                slidersView.isHidden = true
+            case 2:
+                gridColorsCollectionView.isHidden = true
+                spectrumView.isHidden = true
+                slidersView.isHidden = false
+            default:
+                print("error")
+            }
         }
     }
 }
