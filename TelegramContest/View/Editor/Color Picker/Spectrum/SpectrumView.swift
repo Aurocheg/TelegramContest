@@ -10,10 +10,10 @@ import UIKit
 final class SpectrumView: UIView {
     static var onColorDidChange: ((_ color: UIColor) -> ())?
 
-    private let saturationExponentTop: Float = 2.0
-    private let saturationExponentBottom: Float = 1.3
+    private let saturationExponentTop: Float = 0.05
+    private let saturationExponentBottom: Float = 0.0
 
-    private let grayPaletteHeightFactor: CGFloat = 0.1
+    private let grayPaletteHeightFactor: CGFloat = 0.05
     private var rectGrayPalette = CGRect.zero
     private var rectMainPalette = CGRect.zero
     

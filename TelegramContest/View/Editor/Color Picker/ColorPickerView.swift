@@ -30,11 +30,14 @@ final class ColorPickerView: UIView {
     // MARK: - Grid
     public let gridColorsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 30.0, height: 30.0)
+        let itemWidth = UIScreen.main.bounds.width * 0.07
+        layout.itemSize = CGSize(width: itemWidth, height: 30.0)
+        layout.minimumLineSpacing = 0.0
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemYellow
+        collectionView.backgroundColor = .clear
         collectionView.layer.cornerRadius = 10.0
+        collectionView.isScrollEnabled = false
         collectionView.isHidden = false
         
         return collectionView
@@ -44,6 +47,7 @@ final class ColorPickerView: UIView {
     public let spectrumView: UIView = {
         let view = SpectrumView()
         view.isHidden = true
+        view.layer.cornerRadius = 8.0
         return view
     }()
     
