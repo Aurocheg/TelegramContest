@@ -42,11 +42,12 @@ final class SlidersConstraints: UIView {
         
         if let leftConstant = leftConstant {
             slider.leftAnchor.constraint(equalTo: view.leftAnchor, constant: leftConstant).isActive = true
+            slider.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
         } else {
             slider.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            slider.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
         }
         
-        slider.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.68).isActive = true
         slider.heightAnchor.constraint(equalToConstant: 36.0).isActive = true
     }
     

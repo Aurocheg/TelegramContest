@@ -21,10 +21,10 @@ final class ColorSlider: UISlider {
         
         let thumbView = UIView()
         thumbView.backgroundColor = .clear
-        thumbView.layer.borderWidth = 2.0
+        thumbView.layer.borderWidth = 3.0
         thumbView.layer.borderColor = UIColor.black.cgColor
         
-        let thumb = thumbImage(radius: trackHeight, thumbView: thumbView)
+        let thumb = thumbImage(radius: 29.0, thumbView: thumbView)
         self.setThumbImage(thumb, for: .normal)
     }
     
@@ -37,7 +37,7 @@ final class ColorSlider: UISlider {
     }
     
     private func thumbImage(radius: CGFloat, thumbView: UIView) -> UIImage {
-        thumbView.frame = CGRect(x: 0, y: radius / 2, width: radius, height: radius)
+        thumbView.frame = CGRect(x: 0, y: radius / 2, width: 29.0, height: 29.0)
         thumbView.layer.cornerRadius = radius / 2
         
         let renderer = UIGraphicsImageRenderer(bounds: thumbView.bounds)

@@ -40,7 +40,7 @@ final class ColorPickerConstraints: UIView {
         segmentedControl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 18.0).isActive = true
         segmentedControl.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
         segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -36.0).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
     }
     
     public func addConstraintsToToolsView(_ toolsView: UIView, view: UIView, parent: UISegmentedControl) {
