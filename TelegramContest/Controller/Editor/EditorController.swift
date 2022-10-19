@@ -33,6 +33,7 @@ final class EditorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: - Transfer Image from Gallery to Editor
         imageView.image = galleryImage
         
         // MARK: - Targets

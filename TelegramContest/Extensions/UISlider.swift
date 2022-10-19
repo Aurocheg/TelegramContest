@@ -8,16 +8,28 @@
 import Foundation
 import UIKit
 
+enum SliderType {
+    case color
+    case opacity
+}
+
 final class ColorSlider: UISlider {
     private var trackHeight: CGFloat = 36.0
 
-    init(minValue: Float, maxValue: Float) {
+    init(minValue: Float, maxValue: Float, type: SliderType = .color) {
         super.init(frame: .zero)
         
         self.layer.cornerRadius = 18.0
         
         self.minimumValue = minValue
         self.maximumValue = maxValue
+        
+        switch type {
+        case .color: self.tintColor = .darkGray
+        case .opacity:
+            self.setMinimumTrackImage(UIImage(named: "opacityImage"), for: .normal)
+            self.setMaximumTrackImage(UIImage(named: "opacityImage"), for: .normal)
+        }
         
         let thumbView = UIView()
         thumbView.backgroundColor = .clear

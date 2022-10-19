@@ -95,7 +95,7 @@ final class EditorView: UIView {
         editorConstraints.addConstraintsToBottomButton(addButton, view: self, parent: downloadButton, bottomConstant: -16.0, position: .right)
         
         editorConstraints.addConstraintsToBottomButton(cancelButton, view: self, bottomConstant: -42.0, position: .left)
-        editorConstraints.addConstraintsToSegmentedControl(segmentedControl, view: self, collectionView: brushesCollectionView, parent: cancelButton)
+        editorConstraints.addConstraintsToSegmentedControl(segmentedControl, view: self)
         editorConstraints.addConstraintsToBottomButton(downloadButton, view: self, bottomConstant: -42.0, position: .right)
     }
     

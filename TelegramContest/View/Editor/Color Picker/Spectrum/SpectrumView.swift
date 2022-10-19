@@ -54,9 +54,9 @@ final class SpectrumView: UIView {
             for x in stride(from: (0 as CGFloat), to: rectGrayPalette.width, by: elementSize) {
                 let hue = x / rectGrayPalette.width
 
-                let color = UIColor(white: hue, alpha: 1.0)
+                let color = UIColor(white: hue, alpha: 1.0).cgColor
 
-                context!.setFillColor(color.cgColor)
+                context!.setFillColor(color)
                 context!.fill(CGRect(x: x, y: y, width: elementSize, height: elementSize))
             }
         }
@@ -70,9 +70,9 @@ final class SpectrumView: UIView {
             for x in stride(from: (0 as CGFloat), to: rectMainPalette.width, by: elementSize) {
                 let hue = x / rectMainPalette.width
 
-                let color = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+                let color = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0).cgColor
 
-                context!.setFillColor(color.cgColor)
+                context!.setFillColor(color)
                 context!.fill(CGRect(x: x, y: y + rectMainPalette.origin.y,
                                      width: elementSize, height: elementSize))
             }
@@ -87,7 +87,7 @@ final class SpectrumView: UIView {
 
         // MARK: - Main palette
         if rectMainPalette.contains(point) {
-            // offset point, because rect_mainPalette.origin.y is not 0
+            // offset point, because rectMainPalette.origin.y is not 0
             roundedPoint.y -= rectMainPalette.origin.y
 
             var saturation = roundedPoint.y < rectMainPalette.height / 2.0 ? CGFloat(2 * roundedPoint.y) / rectMainPalette.height

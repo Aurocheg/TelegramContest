@@ -31,8 +31,9 @@ final class ColorPickerView: UIView {
     public let gridColorsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let itemWidth = UIScreen.main.bounds.width * 0.07
-        layout.itemSize = CGSize(width: itemWidth, height: 30.0)
+        layout.itemSize = CGSize(width: 32.0, height: 30.0)
         layout.minimumLineSpacing = 0.0
+        layout.minimumInteritemSpacing = 0.0
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
@@ -79,7 +80,7 @@ final class ColorPickerView: UIView {
 
     // MARK: - Opacity
     private let opacityLabel = Label(text: "OPACITY", size: 13.0, weight: .semibold, color: UIColor(red: 0.922, green: 0.922, blue: 0.961, alpha: 0.6))
-    public let opacitySlider = ColorSlider(minValue: 1.0, maxValue: 100.0)
+    public let opacitySlider = ColorSlider(minValue: 1.0, maxValue: 100.0, type: .opacity)
     public let opacityTF = ColorTF()
     
     // MARK: - Colors

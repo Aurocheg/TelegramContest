@@ -64,10 +64,10 @@ final class EditorConstraints: UIView {
         collectionView.heightAnchor.constraint(equalToConstant: 85.0).isActive = true
     }
     
-    public func addConstraintsToSegmentedControl(_ segmentedControl: UISegmentedControl, view: UIView, collectionView: UICollectionView, parent: AnyObject) {
+    public func addConstraintsToSegmentedControl(_ segmentedControl: UISegmentedControl, view: UIView) {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
-        segmentedControl.leftAnchor.constraint(equalTo: parent.rightAnchor, constant: 18.0).isActive = true
+        segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         segmentedControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -44.5).isActive = true
         segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 28.0).isActive = true

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol BrushesProtocol {
     var brush: String { get set }
@@ -24,4 +25,17 @@ struct BrushesModel: BrushesProtocol {
             BrushesModel(brush: ""),
         ]
     }
+}
+
+struct TouchPointsAndColor {
+    var color: UIColor?
+    var width: CGFloat?
+    var opacity: CGFloat?
+    var points: [CGPoint]?
+    
+    init(color: UIColor, points: [CGPoint]?) {
+        self.color = color
+        self.points = points
+    }
+    
 }

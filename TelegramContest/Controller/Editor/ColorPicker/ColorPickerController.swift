@@ -11,21 +11,23 @@ enum RgbSliderType {
     case red
     case green
     case blue
+    case opacity
 }
 
 final class ColorPickerController: UIViewController {
     private let colorPickerView = ColorPickerView()
     
-    // MARK: - Variables
-    var tag = 0
-    var color = UIColor.gray
+    // MARK: - Variables for Grid
+    private var tag = 0
+    private var color = UIColor.gray
     
-    var redColor: Float = 0.0
-    var greenColor: Float = 0.0
-    var blueColor: Float = 0.0
-    var opacityPercent: Float = 1.0
+    // MARK: - Variables for Sliders
+    private var redColor: Float = 0.0
+    private var greenColor: Float = 0.0
+    private var blueColor: Float = 0.0
+    private var opacityPercent: Float = 1.0
     
-    // MARK: - Top
+    // MARK: - Top Elements
     private var closeButton: UIButton {
         colorPickerView.closeButton
     }
@@ -77,7 +79,7 @@ final class ColorPickerController: UIViewController {
         colorPickerView.hexColorTF
     }
     
-    // MARK: - Opacity
+        // MARK: - Opacity
     private var opacitySlider: UISlider {
         colorPickerView.opacitySlider
     }
@@ -86,7 +88,7 @@ final class ColorPickerController: UIViewController {
         colorPickerView.opacityTF
     }
     
-    // MARK: - Current Color
+        // MARK: - Current Color
     private var currentColorView: UIView {
         colorPickerView.currentColorView
     }
@@ -110,25 +112,25 @@ final class ColorPickerController: UIViewController {
         opacityTF.delegate = self
         
         // MARK: - Register
-        gridColorsCollectionView.register(GridCollectionCell.self, forCellWithReuseIdentifier: "gridCollectionCell")
+        gridColorsCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "gridCollectionCell")
         
         // MARK: - Targets
         closeButton.addTarget(self, action: #selector(closeButtonTapped(_:)), for: .touchUpInside)
         
         segmentedControl.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
         
-        redSlider.addTarget(self, action: #selector(colorSliderValueChanged(_:)), for: .valueChanged)
-        greenSlider.addTarget(self, action: #selector(colorSliderValueChanged(_:)), for: .valueChanged)
-        blueSlider.addTarget(self, action: #selector(colorSliderValueChanged(_:)), for: .valueChanged)
-        opacitySlider.addTarget(self, action: #selector(colorSliderValueChanged(_:)), for: .valueChanged)
+        redSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+        greenSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+        blueSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+        opacitySlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         
-        redTF.addTarget(self, action: #selector(colorTFValueChanged(_:)), for: .editingChanged)
-        greenTF.addTarget(self, action: #selector(colorTFValueChanged(_:)), for: .editingChanged)
-        blueTF.addTarget(self, action: #selector(colorTFValueChanged(_:)), for: .editingChanged)
-        opacityTF.addTarget(self, action: #selector(colorTFValueChanged(_:)), for: .editingChanged)
-        hexTF.addTarget(self, action: #selector(colorTFValueChanged(_:)), for: .editingChanged)
+        redTF.addTarget(self, action: #selector(TFValueChanged(_:)), for: .editingChanged)
+        greenTF.addTarget(self, action: #selector(TFValueChanged(_:)), for: .editingChanged)
+        blueTF.addTarget(self, action: #selector(TFValueChanged(_:)), for: .editingChanged)
+        opacityTF.addTarget(self, action: #selector(TFValueChanged(_:)), for: .editingChanged)
+        hexTF.addTarget(self, action: #selector(TFValueChanged(_:)), for: .editingChanged)
         
-        // MARK: - Dispatch
+        // MARK: - Dispatch for changing color of current color view by touching Spectrum View
         let spectrumView = SpectrumView.self
         spectrumView.onColorDidChange = {[weak self] color in
             DispatchQueue.main.async {
@@ -137,35 +139,104 @@ final class ColorPickerController: UIViewController {
         }
     }
     
+    // MARK: - Methods
+    private func setBackgroundGradient(to slider: UISlider, type: RgbSliderType) {
+        let leftColor: CGColor
+        let rightColor: CGColor
+        let sliderRadius = slider.layer.cornerRadius
+        let sliderSize = slider.bounds.size
+        
+        switch type {
+        case .red:
+            leftColor = UIColor(red: 0.0,
+                                green: CGFloat(greenColor) / 255.0,
+                                blue: CGFloat(blueColor) / 255.0,
+                                alpha: 1.0).cgColor
+            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
+                                green: CGFloat(greenColor) / 255.0,
+                                blue: CGFloat(blueColor) / 255.0,
+                                alpha: 1.0).cgColor
+        case .green:
+            leftColor = UIColor(red: CGFloat(redColor) / 255.0,
+                                green: 0.0,
+                                blue: CGFloat(blueColor) / 255.0,
+                                alpha: 1.0).cgColor
+            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
+                                green: CGFloat(greenColor) / 255.0,
+                                blue: CGFloat(blueColor) / 255.0,
+                                alpha: 1.0).cgColor
+        case .blue:
+            leftColor = UIColor(red: CGFloat(redColor) / 255.0,
+                                green: CGFloat(greenColor) / 255.0,
+                                blue: 0.0,
+                                alpha: 1.0).cgColor
+            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
+                                green: CGFloat(greenColor) / 255.0,
+                                blue: CGFloat(blueColor) / 255.0,
+                                alpha: 1.0).cgColor
+        case .opacity:
+            leftColor = UIColor(red: CGFloat(redColor) / 255.0,
+                                green: CGFloat(greenColor) / 255.0,
+                                blue: CGFloat(blueColor) / 255.0,
+                                alpha: 0.3).cgColor
+            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
+                                 green: CGFloat(greenColor) / 255.0,
+                                 blue: CGFloat(blueColor) / 255.0,
+                                 alpha: 1.0).cgColor
+        }
+        
+        let gradientLayer = CAGradientLayer.createSliderGradient(colors: [leftColor, rightColor], cornerRadius: sliderRadius, size: sliderSize)
+    
+        UIGraphicsBeginImageContextWithOptions(sliderSize, true, 1.0)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        gradientLayer.render(in: context)
+
+        let image = UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)).withRoundedCorners(radius: sliderRadius)
+        
+        UIGraphicsEndImageContext()
+        slider.setMinimumTrackImage(image, for: .normal)
+        slider.setMaximumTrackImage(image, for: .normal)
+    }
+    
+    private func readDataFromPlist(cellTag: Int, indexPath: IndexPath) {
+        // For cell for item
+        var colorPalette: Array<String>
+        
+        let path = Bundle.main.path(forResource: "colorPalette", ofType: "plist")
+        let plistArray = NSArray(contentsOfFile: path!)
+        
+        if let colorPalettePlistFile = plistArray {
+            colorPalette = colorPalettePlistFile as! [String]
+            let hexString = colorPalette[cellTag].hexStringToUIColor()
+            color = hexString
+        }
+    }
+    
     // MARK: - @objc
     @objc func closeButtonTapped(_ sender: UIButton) {
-        if sender == closeButton {
-            dismiss(animated: true)
-        }
+        dismiss(animated: true)
     }
     
     @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
-        if sender == segmentedControl {
-            switch segmentedControl.selectedSegmentIndex {
-            case 0:
-                gridColorsCollectionView.isHidden = false
-                spectrumView.isHidden = true
-                slidersView.isHidden = true
-            case 1:
-                gridColorsCollectionView.isHidden = true
-                spectrumView.isHidden = false
-                slidersView.isHidden = true
-            case 2:
-                gridColorsCollectionView.isHidden = true
-                spectrumView.isHidden = true
-                slidersView.isHidden = false
-            default:
-                print("error")
-            }
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            gridColorsCollectionView.isHidden = false
+            spectrumView.isHidden = true
+            slidersView.isHidden = true
+        case 1:
+            gridColorsCollectionView.isHidden = true
+            spectrumView.isHidden = false
+            slidersView.isHidden = true
+        case 2:
+            gridColorsCollectionView.isHidden = true
+            spectrumView.isHidden = true
+            slidersView.isHidden = false
+        default:
+            break
         }
     }
     
-    @objc func colorSliderValueChanged(_ sender: UISlider) {
+    @objc func sliderValueChanged(_ sender: UISlider) {
         let sliderValue = round(sender.value)
         
         switch sender {
@@ -191,14 +262,17 @@ final class ColorPickerController: UIViewController {
                                    alpha: CGFloat(opacityPercent))
         
         currentColorView.backgroundColor = currentColor
-        hexTF.text = currentColor.toHexString().uppercased()
+        var hexString = currentColor.toHexString().uppercased()
+        hexString.remove(at: hexString.startIndex)
+        hexTF.text = hexString
         
         setBackgroundGradient(to: redSlider, type: .red)
         setBackgroundGradient(to: greenSlider, type: .green)
         setBackgroundGradient(to: blueSlider, type: .blue)
+        setBackgroundGradient(to: opacitySlider, type: .opacity)
     }
     
-    @objc func colorTFValueChanged(_ sender: UITextField) {
+    @objc func TFValueChanged(_ sender: UITextField) {
         let textFieldValue = Float(sender.text!) ?? 0.0
         
         switch sender {
@@ -218,89 +292,20 @@ final class ColorPickerController: UIViewController {
             break
         }
         
-        currentColorView.backgroundColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                                   green: CGFloat(greenColor) / 255.0,
-                                                   blue: CGFloat(blueColor) / 255.0,
-                                                   alpha: CGFloat(opacityPercent))
+        let currentColor = UIColor(red: CGFloat(redColor) / 255.0,
+                                  green: CGFloat(greenColor) / 255.0,
+                                  blue: CGFloat(blueColor) / 255.0,
+                                  alpha: CGFloat(opacityPercent))
+        
+        currentColorView.backgroundColor = currentColor
+        var hexString = currentColor.toHexString().uppercased()
+        hexString.remove(at: hexString.startIndex)
+        hexTF.text = hexString
+        
         setBackgroundGradient(to: redSlider, type: .red)
         setBackgroundGradient(to: greenSlider, type: .green)
         setBackgroundGradient(to: blueSlider, type: .blue)
-    }
-}
-
-// MARK: - ColorPickerController
-extension ColorPickerController {
-    func setBackgroundGradient(to slider: UISlider, type: RgbSliderType) {
-        let leftColor: CGColor
-        let rightColor: CGColor
-        
-        switch type {
-        case .red:
-            leftColor = UIColor(red: 0.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: CGFloat(opacityPercent)).cgColor
-            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: CGFloat(opacityPercent)).cgColor
-        case .green:
-            leftColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: 0.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: CGFloat(opacityPercent)).cgColor
-            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: CGFloat(opacityPercent)).cgColor
-        case .blue:
-            leftColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: 0.0,
-                                alpha: CGFloat(opacityPercent)).cgColor
-            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: CGFloat(opacityPercent)).cgColor
-        }
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.cornerRadius = slider.layer.cornerRadius
-        gradientLayer.colors = [leftColor, rightColor]
-        gradientLayer.frame.size = slider.bounds.size
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: slider.frame.width, height: slider.frame.height), true, 1.0)
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        gradientLayer.render(in: context)
-
-        let image = UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
-        UIGraphicsEndImageContext()
-        slider.setMinimumTrackImage(image, for: .normal)
-        slider.setMaximumTrackImage(image, for: .normal)
-    }
-    
-    func hexStringToUIColor(_ hex: String) -> UIColor {
-        var cString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        
-        if cString.hasPrefix("#") {
-            cString.remove(at: cString.startIndex)
-        }
-        
-        if cString.count != 6 {
-            return UIColor.gray
-        }
-        
-        var rgbValue: UInt64 = 0
-        Scanner(string: cString).scanHexInt64(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
+        setBackgroundGradient(to: opacitySlider, type: .opacity)
     }
 }
 
@@ -322,22 +327,9 @@ extension ColorPickerController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension ColorPickerController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "gridCollectionCell", for: indexPath) as? GridCollectionCell else {
-            return UICollectionViewCell()
-        }
-        
-        var colorPalette: Array<String>
-        let path = Bundle.main.path(forResource: "colorPalette", ofType: "plist")
-        let plistArray = NSArray(contentsOfFile: path!)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "gridCollectionCell", for: indexPath)
         cell.tag = tag
-        
-        if let colorPalettePlistFile = plistArray {
-            colorPalette = colorPalettePlistFile as! [String]
-            
-            let hexString = colorPalette[cell.tag]
-            color = hexStringToUIColor(hexString)
-        }
+        readDataFromPlist(cellTag: cell.tag, indexPath: indexPath)
         
         cell.backgroundColor = color
         tag += 1
@@ -346,19 +338,8 @@ extension ColorPickerController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var colorPalette: Array<String>
-        
-        let path = Bundle.main.path(forResource: "colorPalette", ofType: "plist")
-        let plistArray = NSArray(contentsOfFile: path!)
-        
-        if let colorPalettePlistFile = plistArray {
-            colorPalette = colorPalettePlistFile as! [String]
-            
-            let cell = collectionView.cellForItem(at: indexPath) as! GridCollectionCell
-            
-            let hexString = colorPalette[cell.tag]
-            color = hexStringToUIColor(hexString)
-            currentColorView.backgroundColor = color
-        }
+        let cell = collectionView.cellForItem(at: indexPath)!
+        readDataFromPlist(cellTag: cell.tag, indexPath: indexPath)
+        currentColorView.backgroundColor = color
     }
 }

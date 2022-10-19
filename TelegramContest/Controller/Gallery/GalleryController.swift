@@ -55,7 +55,7 @@ final class GalleryController: UIViewController {
                 }
             }
         } else {
-            // TODO: -
+            // TODO: - For iOS < 14
         }
     }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AccessController: UIViewController {
+final class AccessController: UIViewController {
     private let accessView = AccessView()
 
     override func loadView() {
