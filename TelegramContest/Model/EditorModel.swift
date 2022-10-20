@@ -18,24 +18,12 @@ struct BrushesModel: BrushesProtocol {
     
     static func getBrushes() -> [BrushesModel] {
         return [
+            BrushesModel(brush: "pen"),
+            BrushesModel(brush: "brush"),
+            BrushesModel(brush: "brush2"),
             BrushesModel(brush: "pencil"),
-            BrushesModel(brush: ""),
-            BrushesModel(brush: ""),
-            BrushesModel(brush: ""),
-            BrushesModel(brush: ""),
+            BrushesModel(brush: "lasso"),
+            BrushesModel(brush: "eraser")
         ]
     }
-}
-
-struct TouchPointsAndColor {
-    var color: UIColor?
-    var width: CGFloat?
-    var opacity: CGFloat?
-    var points: [CGPoint]?
-    
-    init(color: UIColor, points: [CGPoint]?) {
-        self.color = color
-        self.points = points
-    }
-    
 }

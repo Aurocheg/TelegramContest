@@ -68,7 +68,6 @@ extension GalleryController: UICollectionViewDelegate {
         let image = images[indexPath.row]
         var thumbnail = UIImage()
         let editorController = EditorController()
-        let screenWidth = UIScreen.main.bounds.width
         
         let manager = PHImageManager.default()
         
@@ -77,7 +76,7 @@ extension GalleryController: UICollectionViewDelegate {
         options.deliveryMode = .highQualityFormat
         options.resizeMode = .exact
         
-        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth, height: 520), contentMode: .aspectFill, options: options) {(result, info) in
+        manager.requestImage(for: image, targetSize: CGSize(width: 500, height: 550), contentMode: .aspectFill, options: options) {(result, info) in
             if let result = result {
                 thumbnail = result
             }

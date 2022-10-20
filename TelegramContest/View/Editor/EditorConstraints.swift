@@ -26,13 +26,13 @@ final class EditorConstraints: UIView {
         }        
     }
     
-    public func addConstraintsToImage(_ imageView: UIImageView, view: UIView, parent: AnyObject) {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 42.0).isActive = true
-        imageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        imageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.59).isActive = true
+    public func addConstraintsToCanvas(_ canvasView: UIView, view: UIView, parent: AnyObject) {
+        canvasView.translatesAutoresizingMaskIntoConstraints = false
+                
+        canvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 42.0).isActive = true
+        canvasView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        canvasView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        canvasView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.59).isActive = true
     }
     
     public func addConstraintsToBottomButton(_ button: UIButton, view: UIView, parent: AnyObject? = nil, bottomConstant: CGFloat, position: ButtonsPosition) {
@@ -58,10 +58,10 @@ final class EditorConstraints: UIView {
     public func addConstraintsToBrushesCollection(_ collectionView: UICollectionView, parent: AnyObject, segmentedControl: UISegmentedControl, view: UIView) {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        collectionView.leftAnchor.constraint(equalTo: parent.rightAnchor, constant: 35.5).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: segmentedControl.topAnchor, constant: 40.0).isActive = true
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: segmentedControl.topAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.61).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 85.0).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 93.0).isActive = true
     }
     
     public func addConstraintsToSegmentedControl(_ segmentedControl: UISegmentedControl, view: UIView) {

@@ -20,12 +20,8 @@ final class EditorView: UIView {
         button.setTitle("Clear All", for: .normal)
         return button
     }()
-    
-    public let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }()
+        
+    public let canvasView = CanvasView()
     
     public let colorPickerButton = Button(image: UIImage(named: "colorPicker"), background: .no)
     
@@ -35,6 +31,7 @@ final class EditorView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 17.0, height: 93.0)
         layout.minimumLineSpacing = 27.0
+        layout.scrollDirection = .horizontal
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
@@ -72,7 +69,7 @@ final class EditorView: UIView {
         addSubview(undoButton)
         addSubview(clearAllButton)
         
-        addSubview(imageView)
+        addSubview(canvasView)
         
         addSubview(colorPickerButton)
         addSubview(brushesCollectionView)
@@ -88,7 +85,7 @@ final class EditorView: UIView {
         editorConstraints.addConstraintsToTopButton(undoButton, view: self, position: .left)
         editorConstraints.addConstraintsToTopButton(clearAllButton, view: self, position: .right)
         
-        editorConstraints.addConstraintsToImage(imageView, view: self, parent: clearAllButton)
+        editorConstraints.addConstraintsToCanvas(canvasView, view: self, parent: clearAllButton)
         
         editorConstraints.addConstraintsToBottomButton(colorPickerButton, view: self, parent: cancelButton, bottomConstant: -16.0, position: .left)
         editorConstraints.addConstraintsToBrushesCollection(brushesCollectionView, parent: colorPickerButton, segmentedControl: segmentedControl, view: self)
