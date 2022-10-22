@@ -8,11 +8,18 @@
 import UIKit
 
 final class EditorController: UIViewController {
+    // MARK: - Constraints
+    private let editorConstraints = EditorConstraints()
+    
+    // MARK: - Views
     private let editorView = EditorView()
+    private let canvasView = CanvasView()
     
     // MARK: - Model Init
     private let brushes = BrushesModel.getBrushes()
     private let brushesCellID = BrushesModel.cellID
+    
+    // MARK: - Variables
     
     // MARK: - Transfer Data
     public var galleryImage: UIImage! = nil
@@ -21,10 +28,14 @@ final class EditorController: UIViewController {
     private let transition = PanelTransition()
     
     // MARK: - UI Elements
-    private var canvasView: UIView {
-        editorView.canvasView
+    private var undoButton: UIButton {
+        editorView.undoButton
     }
     
+    private var clearAllButton: UIButton {
+        editorView.clearAllButton
+    }
+
     private var colorPickerButton: UIButton {
         editorView.colorPickerButton
     }
@@ -37,7 +48,11 @@ final class EditorController: UIViewController {
         editorView.cancelButton
     }
     
-    // MARK: - Life Cycle
+    private var downloadButton: UIButton {
+        editorView.downloadButton
+    }
+    
+    // MARK: - View Life Cycle
     override func loadView() {
         view = editorView
     }
@@ -45,22 +60,35 @@ final class EditorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: - Canvas
+        canvasView.backgroundColor = UIColor(patternImage: galleryImage)
+        view.addSubview(canvasView)
+        editorConstraints.addConstraintsToCanvas(canvasView, view: view, parent: clearAllButton)
+
+                                
         // MARK: - Connections
         brushesCollectionView.delegate = self
         brushesCollectionView.dataSource = self
         
         // MARK: - Register
         brushesCollectionView.register(BrushCollectionCell.self, forCellWithReuseIdentifier: brushesCellID)
-        
-        // MARK: - Transfer Image from Gallery to Editor
-        canvasView.backgroundColor = UIColor(patternImage: galleryImage)
-        
+                        
         // MARK: - Targets
+        undoButton.addTarget(self, action: #selector(undoButtonTapped), for: .touchUpInside)
+        clearAllButton.addTarget(self, action: #selector(clearAllButtonTapped), for: .touchUpInside)
         colorPickerButton.addTarget(self, action: #selector(colorPickerButtonTapped), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - @objc
+    @objc func undoButtonTapped() {
+        canvasView.undoDraw()
+    }
+    
+    @objc func clearAllButtonTapped() {
+        canvasView.clearCanvasView()
+    }
+    
     @objc func colorPickerButtonTapped() {
         let colorPickerController = ColorPickerController()
         colorPickerController.transitioningDelegate = transition

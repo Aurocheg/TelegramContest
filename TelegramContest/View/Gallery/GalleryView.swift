@@ -16,11 +16,6 @@ final class GalleryView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
-        let cellWidth = UIScreen.main.bounds.width / 3 - 7
-        
-        layout.estimatedItemSize = CGSize(width: cellWidth, height: 129.0)
-        layout.minimumLineSpacing = 1.0
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
         return collectionView

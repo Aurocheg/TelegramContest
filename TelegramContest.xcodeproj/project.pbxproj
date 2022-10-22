@@ -14,6 +14,7 @@
 		DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE828F9F20A001D5359 /* EditorModel.swift */; };
 		DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */; };
 		DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */; };
+		DE7E1618290470E70057E4AE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E1617290470E70057E4AE /* CanvasView.swift */; };
 		DE85B08629007653005FFD31 /* BrushCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85B08529007653005FFD31 /* BrushCollectionCell.swift */; };
 		DE85B088290077CF005FFD31 /* BrushCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85B087290077CF005FFD31 /* BrushCellConstraints.swift */; };
 		DE90C2A3290051FD00AA0FAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE90C2A2290051FD00AA0FAF /* String.swift */; };
@@ -33,7 +34,6 @@
 		DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */; };
 		DEA1082328FFCFC20043531E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1082228FFCFC20043531E /* UIImage.swift */; };
 		DEB3F9CC28FD42DE00FFAC08 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB3F9CB28FD42DE00FFAC08 /* colorPalette.plist */; };
-		DEC1F2872901836D007C7665 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC1F2862901836D007C7665 /* CanvasView.swift */; };
 		DEC2657828FF216C007E9FDB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC2657728FF216C007E9FDB /* UIColor.swift */; };
 		DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39CE28F6E62300D3548C /* AppDelegate.swift */; };
 		DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39D028F6E62300D3548C /* SceneDelegate.swift */; };
@@ -54,6 +54,7 @@
 		DE334EE828F9F20A001D5359 /* EditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModel.swift; sourceTree = "<group>"; };
 		DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionCell.swift; sourceTree = "<group>"; };
 		DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCellConstraints.swift; sourceTree = "<group>"; };
+		DE7E1617290470E70057E4AE /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		DE85B08529007653005FFD31 /* BrushCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCollectionCell.swift; sourceTree = "<group>"; };
 		DE85B087290077CF005FFD31 /* BrushCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCellConstraints.swift; sourceTree = "<group>"; };
 		DE90C2A2290051FD00AA0FAF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -73,7 +74,6 @@
 		DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidersConstraints.swift; sourceTree = "<group>"; };
 		DEA1082228FFCFC20043531E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		DEB3F9CB28FD42DE00FFAC08 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
-		DEC1F2862901836D007C7665 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		DEC2657728FF216C007E9FDB /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		DEDC39CB28F6E62300D3548C /* TelegramContest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramContest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDC39CE28F6E62300D3548C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		DE334EE028F9478D001D5359 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
-				DEC1F28329017F1B007C7665 /* Canvas */,
+				DE7E1616290470D60057E4AE /* Canvas */,
 				DE85B0842900763E005FFD31 /* Brush */,
 				DE94C67328FB0E2B008E3494 /* Color Picker */,
 				DE334EE128F947A2001D5359 /* EditorView.swift */,
@@ -133,6 +133,14 @@
 				DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */,
 			);
 			path = "Gallery Collection Cell";
+			sourceTree = "<group>";
+		};
+		DE7E1616290470D60057E4AE /* Canvas */ = {
+			isa = PBXGroup;
+			children = (
+				DE7E1617290470E70057E4AE /* CanvasView.swift */,
+			);
+			path = Canvas;
 			sourceTree = "<group>";
 		};
 		DE85B0842900763E005FFD31 /* Brush */ = {
@@ -171,14 +179,6 @@
 				DE94C69228FC3B7C008E3494 /* SpectrumView.swift */,
 			);
 			path = Spectrum;
-			sourceTree = "<group>";
-		};
-		DEC1F28329017F1B007C7665 /* Canvas */ = {
-			isa = PBXGroup;
-			children = (
-				DEC1F2862901836D007C7665 /* CanvasView.swift */,
-			);
-			path = Canvas;
 			sourceTree = "<group>";
 		};
 		DEC2657328FE7D59007E9FDB /* Editor */ = {
@@ -388,7 +388,7 @@
 				DEDC39EA28F6E77700D3548C /* AccessController.swift in Sources */,
 				DE94C68128FBF224008E3494 /* ColorPickerController.swift in Sources */,
 				DEC2657828FF216C007E9FDB /* UIColor.swift in Sources */,
-				DEC1F2872901836D007C7665 /* CanvasView.swift in Sources */,
+				DE7E1618290470E70057E4AE /* CanvasView.swift in Sources */,
 				DE94C68A28FC1276008E3494 /* DismissAnimation.swift in Sources */,
 				DE94C68828FC1263008E3494 /* PresentAnimation.swift in Sources */,
 				DE334EE228F947A2001D5359 /* EditorView.swift in Sources */,

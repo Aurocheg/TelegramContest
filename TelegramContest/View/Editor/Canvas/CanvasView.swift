@@ -2,7 +2,7 @@
 //  CanvasView.swift
 //  TelegramContest
 //
-//  Created by Aurocheg on 20.10.22.
+//  Created by Aurocheg on 22.10.22.
 //
 
 import UIKit
@@ -20,10 +20,10 @@ struct TouchPointsAndColor {
 }
 
 final class CanvasView: UIView {
-    var lines = [TouchPointsAndColor]()
-    var strokeWidth: CGFloat = 10.0
-    var strokeColor: UIColor = .systemYellow
-    var strokeOpacity: CGFloat = 1.0
+    private var lines = [TouchPointsAndColor]()
+    public var strokeWidth: CGFloat = 10.0
+    public var strokeColor: UIColor = .white
+    public var strokeOpacity: CGFloat = 1.0
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -34,7 +34,6 @@ final class CanvasView: UIView {
             for (i, p) in (line.points?.enumerated())! {
                 var point = p
                 point.y -= 130.0
-
                 if i == 0 {
                     context.move(to: point)
                 } else {
@@ -54,8 +53,8 @@ final class CanvasView: UIView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first?.location(in: nil) else { return }
-        guard var lastPoint = lines.popLast() else { return }
         
+        guard var lastPoint = lines.popLast() else {return}
         lastPoint.points?.append(touch)
         lastPoint.color = strokeColor
         lastPoint.width = strokeWidth
@@ -75,5 +74,4 @@ final class CanvasView: UIView {
             setNeedsDisplay()
         }
     }
-    
 }

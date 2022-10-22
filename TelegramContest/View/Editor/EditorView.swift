@@ -12,17 +12,21 @@ final class EditorView: UIView {
     private let editorConstraints = EditorConstraints()
     
     // MARK: - Init UI Elements
-    public let undoButton = Button(image: UIImage(named: "undo"), background: .no)
+    public let undoButton: UIButton = {
+        let button = Button(image: UIImage(named: "undo"), background: .no)
+        button.isUserInteractionEnabled = true
+        return button
+    }()
     
     public let clearAllButton: UIButton = {
         let button = Button(background: .no)
-        button.tintColor = .white
         button.setTitle("Clear All", for: .normal)
+        let color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)
+        button.setTitleColor(color, for: .disabled)
         return button
     }()
-        
-    public let canvasView = CanvasView()
     
+
     public let colorPickerButton = Button(image: UIImage(named: "colorPicker"), background: .no)
     
     public let addButton = Button(image: UIImage(named: "add"), background: .dark)
@@ -48,7 +52,11 @@ final class EditorView: UIView {
         return segmentedControl
     }()
     
-    public let downloadButton = Button(image: UIImage(named: "download"), background: .no)
+    public let downloadButton: UIButton = {
+        let button = Button(image: UIImage(named: "download"), background: .no)
+        button.isEnabled = false
+        return button
+    }()
     
     // MARK: - Init Method
     init() {
@@ -68,25 +76,21 @@ final class EditorView: UIView {
     private func initViews() {
         addSubview(undoButton)
         addSubview(clearAllButton)
-        
-        addSubview(canvasView)
-        
+                        
         addSubview(colorPickerButton)
         addSubview(brushesCollectionView)
         addSubview(addButton)
         
         addSubview(cancelButton)
         addSubview(segmentedControl)
-        addSubview(downloadButton)
+        addSubview(downloadButton)        
     }
     
     // MARK: - Init Constraints Method
     private func initConstraints() {
         editorConstraints.addConstraintsToTopButton(undoButton, view: self, position: .left)
         editorConstraints.addConstraintsToTopButton(clearAllButton, view: self, position: .right)
-        
-        editorConstraints.addConstraintsToCanvas(canvasView, view: self, parent: clearAllButton)
-        
+                
         editorConstraints.addConstraintsToBottomButton(colorPickerButton, view: self, parent: cancelButton, bottomConstant: -16.0, position: .left)
         editorConstraints.addConstraintsToBrushesCollection(brushesCollectionView, parent: colorPickerButton, segmentedControl: segmentedControl, view: self)
         editorConstraints.addConstraintsToBottomButton(addButton, view: self, parent: downloadButton, bottomConstant: -16.0, position: .right)

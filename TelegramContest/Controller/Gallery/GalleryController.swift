@@ -19,6 +19,7 @@ final class GalleryController: UIViewController {
     
     // MARK: - Variables
     private var images = [PHAsset]()
+    private let screenWidth = UIScreen.main.bounds.width
         
     // MARK: - Life Cycle Methods
     override func loadView() {
@@ -76,7 +77,7 @@ extension GalleryController: UICollectionViewDelegate {
         options.deliveryMode = .highQualityFormat
         options.resizeMode = .exact
         
-        manager.requestImage(for: image, targetSize: CGSize(width: 500, height: 550), contentMode: .aspectFill, options: options) {(result, info) in
+        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth + 1.0, height: 550), contentMode: .aspectFill, options: options) {(result, info) in
             if let result = result {
                 thumbnail = result
             }
@@ -90,7 +91,26 @@ extension GalleryController: UICollectionViewDelegate {
     }
 }
 
-// MARK: - UI CollectionViewDataSource
+// MARK: - UICollectionViewDelegateFlowLayout
+extension GalleryController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        1.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let leftAndRightPaddings: CGFloat = 5.0
+        let numberOfItemsPerRow: CGFloat = CGFloat(2)
+        
+        let bounds = UIScreen.main.bounds
+        let width = (bounds.size.width - leftAndRightPaddings * (numberOfItemsPerRow + 1)) / numberOfItemsPerRow
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width)
+        
+        return layout.itemSize
+    }
+}
+
+// MARK: - UICollectionViewDataSource
 extension GalleryController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         images.count
@@ -105,7 +125,7 @@ extension GalleryController: UICollectionViewDataSource {
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
         
-        manager.requestImage(for: asset, targetSize: CGSize(width: 129.0, height: 129.0), contentMode: .aspectFit, options: options) {(image, _) in
+        manager.requestImage(for: asset, targetSize: CGSize(width: screenWidth * 2, height: screenWidth * 2), contentMode: .aspectFill, options: options) {(image, _) in
             DispatchQueue.main.async {
                 cell.galleryImageView.image = image
             }
