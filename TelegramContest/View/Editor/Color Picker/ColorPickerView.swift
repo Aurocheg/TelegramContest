@@ -30,8 +30,11 @@ final class ColorPickerView: UIView {
     // MARK: - Grid
     public let gridColorsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let itemWidth = UIScreen.main.bounds.width * 0.07
-        layout.itemSize = CGSize(width: 32.0, height: 30.0)
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = screenWidth * 0.07622
+        
+        layout.itemSize = CGSize(width: itemWidth, height: 30.0)
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
         
@@ -61,18 +64,18 @@ final class ColorPickerView: UIView {
     
     // MARK: - Red
     private let redLabel = Label(text: "RED", size: 13.0, weight: .semibold, color: UIColor(red: 0.922, green: 0.922, blue: 0.961, alpha: 0.6))
-    public let redSlider = ColorSlider(minValue: 0.0, maxValue: 255.0)
-    public let redTF = ColorTF()
+    public let redSlider = ColorSlider(minValue: 0.0, maxValue: 255.0, value: 255.0)
+    public let redTF = ColorTF(currentText: "255")
     
     // MARK: - Green
     private let greenLabel = Label(text: "GREEN", size: 13.0, weight: .semibold, color: UIColor(red: 0.922, green: 0.922, blue: 0.961, alpha: 0.6))
-    public let greenSlider = ColorSlider(minValue: 0.0, maxValue: 255.0)
-    public let greenTF = ColorTF()
+    public let greenSlider = ColorSlider(minValue: 0.0, maxValue: 255.0, value: 145.0)
+    public let greenTF = ColorTF(currentText: "145")
     
     // MARK: - Blue
     private let blueLabel = Label(text: "BLUE", size: 13.0, weight: .semibold, color: UIColor(red: 0.922, green: 0.922, blue: 0.961, alpha: 0.6))
-    public let blueSlider = ColorSlider(minValue: 0.0, maxValue: 255.0)
-    public let blueTF = ColorTF()
+    public let blueSlider = ColorSlider(minValue: 0.0, maxValue: 255.0, value: 255.0)
+    public let blueTF = ColorTF(currentText: "255")
     
     // MARK: - Hex
     private let hexColorLabel = Label(text: "Display P3 Hex Color #", size: 17.0, weight: .regular)
@@ -80,7 +83,7 @@ final class ColorPickerView: UIView {
 
     // MARK: - Opacity
     private let opacityLabel = Label(text: "OPACITY", size: 13.0, weight: .semibold, color: UIColor(red: 0.922, green: 0.922, blue: 0.961, alpha: 0.6))
-    public let opacitySlider = ColorSlider(minValue: 1.0, maxValue: 100.0, type: .opacity)
+    public let opacitySlider = ColorSlider(minValue: 1.0, maxValue: 100.0, type: .opacity, value: 100.0)
     public let opacityTF = ColorTF()
     
     // MARK: - Colors

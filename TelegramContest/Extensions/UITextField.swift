@@ -13,7 +13,6 @@ final class ColorTF: UITextField {
         super.init(frame: .zero)
         
         self.font = .systemFont(ofSize: textSize, weight: weight)
-        self.text = text
         self.textColor = textColor
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         self.layer.cornerRadius = 8.0

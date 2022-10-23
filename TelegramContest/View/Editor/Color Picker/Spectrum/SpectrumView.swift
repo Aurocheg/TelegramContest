@@ -87,7 +87,6 @@ final class SpectrumView: UIView {
 
         // MARK: - Main palette
         if rectMainPalette.contains(point) {
-            // offset point, because rectMainPalette.origin.y is not 0
             roundedPoint.y -= rectMainPalette.origin.y
 
             var saturation = roundedPoint.y < rectMainPalette.height / 2.0 ? CGFloat(2 * roundedPoint.y) / rectMainPalette.height

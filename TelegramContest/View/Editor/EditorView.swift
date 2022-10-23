@@ -25,7 +25,6 @@ final class EditorView: UIView {
         button.setTitleColor(color, for: .disabled)
         return button
     }()
-    
 
     public let colorPickerButton = Button(image: UIImage(named: "colorPicker"), background: .no)
     
@@ -48,6 +47,7 @@ final class EditorView: UIView {
     public let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Draw", "Text"])
         segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.backgroundColor = .black
         
         return segmentedControl
     }()

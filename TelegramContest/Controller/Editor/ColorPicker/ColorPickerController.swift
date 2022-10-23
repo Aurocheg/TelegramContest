@@ -20,12 +20,13 @@ final class ColorPickerController: UIViewController {
     // MARK: - Variables for Grid
     private var tag = 0
     private var color = UIColor.gray
+    private var lastSelectedCell = 0
     
     // MARK: - Variables for Sliders
-    private var redColor: Float = 0.0
-    private var greenColor: Float = 0.0
-    private var blueColor: Float = 0.0
-    private var opacityPercent: Float = 1.0
+    private var redColor: CGFloat = 1.0
+    private var greenColor: CGFloat = 0.568
+    private var blueColor: CGFloat = 1.0
+    private var opacityPercent: CGFloat = 1.0
     
     // MARK: - Top Elements
     private var closeButton: UIButton {
@@ -101,6 +102,8 @@ final class ColorPickerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.layer.cornerRadius = 13.0
+        
         // MARK: - Connections
         gridColorsCollectionView.delegate = self
         gridColorsCollectionView.dataSource = self
@@ -130,59 +133,58 @@ final class ColorPickerController: UIViewController {
         opacityTF.addTarget(self, action: #selector(TFValueChanged(_:)), for: .editingChanged)
         hexTF.addTarget(self, action: #selector(TFValueChanged(_:)), for: .editingChanged)
         
-        // MARK: - Dispatch for changing color of current color view by touching Spectrum View
+        // MARK: - Dispatch for changing color of current color view when touching Spectrum View
         let spectrumView = SpectrumView.self
         spectrumView.onColorDidChange = {[weak self] color in
             DispatchQueue.main.async {
+                self!.initOpacity()
                 self!.currentColorView.backgroundColor = color
+                color.getRed(&self!.redColor, green: &self!.greenColor, blue: &self!.blueColor, alpha: &self!.opacityPercent)
+                self!.setBackgroundGradient(to: self!.opacitySlider, type: .opacity)
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let currentColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0)
+        
+        setBackgroundGradient(to: redSlider, type: .red)
+        setBackgroundGradient(to: greenSlider, type: .green)
+        setBackgroundGradient(to: blueSlider, type: .blue)
+        setBackgroundGradient(to: opacitySlider, type: .opacity)
+        
+        redTF.text = "255"
+        greenTF.text = "145"
+        blueTF.text = "255"
+        hexTF.text = currentColor.toHexString().uppercased()
+        opacityTF.text = "\(Int(opacityPercent * 100))%"
+        
+        currentColorView.backgroundColor = currentColor
     }
     
     // MARK: - Methods
     private func setBackgroundGradient(to slider: UISlider, type: RgbSliderType) {
         let leftColor: CGColor
         let rightColor: CGColor
+        
         let sliderRadius = slider.layer.cornerRadius
         let sliderSize = slider.bounds.size
         
         switch type {
         case .red:
-            leftColor = UIColor(red: 0.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: 1.0).cgColor
-            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: 1.0).cgColor
+            leftColor = UIColor(red: 0.0, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
+            rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
         case .green:
-            leftColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: 0.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: 1.0).cgColor
-            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: 1.0).cgColor
+            leftColor = UIColor(red: redColor, green: 0.0, blue: blueColor, alpha: 1.0).cgColor
+            rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
         case .blue:
-            leftColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: 0.0,
-                                alpha: 1.0).cgColor
-            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: 1.0).cgColor
+            leftColor = UIColor(red: redColor, green: greenColor, blue: 0.0, alpha: 1.0).cgColor
+            rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
         case .opacity:
-            leftColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                green: CGFloat(greenColor) / 255.0,
-                                blue: CGFloat(blueColor) / 255.0,
-                                alpha: 0.3).cgColor
-            rightColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                 green: CGFloat(greenColor) / 255.0,
-                                 blue: CGFloat(blueColor) / 255.0,
-                                 alpha: 1.0).cgColor
+            leftColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 0.3).cgColor
+            rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
         }
         
         let gradientLayer = CAGradientLayer.createSliderGradient(colors: [leftColor, rightColor], cornerRadius: sliderRadius, size: sliderSize)
@@ -210,6 +212,12 @@ final class ColorPickerController: UIViewController {
             let hexString = colorPalette[cellTag].hexStringToUIColor()
             color = hexString
         }
+    }
+    
+    private func initOpacity() {
+        opacityPercent = 1.0
+        opacitySlider.value = Float(opacityPercent * 100)
+        opacityTF.text = "\(Int(opacityPercent * 100))%"
     }
     
     // MARK: - @objc
@@ -241,27 +249,24 @@ final class ColorPickerController: UIViewController {
         
         switch sender {
         case redSlider:
-            redColor = sliderValue
+            redColor = CGFloat(sliderValue / 255.0)
             redTF.text = String(Int(sliderValue))
         case greenSlider:
-            greenColor = sliderValue
+            greenColor = CGFloat(sliderValue / 255.0)
             greenTF.text = String(Int(sliderValue))
         case blueSlider:
-            blueColor = sliderValue
+            blueColor = CGFloat(sliderValue / 255.0)
             blueTF.text = String(Int(sliderValue))
         case opacitySlider:
-            opacityPercent = sliderValue / 100
+            opacityPercent = CGFloat(sliderValue / 100.0)
             opacityTF.text = "\(Int(sliderValue))%"
         default:
             break
         }
         
-        let currentColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                   green: CGFloat(greenColor) / 255.0,
-                                   blue: CGFloat(blueColor) / 255.0,
-                                   alpha: CGFloat(opacityPercent))
-        
+        let currentColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: opacityPercent)
         currentColorView.backgroundColor = currentColor
+        
         var hexString = currentColor.toHexString().uppercased()
         hexString.remove(at: hexString.startIndex)
         hexTF.text = hexString
@@ -277,25 +282,22 @@ final class ColorPickerController: UIViewController {
         
         switch sender {
         case redTF:
-            redColor = textFieldValue
+            redColor = CGFloat(textFieldValue / 255.0)
             redSlider.value = textFieldValue
         case greenTF:
-            greenColor = textFieldValue
+            greenColor = CGFloat(textFieldValue / 255.0)
             greenSlider.value = textFieldValue
         case blueTF:
-            blueColor = textFieldValue
+            blueColor = CGFloat(textFieldValue / 255.0)
             blueSlider.value = textFieldValue
         case opacityTF:
-            opacityPercent = textFieldValue / 100
+            opacityPercent = CGFloat(textFieldValue / 100)
             opacitySlider.value = textFieldValue
         default:
             break
         }
         
-        let currentColor = UIColor(red: CGFloat(redColor) / 255.0,
-                                  green: CGFloat(greenColor) / 255.0,
-                                  blue: CGFloat(blueColor) / 255.0,
-                                  alpha: CGFloat(opacityPercent))
+        let currentColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: opacityPercent)
         
         currentColorView.backgroundColor = currentColor
         var hexString = currentColor.toHexString().uppercased()
@@ -322,6 +324,10 @@ extension ColorPickerController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         120
     }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        10
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -339,7 +345,24 @@ extension ColorPickerController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)!
+        
+        cell.layer.borderWidth = 3.0
+        cell.layer.borderColor = UIColor.white.cgColor
+
+        initOpacity()
+        
         readDataFromPlist(cellTag: cell.tag, indexPath: indexPath)
+        color.getRed(&redColor, green: &greenColor, blue: &blueColor, alpha: &opacityPercent)
         currentColorView.backgroundColor = color
+        
+        
+        setBackgroundGradient(to: opacitySlider, type: .opacity)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)!
+        
+        cell.layer.borderColor = UIColor.clear.cgColor
+        cell.layer.borderWidth = 0.0
     }
 }

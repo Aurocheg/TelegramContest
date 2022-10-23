@@ -3,7 +3,6 @@
 //  TelegramContest
 //
 //  Created by Aurocheg on 14.10.22.
-//  я долбаеб (Чикита) made with love (63 TP)
 
 import UIKit
 

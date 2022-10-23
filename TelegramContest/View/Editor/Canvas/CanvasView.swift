@@ -24,10 +24,13 @@ final class CanvasView: UIView {
     public var strokeWidth: CGFloat = 10.0
     public var strokeColor: UIColor = .white
     public var strokeOpacity: CGFloat = 1.0
-    
+    public var isLineExisting = false
+        
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
+        isLineExisting = true
+                            
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
         lines.forEach { (line) in
@@ -48,10 +51,12 @@ final class CanvasView: UIView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        isLineExisting = true
         lines.append(TouchPointsAndColor(color: UIColor(), points: [CGPoint]()))
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        isLineExisting = true
         guard let touch = touches.first?.location(in: nil) else { return }
         
         guard var lastPoint = lines.popLast() else {return}

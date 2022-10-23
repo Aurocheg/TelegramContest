@@ -28,7 +28,7 @@ final class EditorController: UIViewController {
     private let transition = PanelTransition()
     
     // MARK: - UI Elements
-    private var undoButton: UIButton {
+    public var undoButton: UIButton {
         editorView.undoButton
     }
     
@@ -60,11 +60,14 @@ final class EditorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.isNavigationBarHidden = true
+        
+        brushesCollectionView.transform = CGAffineTransform(translationX: 0, y: 27.0)
+        
         // MARK: - Canvas
         canvasView.backgroundColor = UIColor(patternImage: galleryImage)
         view.addSubview(canvasView)
         editorConstraints.addConstraintsToCanvas(canvasView, view: view, parent: clearAllButton)
-
                                 
         // MARK: - Connections
         brushesCollectionView.delegate = self
@@ -117,6 +120,15 @@ extension EditorController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.brushImageView.image = UIImage(named: brushes[indexPath.row].brush)
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            cell.transform = CGAffineTransform(translationX: 0, y: -27.0)
+        }
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }

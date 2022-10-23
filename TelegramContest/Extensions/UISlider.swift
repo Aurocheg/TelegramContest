@@ -16,13 +16,13 @@ enum SliderType {
 final class ColorSlider: UISlider {
     private var trackHeight: CGFloat = 36.0
 
-    init(minValue: Float, maxValue: Float, type: SliderType = .color) {
+    init(minValue: Float, maxValue: Float, type: SliderType = .color, value: Float) {
         super.init(frame: .zero)
-        
+                
         self.layer.cornerRadius = 18.0
-        
         self.minimumValue = minValue
         self.maximumValue = maxValue
+        self.value = value
         
         switch type {
         case .color: self.tintColor = .darkGray
