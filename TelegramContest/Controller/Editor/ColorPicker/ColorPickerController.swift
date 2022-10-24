@@ -16,11 +16,14 @@ enum RgbSliderType {
 
 final class ColorPickerController: UIViewController {
     private let colorPickerView = ColorPickerView()
+    static var brushColorDidChange: ((_ color: UIColor) -> ())?
     
     // MARK: - Variables for Grid
     private var tag = 0
     private var color = UIColor.gray
-    private var lastSelectedCell = 0
+    
+    // MARK: - Variables for color collection cell
+    private let userColors = UserDefaults.standard.object(forKey: "userColors") as? Array<String> ?? []
     
     // MARK: - Variables for Sliders
     private var redColor: CGFloat = 1.0
@@ -80,7 +83,7 @@ final class ColorPickerController: UIViewController {
         colorPickerView.hexColorTF
     }
     
-        // MARK: - Opacity
+    // MARK: - Opacity
     private var opacitySlider: UISlider {
         colorPickerView.opacitySlider
     }
@@ -89,9 +92,13 @@ final class ColorPickerController: UIViewController {
         colorPickerView.opacityTF
     }
     
-        // MARK: - Current Color
-    private var currentColorView: UIView {
+    // MARK: - Current Color
+    public var currentColorView: UIView {
         colorPickerView.currentColorView
+    }
+    
+    private var colorsCollectionView: UICollectionView {
+        colorPickerView.colorsCollectionView
     }
     
     // MARK: - View Life Cycle
@@ -107,6 +114,8 @@ final class ColorPickerController: UIViewController {
         // MARK: - Connections
         gridColorsCollectionView.delegate = self
         gridColorsCollectionView.dataSource = self
+        colorsCollectionView.delegate = self
+        colorsCollectionView.dataSource = self
         
         redTF.delegate = self
         greenTF.delegate = self
@@ -116,6 +125,7 @@ final class ColorPickerController: UIViewController {
         
         // MARK: - Register
         gridColorsCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "gridCollectionCell")
+        colorsCollectionView.register(ColorsCollectionCell.self, forCellWithReuseIdentifier: "colorsCollectionCell")
         
         // MARK: - Targets
         closeButton.addTarget(self, action: #selector(closeButtonTapped(_:)), for: .touchUpInside)
@@ -139,6 +149,7 @@ final class ColorPickerController: UIViewController {
             DispatchQueue.main.async {
                 self!.initOpacity()
                 self!.currentColorView.backgroundColor = color
+                ColorPickerController.brushColorDidChange?(color)
                 color.getRed(&self!.redColor, green: &self!.greenColor, blue: &self!.blueColor, alpha: &self!.opacityPercent)
                 self!.setBackgroundGradient(to: self!.opacitySlider, type: .opacity)
             }
@@ -201,7 +212,6 @@ final class ColorPickerController: UIViewController {
     }
     
     private func readDataFromPlist(cellTag: Int, indexPath: IndexPath) {
-        // For cell for item
         var colorPalette: Array<String>
         
         let path = Bundle.main.path(forResource: "colorPalette", ofType: "plist")
@@ -266,6 +276,7 @@ final class ColorPickerController: UIViewController {
         
         let currentColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: opacityPercent)
         currentColorView.backgroundColor = currentColor
+        ColorPickerController.brushColorDidChange?(currentColor)
         
         var hexString = currentColor.toHexString().uppercased()
         hexString.remove(at: hexString.startIndex)
@@ -298,8 +309,9 @@ final class ColorPickerController: UIViewController {
         }
         
         let currentColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: opacityPercent)
-        
         currentColorView.backgroundColor = currentColor
+        ColorPickerController.brushColorDidChange?(currentColor)
+
         var hexString = currentColor.toHexString().uppercased()
         hexString.remove(at: hexString.startIndex)
         hexTF.text = hexString
@@ -322,25 +334,40 @@ extension ColorPickerController: UITextFieldDelegate {
 // MARK: - UICollectionViewDelegate
 extension ColorPickerController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        120
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        10
+        switch collectionView {
+        case gridColorsCollectionView:
+            return 120
+        case colorsCollectionView:
+            return userColors.count
+        default:
+            return 0
+        }
     }
 }
 
 // MARK: - UICollectionViewDataSource
 extension ColorPickerController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "gridCollectionCell", for: indexPath)
-        cell.tag = tag
-        readDataFromPlist(cellTag: cell.tag, indexPath: indexPath)
-        
-        cell.backgroundColor = color
-        tag += 1
-        
-        return cell
+        switch collectionView {
+        case gridColorsCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "gridCollectionCell", for: indexPath)
+            cell.tag = tag
+            readDataFromPlist(cellTag: cell.tag, indexPath: indexPath)
+            
+            cell.backgroundColor = color
+            tag += 1
+            
+            return cell
+        case colorsCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colorsCollectionCell", for: indexPath) as? ColorsCollectionCell else {
+                return UICollectionViewCell()
+            }
+            let color = userColors[indexPath.row]
+            cell.colorView.backgroundColor = color.hexStringToUIColor()
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -354,7 +381,7 @@ extension ColorPickerController: UICollectionViewDataSource {
         readDataFromPlist(cellTag: cell.tag, indexPath: indexPath)
         color.getRed(&redColor, green: &greenColor, blue: &blueColor, alpha: &opacityPercent)
         currentColorView.backgroundColor = color
-        
+        ColorPickerController.brushColorDidChange?(color)
         
         setBackgroundGradient(to: opacitySlider, type: .opacity)
     }

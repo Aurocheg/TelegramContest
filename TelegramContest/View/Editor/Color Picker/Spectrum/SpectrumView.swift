@@ -23,6 +23,16 @@ final class SpectrumView: UIView {
         }
     }
     
+    private let dot: UIView = {
+        let dot = UIView()
+        
+        dot.layer.cornerRadius = 15.0
+        dot.layer.borderColor = UIColor.black.cgColor
+        dot.layer.borderWidth = 2.0
+        
+        return dot
+    }()
+    
     // MARK: - Init Method
     init() {
         super.init(frame: .zero)
@@ -37,6 +47,7 @@ final class SpectrumView: UIView {
     // MARK: - Init Views Method
     private func initViews() {
         self.clipsToBounds = true
+        self.addSubview(dot)
         let touchGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.touchedColor(gestureRecognizer:)))
         touchGesture.minimumPressDuration = 0
         touchGesture.allowableMovement = CGFloat.greatestFiniteMagnitude
@@ -105,6 +116,7 @@ final class SpectrumView: UIView {
 
     @objc func touchedColor(gestureRecognizer: UILongPressGestureRecognizer) {
         let point = gestureRecognizer.location(in: self)
+        dot.frame = CGRect(x: point.x, y: point.y, width: 30.0, height: 30.0)
         let color = getColorAtPoint(point: point)
 
         SpectrumView.onColorDidChange?(color)

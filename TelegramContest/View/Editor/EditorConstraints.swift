@@ -35,7 +35,16 @@ final class EditorConstraints: UIView {
         canvasView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         canvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 42.0).isActive = true
         canvasView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        canvasView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.59).isActive = true
+        canvasView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.61).isActive = true
+    }
+    
+    public func addConstraintsToToolsView(_ toolsView: UIView, view: UIView) {
+        toolsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        toolsView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        toolsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -44.5).isActive = true
+        toolsView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        toolsView.heightAnchor.constraint(equalToConstant: 110.0).isActive = true
     }
     
     public func addConstraintsToBottomButton(_ button: UIButton, view: UIView, parent: AnyObject? = nil, bottomConstant: CGFloat, position: ButtonsPosition) {
@@ -64,15 +73,58 @@ final class EditorConstraints: UIView {
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: segmentedControl.topAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.61).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 93.0).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 123.0).isActive = true
     }
     
     public func addConstraintsToSegmentedControl(_ segmentedControl: UISegmentedControl, view: UIView) {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
         segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        segmentedControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -44.5).isActive = true
+        segmentedControl.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
+    }
+    
+    public func addConstraintsToSizeView(_ sizeView: UIView, view: UIView) {
+        sizeView.translatesAutoresizingMaskIntoConstraints = false
+        
+        sizeView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0).isActive = true
+        sizeView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -42.0).isActive = true
+        sizeView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -16.0).isActive = true
+        sizeView.heightAnchor.constraint(equalToConstant: 140.0).isActive = true
+    }
+    
+    public func addConstraintsToSizeBack(_ sizeBackButton: UIButton, sizeView: UIView) {
+        sizeBackButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        sizeBackButton.leftAnchor.constraint(equalTo: sizeView.leftAnchor).isActive = true
+        sizeBackButton.bottomAnchor.constraint(equalTo: sizeView.bottomAnchor).isActive = true
+        sizeBackButton.widthAnchor.constraint(equalToConstant: 33.0).isActive = true
+        sizeBackButton.heightAnchor.constraint(equalToConstant: 33.0).isActive = true
+    }
+    
+    public func addConstraintsToSizeSlider(_ sizeSlider: UISlider, sizeView: UIView, parent: UIButton) {
+        sizeSlider.translatesAutoresizingMaskIntoConstraints = false
+    
+        sizeSlider.centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true
+        sizeSlider.leftAnchor.constraint(equalTo: parent.rightAnchor, constant: 16.5).isActive = true
+        sizeSlider.widthAnchor.constraint(equalTo: sizeView.widthAnchor, multiplier: 0.61).isActive = true
+    }
+    
+    public func addConstraintsToSizeSliderView(_ sizeSliderView: UIView, sizeSlider: UISlider) {
+        sizeSliderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        sizeSliderView.leftAnchor.constraint(equalTo: sizeSlider.leftAnchor).isActive = true
+        sizeSliderView.topAnchor.constraint(equalTo: sizeSlider.topAnchor).isActive = true
+        sizeSliderView.widthAnchor.constraint(equalTo: sizeSlider.widthAnchor).isActive = true
+        sizeSliderView.heightAnchor.constraint(equalTo: sizeSlider.heightAnchor).isActive = true
+    }
+    
+    public func addConstraintsToSizeActionButton(_ actionButton: UIButton, sizeView: UIView, slider: UISlider) {
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        actionButton.rightAnchor.constraint(equalTo: sizeView.rightAnchor).isActive = true
+        actionButton.centerYAnchor.constraint(equalTo: slider.centerYAnchor).isActive = true
+        actionButton.heightAnchor.constraint(equalToConstant: 22.0).isActive = true
     }
 }

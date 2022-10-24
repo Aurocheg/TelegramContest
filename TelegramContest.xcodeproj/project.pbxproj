@@ -14,6 +14,8 @@
 		DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE828F9F20A001D5359 /* EditorModel.swift */; };
 		DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */; };
 		DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */; };
+		DE6270B92905986D00D5941F /* ColorsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6270B82905986D00D5941F /* ColorsCollectionCell.swift */; };
+		DE6270BB290599EB00D5941F /* ColorsCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6270BA290599EB00D5941F /* ColorsCellConstraints.swift */; };
 		DE7E1618290470E70057E4AE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E1617290470E70057E4AE /* CanvasView.swift */; };
 		DE85B08629007653005FFD31 /* BrushCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85B08529007653005FFD31 /* BrushCollectionCell.swift */; };
 		DE85B088290077CF005FFD31 /* BrushCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85B087290077CF005FFD31 /* BrushCellConstraints.swift */; };
@@ -54,6 +56,8 @@
 		DE334EE828F9F20A001D5359 /* EditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModel.swift; sourceTree = "<group>"; };
 		DE59C85628F7EB06000B1D7D /* GalleryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionCell.swift; sourceTree = "<group>"; };
 		DE59C85928F834A0000B1D7D /* GalleryCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCellConstraints.swift; sourceTree = "<group>"; };
+		DE6270B82905986D00D5941F /* ColorsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCollectionCell.swift; sourceTree = "<group>"; };
+		DE6270BA290599EB00D5941F /* ColorsCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCellConstraints.swift; sourceTree = "<group>"; };
 		DE7E1617290470E70057E4AE /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		DE85B08529007653005FFD31 /* BrushCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCollectionCell.swift; sourceTree = "<group>"; };
 		DE85B087290077CF005FFD31 /* BrushCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCellConstraints.swift; sourceTree = "<group>"; };
@@ -135,6 +139,15 @@
 			path = "Gallery Collection Cell";
 			sourceTree = "<group>";
 		};
+		DE6270B72905984900D5941F /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				DE6270B82905986D00D5941F /* ColorsCollectionCell.swift */,
+				DE6270BA290599EB00D5941F /* ColorsCellConstraints.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
 		DE7E1616290470D60057E4AE /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +168,7 @@
 		DE94C67328FB0E2B008E3494 /* Color Picker */ = {
 			isa = PBXGroup;
 			children = (
+				DE6270B72905984900D5941F /* Colors */,
 				DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */,
 				DE94C68E28FC3B51008E3494 /* Spectrum */,
 				DE94C67428FB0E3A008E3494 /* ColorPickerView.swift */,
@@ -381,6 +395,7 @@
 				DE94C67728FB0E46008E3494 /* ColorPickerConstraints.swift in Sources */,
 				DEA1082328FFCFC20043531E /* UIImage.swift in Sources */,
 				DE85B08629007653005FFD31 /* BrushCollectionCell.swift in Sources */,
+				DE6270B92905986D00D5941F /* ColorsCollectionCell.swift in Sources */,
 				DE94C68628FC1246008E3494 /* PanelTransition.swift in Sources */,
 				DE94C67B28FB138F008E3494 /* UITextField.swift in Sources */,
 				DE334EE728F97B01001D5359 /* UIButton.swift in Sources */,
@@ -397,6 +412,7 @@
 				DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */,
 				DE94C67928FB1385008E3494 /* UISlider.swift in Sources */,
 				DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */,
+				DE6270BB290599EB00D5941F /* ColorsCellConstraints.swift in Sources */,
 				DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */,
 				DE90C2A52900539600AA0FAF /* CAGradientLayer.swift in Sources */,
 				DE90C2A3290051FD00AA0FAF /* String.swift in Sources */,

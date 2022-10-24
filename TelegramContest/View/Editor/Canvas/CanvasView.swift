@@ -20,17 +20,15 @@ struct TouchPointsAndColor {
 }
 
 final class CanvasView: UIView {
+    static var onLineCreating: ((_ bool: Bool) -> ())?
     private var lines = [TouchPointsAndColor]()
     public var strokeWidth: CGFloat = 10.0
     public var strokeColor: UIColor = .white
     public var strokeOpacity: CGFloat = 1.0
-    public var isLineExisting = false
         
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        isLineExisting = true
-                            
+
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
         lines.forEach { (line) in
@@ -47,16 +45,16 @@ final class CanvasView: UIView {
             }
             context.setLineCap(.round)
             context.strokePath()
+            CanvasView.onLineCreating?(true)
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        isLineExisting = true
         lines.append(TouchPointsAndColor(color: UIColor(), points: [CGPoint]()))
+        CanvasView.onLineCreating?(true)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        isLineExisting = true
         guard let touch = touches.first?.location(in: nil) else { return }
         
         guard var lastPoint = lines.popLast() else {return}
@@ -66,17 +64,20 @@ final class CanvasView: UIView {
         lastPoint.opacity = strokeOpacity
         lines.append(lastPoint)
         setNeedsDisplay()
+        CanvasView.onLineCreating?(true)
     }
     
     public func clearCanvasView() {
         lines.removeAll()
         setNeedsDisplay()
+        CanvasView.onLineCreating?(false)
     }
     
     public func undoDraw() {
         if lines.count > 0 {
             lines.removeLast()
             setNeedsDisplay()
+            CanvasView.onLineCreating?(false)
         }
     }
 }

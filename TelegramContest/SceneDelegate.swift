@@ -15,6 +15,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let userColors = [
+            "#0042A9",
+            "#B51A00",
+            "#B1DD8B",
+            "#FEECD4",
+            "#EAF28F"
+        ]
+        
+        UserDefaults.standard.set(userColors, forKey: "userColors")
+        
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = .dark
         

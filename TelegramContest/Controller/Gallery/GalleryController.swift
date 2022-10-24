@@ -77,7 +77,7 @@ extension GalleryController: UICollectionViewDelegate {
         options.deliveryMode = .highQualityFormat
         options.resizeMode = .exact
         
-        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth + 1.0, height: 550), contentMode: .aspectFill, options: options) {(result, info) in
+        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth + 1.0, height: 700), contentMode: .aspectFill, options: options) {(result, info) in
             if let result = result {
                 thumbnail = result
             }

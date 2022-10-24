@@ -96,4 +96,13 @@ final class ColorPickerConstraints: UIView {
         currentColorView.widthAnchor.constraint(equalToConstant: 82.0).isActive = true
         currentColorView.heightAnchor.constraint(equalToConstant: 82.0).isActive = true
     }
+    
+    public func addConstraintsToColorsCollection(_ colorsCollectionView: UICollectionView, view: UIView, parent: AnyObject) {
+        colorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        colorsCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16.0).isActive = true
+        colorsCollectionView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 22.0).isActive = true
+        colorsCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.615).isActive = true
+        colorsCollectionView.heightAnchor.constraint(equalToConstant: 82.0).isActive = true
+    }
 }

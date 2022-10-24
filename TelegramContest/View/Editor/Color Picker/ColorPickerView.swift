@@ -102,7 +102,14 @@ final class ColorPickerView: UIView {
     
     public let colorsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 30.0, height: 30.0)
+        layout.minimumLineSpacing = 22.5
+        layout.scrollDirection = .horizontal
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.isScrollEnabled = false
+        
         return collectionView
     }()
     
@@ -210,5 +217,6 @@ final class ColorPickerView: UIView {
         
         // MARK: - Colors
         colorPickerConstraints.addConstraintsToCurrentColor(currentColorView, view: self, parent: separatingLineView)
+        colorPickerConstraints.addConstraintsToColorsCollection(colorsCollectionView, view: self, parent: separatingLineView)
     }
 }
