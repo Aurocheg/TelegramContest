@@ -63,13 +63,18 @@ final class EditorController: UIViewController {
     private var sizeView: UIView {
         editorView.sizeView
     }
+    private var sizeImageView: UIImageView {
+        editorView.sizeImageView
+    }
     private var sizeActionButton: UIButton {
         editorView.sizeActionButton
     }
     private var sizeBackButton: UIButton {
         editorView.sizeBackButton
     }
-    
+    private var sizeSlider: UISlider {
+        editorView.sizeSlider
+    }
     
     // MARK: - Interactions
     private var sizeInteraction: UIContextMenuInteraction? = nil
@@ -85,11 +90,13 @@ final class EditorController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         
         brushesCollectionView.transform = CGAffineTransform(translationX: 0, y: 27.0)
+        sizeImageView.transform = CGAffineTransform(translationX: -130.0, y: 0.0)
         
         // MARK: - Canvas
         canvasView.backgroundColor = UIColor(patternImage: galleryImage)
         view.addSubview(canvasView)
         editorConstraints.addConstraintsToCanvas(canvasView, view: view, parent: clearAllButton)
+        sizeSlider.value = Float(canvasView.strokeWidth)
                                 
         // MARK: - Size Menu
         sizeInteraction = UIContextMenuInteraction(delegate: self)
@@ -110,7 +117,9 @@ final class EditorController: UIViewController {
         clearAllButton.addTarget(self, action: #selector(clearAllButtonTapped), for: .touchUpInside)
         colorPickerButton.addTarget(self, action: #selector(colorPickerButtonTapped), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        downloadButton.addTarget(self, action: #selector(downloadButtonTapped), for: .touchUpInside)
         sizeBackButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        sizeSlider.addTarget(self, action: #selector(sizeSliderChanged), for: .valueChanged)
         
         let colorPickerController = ColorPickerController.self
         colorPickerController.brushColorDidChange = {[weak self] color in
@@ -127,9 +136,11 @@ final class EditorController: UIViewController {
                 if self!.isLineExisting {
                     self!.undoButton.isEnabled = true
                     self!.clearAllButton.isEnabled = true
+                    self!.downloadButton.isEnabled = true
                 } else {
                     self!.undoButton.isEnabled = false
                     self!.clearAllButton.isEnabled = false
+                    self?.downloadButton.isEnabled = false
                 }
             }
         }
@@ -156,10 +167,37 @@ final class EditorController: UIViewController {
         dismiss(animated: true)
     }
     
+    @objc func downloadButtonTapped() {
+        let image = canvasView.takeScreenshot()
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageSaved(_:didFinishSavingWithError:contextType:)), nil)
+    }
+    
+    @objc func imageSaved(_ image: UIImage, didFinishSavingWithError error: Error?, contextType: UnsafeRawPointer) {
+        if let error = error {
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
     @objc func backButtonTapped() {
+        UIView.animate(withDuration: 0.3) {
+            self.sizeImageView.transform = CGAffineTransform(translationX: -130.0, y: 0.0)
+        }
+
         sizeView.isHidden = true
         toolsView.isHidden = false
     }
+    
+    @objc func sizeSliderChanged() {
+        canvasView.strokeWidth = CGFloat(sizeSlider.value)
+    }
+    
+    
 }
 
 extension EditorController: UIContextMenuInteractionDelegate {
@@ -224,13 +262,19 @@ extension EditorController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)!
+        guard let cell = collectionView.cellForItem(at: indexPath) as? BrushCollectionCell else { return }
         UIView.animate(withDuration: 0.2) {
             cell.transform = CGAffineTransform(translationX: 0, y: -12.0)
         }
         
-        toolsView.isHidden = true
-        sizeView.isHidden = false
+        if !(indexPath.row > 2) {
+            sizeImageView.image = cell.brushImageView.image
+            UIView.animate(withDuration: 0.3) {
+                self.sizeImageView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
+            }
+            toolsView.isHidden = true
+            sizeView.isHidden = false
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

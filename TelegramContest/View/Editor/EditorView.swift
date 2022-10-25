@@ -61,6 +61,11 @@ final class EditorView: UIView {
         view.isHidden = true
         return view
     }()
+    public let sizeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
     public let sizeBackButton = Button(image: UIImage(named: "back"), background: .no)
     public let sizeSliderView = SizeSliderView()
     public let sizeSlider: UISlider = {
@@ -71,6 +76,8 @@ final class EditorView: UIView {
         thumbView.backgroundColor = .white
         let thumb = slider.thumbImage(radius: 28.0, thumbView: thumbView, size: size)
         
+        slider.minimumValue = 1.0
+        slider.maximumValue = 40.0
         slider.setThumbImage(thumb, for: .normal)
         slider.setMinimumTrackImage(UIImage(), for: .normal)
         slider.setMaximumTrackImage(UIImage(), for: .normal)
@@ -86,7 +93,7 @@ final class EditorView: UIView {
         
         return button
     }()
-    
+
     // MARK: - Init Method
     init() {
         super.init(frame: .zero)
@@ -115,6 +122,7 @@ final class EditorView: UIView {
         toolsView.addSubview(downloadButton)
         
         addSubview(sizeView)
+        sizeView.addSubview(sizeImageView)
         sizeView.addSubview(sizeBackButton)
         sizeView.addSubview(sizeSliderView)
         sizeView.addSubview(sizeSlider)
@@ -135,6 +143,7 @@ final class EditorView: UIView {
         editorConstraints.addConstraintsToBottomButton(downloadButton, view: toolsView, bottomConstant: 0.0, position: .right)
         
         editorConstraints.addConstraintsToSizeView(sizeView, view: self)
+        editorConstraints.addConstraintsToSizeImage(sizeImageView, sizeView: sizeView)
         editorConstraints.addConstraintsToSizeBack(sizeBackButton, sizeView: sizeView)
         editorConstraints.addConstraintsToSizeSlider(sizeSlider, sizeView: sizeView, parent: sizeBackButton)
         editorConstraints.addConstraintsToSizeSliderView(sizeSliderView, sizeSlider: sizeSlider)

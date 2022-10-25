@@ -12,17 +12,27 @@ enum ButtonsPosition {
 }
 
 final class EditorConstraints: UIView {
+    private let screenHeight = UIScreen.main.bounds.height
+    
     public func addConstraintsToTopButton(_ button: UIButton, view: UIView, position: ButtonsPosition) {
         button.translatesAutoresizingMaskIntoConstraints = false
                 
         switch position {
         case .left:
-            button.topAnchor.constraint(equalTo: view.topAnchor, constant: 67.0).isActive = true
+            if screenHeight < 812.0 {
+                button.topAnchor.constraint(equalTo: view.topAnchor, constant: 39.0).isActive = true
+            } else {
+                button.topAnchor.constraint(equalTo: view.topAnchor, constant: 67.0).isActive = true
+            }
             button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0).isActive = true
             button.widthAnchor.constraint(equalToConstant: 16.0).isActive = true
             button.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
         case .right:
-            button.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
+            if screenHeight < 812.0 {
+                button.topAnchor.constraint(equalTo: view.topAnchor, constant: 36.0).isActive = true
+            } else {
+                button.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
+            }
             button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12.0).isActive = true
             button.widthAnchor.constraint(equalToConstant: 64.0).isActive = true
             button.heightAnchor.constraint(equalToConstant: 22.0).isActive = true
@@ -31,9 +41,15 @@ final class EditorConstraints: UIView {
     
     public func addConstraintsToCanvas(_ canvasView: UIView, view: UIView, parent: UIButton) {
         canvasView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         canvasView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        canvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 42.0).isActive = true
+        
+        if screenHeight < 812.0 {
+            canvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
+        } else {
+            canvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 42.0).isActive = true
+        }
+        
         canvasView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         canvasView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.61).isActive = true
     }
@@ -92,6 +108,15 @@ final class EditorConstraints: UIView {
         sizeView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -42.0).isActive = true
         sizeView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -16.0).isActive = true
         sizeView.heightAnchor.constraint(equalToConstant: 140.0).isActive = true
+    }
+    
+    public func addConstraintsToSizeImage(_ sizeImageView: UIImageView, sizeView: UIView) {
+        sizeImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        sizeImageView.centerXAnchor.constraint(equalTo: sizeView.centerXAnchor).isActive = true
+        sizeImageView.topAnchor.constraint(equalTo: sizeView.topAnchor).isActive = true
+        sizeImageView.widthAnchor.constraint(equalToConstant: 34.0).isActive = true
+        sizeImageView.heightAnchor.constraint(equalToConstant: 107.0).isActive = true
     }
     
     public func addConstraintsToSizeBack(_ sizeBackButton: UIButton, sizeView: UIView) {

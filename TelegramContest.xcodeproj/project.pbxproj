@@ -17,6 +17,7 @@
 		DE6270B92905986D00D5941F /* ColorsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6270B82905986D00D5941F /* ColorsCollectionCell.swift */; };
 		DE6270BB290599EB00D5941F /* ColorsCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6270BA290599EB00D5941F /* ColorsCellConstraints.swift */; };
 		DE7E1618290470E70057E4AE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E1617290470E70057E4AE /* CanvasView.swift */; };
+		DE8326BA2907E4D0003BE62E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8326B92907E4D0003BE62E /* UIView.swift */; };
 		DE85B08629007653005FFD31 /* BrushCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85B08529007653005FFD31 /* BrushCollectionCell.swift */; };
 		DE85B088290077CF005FFD31 /* BrushCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85B087290077CF005FFD31 /* BrushCellConstraints.swift */; };
 		DE90C2A3290051FD00AA0FAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE90C2A2290051FD00AA0FAF /* String.swift */; };
@@ -59,6 +60,7 @@
 		DE6270B82905986D00D5941F /* ColorsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCollectionCell.swift; sourceTree = "<group>"; };
 		DE6270BA290599EB00D5941F /* ColorsCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCellConstraints.swift; sourceTree = "<group>"; };
 		DE7E1617290470E70057E4AE /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		DE8326B92907E4D0003BE62E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		DE85B08529007653005FFD31 /* BrushCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCollectionCell.swift; sourceTree = "<group>"; };
 		DE85B087290077CF005FFD31 /* BrushCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCellConstraints.swift; sourceTree = "<group>"; };
 		DE90C2A2290051FD00AA0FAF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				DEA1082228FFCFC20043531E /* UIImage.swift */,
 				DE90C2A2290051FD00AA0FAF /* String.swift */,
 				DE90C2A42900539600AA0FAF /* CAGradientLayer.swift */,
+				DE8326B92907E4D0003BE62E /* UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */,
 				DE94C67928FB1385008E3494 /* UISlider.swift in Sources */,
 				DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */,
+				DE8326BA2907E4D0003BE62E /* UIView.swift in Sources */,
 				DE6270BB290599EB00D5941F /* ColorsCellConstraints.swift in Sources */,
 				DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */,
 				DE90C2A52900539600AA0FAF /* CAGradientLayer.swift in Sources */,
