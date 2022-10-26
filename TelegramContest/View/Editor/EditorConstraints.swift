@@ -14,6 +14,7 @@ enum ButtonsPosition {
 final class EditorConstraints: UIView {
     private let screenHeight = UIScreen.main.bounds.height
     
+    // MARK: - Top
     public func addConstraintsToTopButton(_ button: UIButton, view: UIView, position: ButtonsPosition) {
         button.translatesAutoresizingMaskIntoConstraints = false
                 
@@ -39,21 +40,31 @@ final class EditorConstraints: UIView {
         }        
     }
     
-    public func addConstraintsToCanvas(_ canvasView: UIView, view: UIView, parent: UIButton) {
-        canvasView.translatesAutoresizingMaskIntoConstraints = false
-
-        canvasView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    public func addConstraintsToMainCanvas(_ mainCanvasView: UIView, view: UIView, parent: UIButton) {
+        mainCanvasView.translatesAutoresizingMaskIntoConstraints = false
+        
+        mainCanvasView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
         if screenHeight < 812.0 {
-            canvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
+            mainCanvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 20.0).isActive = true
         } else {
-            canvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 42.0).isActive = true
+            mainCanvasView.topAnchor.constraint(equalTo: parent.bottomAnchor, constant: 42.0).isActive = true
         }
         
-        canvasView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        canvasView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.61).isActive = true
+        mainCanvasView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        mainCanvasView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.61).isActive = true
     }
     
+    public func addConstraintsToCanvas(_ canvasView: UIView, view: UIView) {
+        canvasView.translatesAutoresizingMaskIntoConstraints = false
+        
+        canvasView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        canvasView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        canvasView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        canvasView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+    }
+    
+    // MARK: - Tools
     public func addConstraintsToToolsView(_ toolsView: UIView, view: UIView) {
         toolsView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -92,6 +103,7 @@ final class EditorConstraints: UIView {
         collectionView.heightAnchor.constraint(equalToConstant: 123.0).isActive = true
     }
     
+    // MARK: - Segmented Control
     public func addConstraintsToSegmentedControl(_ segmentedControl: UISegmentedControl, view: UIView) {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
@@ -101,6 +113,7 @@ final class EditorConstraints: UIView {
         segmentedControl.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
     }
     
+    // MARK: - Size
     public func addConstraintsToSizeView(_ sizeView: UIView, view: UIView) {
         sizeView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -151,5 +164,68 @@ final class EditorConstraints: UIView {
         actionButton.rightAnchor.constraint(equalTo: sizeView.rightAnchor).isActive = true
         actionButton.centerYAnchor.constraint(equalTo: slider.centerYAnchor).isActive = true
         actionButton.heightAnchor.constraint(equalToConstant: 22.0).isActive = true
+    }
+    
+    // MARK: - Text
+    public func addConstraintsToTextMainView(textMainView: UIView, view: UIView, parent: UIButton, segmentedControl: UISegmentedControl) {
+        textMainView.translatesAutoresizingMaskIntoConstraints = false
+        
+        textMainView.centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true
+        textMainView.leftAnchor.constraint(equalTo: segmentedControl.leftAnchor).isActive = true
+        textMainView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7974).isActive = true
+        textMainView.heightAnchor.constraint(equalToConstant: 30.5).isActive = true
+    }
+    
+    public func addConstraintsToTextView(_ textView: UITextView, canvasView: UIView) {
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        textView.centerXAnchor.constraint(equalTo: canvasView.centerXAnchor).isActive = true
+        textView.centerYAnchor.constraint(equalTo: canvasView.centerYAnchor).isActive = true
+        textView.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
+    }
+    
+    public func addConstraintsToTextSizeSlider(_ textSizeSlider: UISlider, canvasView: UIView, textView: UITextView) {
+        textSizeSlider.translatesAutoresizingMaskIntoConstraints = false
+        
+        textSizeSlider.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+        
+        textSizeSlider.leftAnchor.constraint(equalTo: canvasView.leftAnchor, constant: -117.0).isActive = true
+        textSizeSlider.centerYAnchor.constraint(equalTo: textView.centerYAnchor).isActive = true
+        textSizeSlider.widthAnchor.constraint(equalToConstant: 240.0).isActive = true
+        textSizeSlider.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
+    }
+    
+    public func addConstraintsToTextSizeSliderView(_ textSizeSliderView: UIView, textSizeSlider: UISlider) {
+        textSizeSliderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        textSizeSliderView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+        
+        textSizeSliderView.leftAnchor.constraint(equalTo: textSizeSlider.leftAnchor).isActive = true
+        textSizeSliderView.topAnchor.constraint(equalTo: textSizeSlider.topAnchor).isActive = true
+        textSizeSliderView.widthAnchor.constraint(equalTo: textSizeSlider.widthAnchor).isActive = true
+        textSizeSliderView.heightAnchor.constraint(equalTo: textSizeSlider.heightAnchor).isActive = true
+    }
+    
+    public func addConstraintsToToolButton(_ toolButton: UIButton, textMainView: UIView, parent: UIButton? = nil) {
+        toolButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        if let parent = parent {
+            toolButton.leftAnchor.constraint(equalTo: parent.rightAnchor, constant: 14.0).isActive = true
+        } else {
+            toolButton.leftAnchor.constraint(equalTo: textMainView.leftAnchor).isActive = true
+        }
+        
+        toolButton.centerYAnchor.constraint(equalTo: textMainView.centerYAnchor).isActive = true
+        toolButton.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
+        toolButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+    }
+    
+    public func addConstraintsToFontsCollection(_ fontsCollectionView: UICollectionView, textMainView: UIView, parent: UIButton) {
+        fontsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        fontsCollectionView.leftAnchor.constraint(equalTo: parent.rightAnchor).isActive = true
+        fontsCollectionView.topAnchor.constraint(equalTo: textMainView.topAnchor).isActive = true
+        fontsCollectionView.widthAnchor.constraint(equalTo: textMainView.widthAnchor, multiplier: 0.73).isActive = true
+        fontsCollectionView.heightAnchor.constraint(equalTo: textMainView.heightAnchor).isActive = true
     }
 }

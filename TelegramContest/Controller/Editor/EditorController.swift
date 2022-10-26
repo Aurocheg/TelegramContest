@@ -25,13 +25,16 @@ final class EditorController: UIViewController {
     }
     private let brushesCellID = BrushesModel.cellID
     
+    private let fonts = FontsModel.getFonts()
+    private let fontsCellID = FontsModel.cellID
+    
     // MARK: - Transfer Data
     public var galleryImage: UIImage! = nil
     
     // MARK: - Transition
     private let transition = PanelTransition()
     
-    // MARK: - UI Elements
+    // MARK: - Top Elements
     public var undoButton: UIButton {
         editorView.undoButton
     }
@@ -39,10 +42,21 @@ final class EditorController: UIViewController {
     private var clearAllButton: UIButton {
         editorView.clearAllButton
     }
+    
+    // MARK: - Canvas
+    private var mainCanvasView: UIView {
+        editorView.mainCanvasView
+    }
+    
+    private var imageView: UIImageView {
+        editorView.imageView
+    }
 
+    // MARK: - Tools Elements
     private var toolsView: UIView {
         editorView.toolsView
     }
+    
     private var colorPickerButton: UIButton {
         editorView.colorPickerButton
     }
@@ -50,30 +64,71 @@ final class EditorController: UIViewController {
     private var addButton: UIButton {
         editorView.addButton
     }
+    
     private var brushesCollectionView: UICollectionView {
         editorView.brushesCollectionView
     }
+    
     private var cancelButton: UIButton {
         editorView.cancelButton
     }
+    
+    private var segmentedControl: UISegmentedControl {
+        editorView.segmentedControl
+    }
+    
     private var downloadButton: UIButton {
         editorView.downloadButton
     }
     
+    // MARK: - Size Elements
     private var sizeView: UIView {
         editorView.sizeView
     }
+    
     private var sizeImageView: UIImageView {
         editorView.sizeImageView
     }
+    
     private var sizeActionButton: UIButton {
         editorView.sizeActionButton
     }
+    
     private var sizeBackButton: UIButton {
         editorView.sizeBackButton
     }
+    
     private var sizeSlider: UISlider {
         editorView.sizeSlider
+    }
+    
+    // MARK: - Text Elements
+    private var textMainView: UIView {
+        editorView.textMainView
+    }
+    
+    private var textView: UITextView {
+        editorView.textView
+    }
+    
+    private var textSizeSlider: UISlider {
+        editorView.textSizeSlider
+    }
+    
+    private var textSizeSliderView: UIView {
+        editorView.textSizeSliderView
+    }
+    
+    private var weightButton: UIButton {
+        editorView.weightButton
+    }
+    
+    private var alignmentButton: UIButton {
+        editorView.alignmentButton
+    }
+    
+    private var fontsCollectionView: UICollectionView {
+        editorView.fontsCollectionView
     }
     
     // MARK: - Interactions
@@ -89,13 +144,16 @@ final class EditorController: UIViewController {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
         
+        // MARK: - Transforms
         brushesCollectionView.transform = CGAffineTransform(translationX: 0, y: 27.0)
         sizeImageView.transform = CGAffineTransform(translationX: -130.0, y: 0.0)
         
         // MARK: - Canvas
-        canvasView.backgroundColor = UIColor(patternImage: galleryImage)
-        view.addSubview(canvasView)
-        editorConstraints.addConstraintsToCanvas(canvasView, view: view, parent: clearAllButton)
+        canvasView.isUserInteractionEnabled = false
+        imageView.image = galleryImage
+        mainCanvasView.addSubview(canvasView)
+        editorConstraints.addConstraintsToCanvas(canvasView, view: mainCanvasView)
+        
         sizeSlider.value = Float(canvasView.strokeWidth)
                                 
         // MARK: - Size Menu
@@ -106,17 +164,22 @@ final class EditorController: UIViewController {
         addButton.addInteraction(shapesInteraction!)
         
         // MARK: - Connections
-        brushesCollectionView.delegate = self
         brushesCollectionView.dataSource = self
+        brushesCollectionView.delegate = self
+        textView.delegate = self
+        fontsCollectionView.dataSource = self
+        fontsCollectionView.delegate = self
         
         // MARK: - Register
         brushesCollectionView.register(BrushCollectionCell.self, forCellWithReuseIdentifier: brushesCellID)
+        fontsCollectionView.register(FontsCollectionCell.self, forCellWithReuseIdentifier: fontsCellID)
 
         // MARK: - Targets
         undoButton.addTarget(self, action: #selector(undoButtonTapped), for: .touchUpInside)
         clearAllButton.addTarget(self, action: #selector(clearAllButtonTapped), for: .touchUpInside)
         colorPickerButton.addTarget(self, action: #selector(colorPickerButtonTapped), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         downloadButton.addTarget(self, action: #selector(downloadButtonTapped), for: .touchUpInside)
         sizeBackButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         sizeSlider.addTarget(self, action: #selector(sizeSliderChanged), for: .valueChanged)
@@ -167,8 +230,25 @@ final class EditorController: UIViewController {
         dismiss(animated: true)
     }
     
+    @objc func segmentedControlValueChanged() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            brushesCollectionView.isHidden = false
+            textMainView.isHidden = true
+        case 1:
+            brushesCollectionView.isHidden = true
+            textMainView.isHidden = false
+            canvasView.addSubview(textView)
+            canvasView.addSubview(textSizeSlider)
+            canvasView.addSubview(textSizeSliderView)
+            editorConstraints.addConstraintsToTextView(textView, canvasView: canvasView)
+        default:
+            break
+        }
+    }
+    
     @objc func downloadButtonTapped() {
-        let image = canvasView.takeScreenshot()
+        let image = mainCanvasView.takeScreenshot()
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageSaved(_:didFinishSavingWithError:contextType:)), nil)
     }
     
@@ -196,10 +276,10 @@ final class EditorController: UIViewController {
     @objc func sizeSliderChanged() {
         canvasView.strokeWidth = CGFloat(sizeSlider.value)
     }
-    
-    
 }
 
+
+// MARK: - UIContextMenuInteractionDelegate
 extension EditorController: UIContextMenuInteractionDelegate {
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         switch interaction {
@@ -242,6 +322,7 @@ extension EditorController: UIContextMenuInteractionDelegate {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension EditorController: UICollectionViewDelegate {
     
 }
@@ -249,31 +330,56 @@ extension EditorController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension EditorController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        brushes.count
+        switch collectionView {
+        case brushesCollectionView:
+            return brushes.count
+        case fontsCollectionView:
+            return fonts.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: brushesCellID, for: indexPath) as? BrushCollectionCell else {
+        switch collectionView {
+        case brushesCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: brushesCellID, for: indexPath) as? BrushCollectionCell else {
+                return UICollectionViewCell()
+            }
+            cell.brushImageView.image = brushes[indexPath.row].brush
+            
+            return cell
+        case fontsCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: fontsCellID, for: indexPath) as? FontsCollectionCell else {
+                return UICollectionViewCell()
+            }
+            let font = fonts[indexPath.row]
+            cell.fontButton.setTitle(font.fontName, for: .normal)
+            return cell
+        default:
             return UICollectionViewCell()
         }
-        cell.brushImageView.image = brushes[indexPath.row].brush
-        
-        return cell
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BrushCollectionCell else { return }
-        UIView.animate(withDuration: 0.2) {
-            cell.transform = CGAffineTransform(translationX: 0, y: -12.0)
-        }
-        
-        if !(indexPath.row > 2) {
-            sizeImageView.image = cell.brushImageView.image
-            UIView.animate(withDuration: 0.3) {
-                self.sizeImageView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
+        switch collectionView {
+        case brushesCollectionView:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? BrushCollectionCell else { return }
+            UIView.animate(withDuration: 0.2) {
+                cell.transform = CGAffineTransform(translationX: 0, y: -12.0)
             }
-            toolsView.isHidden = true
-            sizeView.isHidden = false
+            
+            if !(indexPath.row > 2) {
+                sizeImageView.image = cell.brushImageView.image
+                UIView.animate(withDuration: 0.3) {
+                    self.sizeImageView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
+                }
+                toolsView.isHidden = true
+                sizeView.isHidden = false
+            }
+        default:
+            break
         }
     }
     
@@ -282,5 +388,17 @@ extension EditorController: UICollectionViewDataSource {
         UIView.animate(withDuration: 0.2) {
             cell.transform = CGAffineTransform(translationX: 0, y: 0.0)
         }
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension EditorController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let fixedWidth = textView.frame.size.width
+        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        var newFrame = textView.frame
+        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+        textView.frame = newFrame
     }
 }

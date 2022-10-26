@@ -98,9 +98,9 @@ extension GalleryController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let leftAndRightPaddings: CGFloat = 5.0
+        let leftAndRightPaddings: CGFloat = 3.5
         let numberOfItemsPerRow: CGFloat = CGFloat(2)
-        
+    
         let bounds = UIScreen.main.bounds
         let width = (bounds.size.width - leftAndRightPaddings * (numberOfItemsPerRow + 1)) / numberOfItemsPerRow
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout

@@ -25,7 +25,17 @@ final class CanvasView: UIView {
     public var strokeWidth: CGFloat = 10.0
     public var strokeColor: UIColor = .white
     public var strokeOpacity: CGFloat = 1.0
+    
+    init() {
+        super.init(frame: .zero)
         
+        backgroundColor = .clear
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
 

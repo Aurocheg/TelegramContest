@@ -18,6 +18,8 @@
 		DE6270BB290599EB00D5941F /* ColorsCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6270BA290599EB00D5941F /* ColorsCellConstraints.swift */; };
 		DE7E1618290470E70057E4AE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E1617290470E70057E4AE /* CanvasView.swift */; };
 		DE8326BA2907E4D0003BE62E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8326B92907E4D0003BE62E /* UIView.swift */; };
+		DE8326BD29083080003BE62E /* FontsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8326BC29083080003BE62E /* FontsCollectionCell.swift */; };
+		DE8326BF290830E2003BE62E /* FontsCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8326BE290830E2003BE62E /* FontsCellConstraints.swift */; };
 		DE85B08629007653005FFD31 /* BrushCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85B08529007653005FFD31 /* BrushCollectionCell.swift */; };
 		DE85B088290077CF005FFD31 /* BrushCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85B087290077CF005FFD31 /* BrushCellConstraints.swift */; };
 		DE90C2A3290051FD00AA0FAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE90C2A2290051FD00AA0FAF /* String.swift */; };
@@ -61,6 +63,8 @@
 		DE6270BA290599EB00D5941F /* ColorsCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCellConstraints.swift; sourceTree = "<group>"; };
 		DE7E1617290470E70057E4AE /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		DE8326B92907E4D0003BE62E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		DE8326BC29083080003BE62E /* FontsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsCollectionCell.swift; sourceTree = "<group>"; };
+		DE8326BE290830E2003BE62E /* FontsCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsCellConstraints.swift; sourceTree = "<group>"; };
 		DE85B08529007653005FFD31 /* BrushCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCollectionCell.swift; sourceTree = "<group>"; };
 		DE85B087290077CF005FFD31 /* BrushCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCellConstraints.swift; sourceTree = "<group>"; };
 		DE90C2A2290051FD00AA0FAF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 		DE334EE028F9478D001D5359 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				DE8326BB2908306B003BE62E /* Fonts */,
 				DE7E1616290470D60057E4AE /* Canvas */,
 				DE85B0842900763E005FFD31 /* Brush */,
 				DE94C67328FB0E2B008E3494 /* Color Picker */,
@@ -157,6 +162,15 @@
 				DE7E1617290470E70057E4AE /* CanvasView.swift */,
 			);
 			path = Canvas;
+			sourceTree = "<group>";
+		};
+		DE8326BB2908306B003BE62E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DE8326BC29083080003BE62E /* FontsCollectionCell.swift */,
+				DE8326BE290830E2003BE62E /* FontsCellConstraints.swift */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		DE85B0842900763E005FFD31 /* Brush */ = {
@@ -397,6 +411,7 @@
 				DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */,
 				DE94C67728FB0E46008E3494 /* ColorPickerConstraints.swift in Sources */,
 				DEA1082328FFCFC20043531E /* UIImage.swift in Sources */,
+				DE8326BD29083080003BE62E /* FontsCollectionCell.swift in Sources */,
 				DE85B08629007653005FFD31 /* BrushCollectionCell.swift in Sources */,
 				DE6270B92905986D00D5941F /* ColorsCollectionCell.swift in Sources */,
 				DE94C68628FC1246008E3494 /* PanelTransition.swift in Sources */,
@@ -413,6 +428,7 @@
 				DE94C68328FBF332008E3494 /* DimmPresentationController.swift in Sources */,
 				DE94C67D28FB13A9008E3494 /* UILabel.swift in Sources */,
 				DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */,
+				DE8326BF290830E2003BE62E /* FontsCellConstraints.swift in Sources */,
 				DE94C67928FB1385008E3494 /* UISlider.swift in Sources */,
 				DE59C85728F7EB06000B1D7D /* GalleryCollectionCell.swift in Sources */,
 				DE8326BA2907E4D0003BE62E /* UIView.swift in Sources */,

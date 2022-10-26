@@ -54,3 +54,20 @@ struct BrushesModel: BrushesProtocol {
         return compositeImage
     }
 }
+
+protocol FontsProtocol {
+    var fontName: String { get set }
+}
+
+struct FontsModel: FontsProtocol {
+    var fontName: String
+    static let cellID = "fontsCollectionCell"
+    
+    static func getFonts() -> [FontsModel] {
+        return [
+            FontsModel(fontName: "San Francisco"),
+            FontsModel(fontName: "New York"),
+            FontsModel(fontName: "Mono")
+        ]
+    }
+}
