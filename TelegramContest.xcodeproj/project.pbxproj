@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE147C0A290D9E500021CF98 /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE147C09290D9E500021CF98 /* UIBezierPath.swift */; };
+		DE147C0D290E6CFD0021CF98 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DE147C0C290E6CFD0021CF98 /* Lottie */; };
+		DE147C11290E71C90021CF98 /* duck.json in Resources */ = {isa = PBXBuildFile; fileRef = DE147C10290E71C90021CF98 /* duck.json */; };
 		DE334EDF28F94785001D5359 /* EditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EDE28F94785001D5359 /* EditorController.swift */; };
 		DE334EE228F947A2001D5359 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE128F947A2001D5359 /* EditorView.swift */; };
 		DE334EE428F947B3001D5359 /* EditorConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE334EE328F947B3001D5359 /* EditorConstraints.swift */; };
@@ -52,6 +55,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		681B08F2FE5E8978819233FA /* Pods-TelegramContest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TelegramContest.debug.xcconfig"; path = "Target Support Files/Pods-TelegramContest/Pods-TelegramContest.debug.xcconfig"; sourceTree = "<group>"; };
+		DE147C09290D9E500021CF98 /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
+		DE147C10290E71C90021CF98 /* duck.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duck.json; sourceTree = "<group>"; };
 		DE334EDE28F94785001D5359 /* EditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorController.swift; sourceTree = "<group>"; };
 		DE334EE128F947A2001D5359 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		DE334EE328F947B3001D5359 /* EditorConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorConstraints.swift; sourceTree = "<group>"; };
@@ -96,6 +102,7 @@
 		DEDC39EE28F6E79A00D3548C /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		DEDC39F028F6E7A400D3548C /* GalleryConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryConstraints.swift; sourceTree = "<group>"; };
 		DEDC39F228F6E7AE00D3548C /* AccessConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessConstraints.swift; sourceTree = "<group>"; };
+		EB5CD77D4A0E092F06712824 /* Pods-TelegramContest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TelegramContest.release.xcconfig"; path = "Target Support Files/Pods-TelegramContest/Pods-TelegramContest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,12 +110,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE147C0D290E6CFD0021CF98 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68AD849FA0D4FE50DFF72AF5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				681B08F2FE5E8978819233FA /* Pods-TelegramContest.debug.xcconfig */,
+				EB5CD77D4A0E092F06712824 /* Pods-TelegramContest.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BAC3BF8F9D7AB283405C113A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DE334EE028F9478D001D5359 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +158,7 @@
 				DE90C2A2290051FD00AA0FAF /* String.swift */,
 				DE90C2A42900539600AA0FAF /* CAGradientLayer.swift */,
 				DE8326B92907E4D0003BE62E /* UIView.swift */,
+				DE147C09290D9E500021CF98 /* UIBezierPath.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -252,6 +277,8 @@
 			children = (
 				DEDC39CD28F6E62300D3548C /* TelegramContest */,
 				DEDC39CC28F6E62300D3548C /* Products */,
+				68AD849FA0D4FE50DFF72AF5 /* Pods */,
+				BAC3BF8F9D7AB283405C113A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,6 +303,7 @@
 				DEDC39D728F6E62300D3548C /* Assets.xcassets */,
 				DEDC39DC28F6E62300D3548C /* Info.plist */,
 				DEB3F9CB28FD42DE00FFAC08 /* colorPalette.plist */,
+				DE147C10290E71C90021CF98 /* duck.json */,
 			);
 			path = TelegramContest;
 			sourceTree = "<group>";
@@ -334,6 +362,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DEDC39DF28F6E62300D3548C /* Build configuration list for PBXNativeTarget "TelegramContest" */;
 			buildPhases = (
+				F9FE989C094D2B144D8C7BAA /* [CP] Check Pods Manifest.lock */,
 				DEDC39C728F6E62300D3548C /* Sources */,
 				DEDC39C828F6E62300D3548C /* Frameworks */,
 				DEDC39C928F6E62300D3548C /* Resources */,
@@ -343,6 +372,9 @@
 			dependencies = (
 			);
 			name = TelegramContest;
+			packageProductDependencies = (
+				DE147C0C290E6CFD0021CF98 /* Lottie */,
+			);
 			productName = TelegramContest;
 			productReference = DEDC39CB28F6E62300D3548C /* TelegramContest.app */;
 			productType = "com.apple.product-type.application";
@@ -359,6 +391,7 @@
 				TargetAttributes = {
 					DEDC39CA28F6E62300D3548C = {
 						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1400;
 					};
 				};
 			};
@@ -371,6 +404,9 @@
 				Base,
 			);
 			mainGroup = DEDC39C228F6E62300D3548C;
+			packageReferences = (
+				DE147C0B290E6CFD0021CF98 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = DEDC39CC28F6E62300D3548C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -386,11 +422,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEB3F9CC28FD42DE00FFAC08 /* colorPalette.plist in Resources */,
+				DE147C11290E71C90021CF98 /* duck.json in Resources */,
 				DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F9FE989C094D2B144D8C7BAA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TelegramContest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DEDC39C728F6E62300D3548C /* Sources */ = {
@@ -406,6 +468,7 @@
 				DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */,
 				DEDC39F328F6E7AE00D3548C /* AccessConstraints.swift in Sources */,
 				DE334EE928F9F20A001D5359 /* EditorModel.swift in Sources */,
+				DE147C0A290D9E500021CF98 /* UIBezierPath.swift in Sources */,
 				DE85B088290077CF005FFD31 /* BrushCellConstraints.swift in Sources */,
 				DE94C67228FB0E18008E3494 /* ColorPresentationController.swift in Sources */,
 				DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */,
@@ -559,9 +622,11 @@
 		};
 		DEDC39E028F6E62300D3548C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 681B08F2FE5E8978819233FA /* Pods-TelegramContest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A8U85SKFPU;
@@ -581,6 +646,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.aurocheg.TelegramContest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -588,9 +654,11 @@
 		};
 		DEDC39E128F6E62300D3548C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB5CD77D4A0E092F06712824 /* Pods-TelegramContest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A8U85SKFPU;
@@ -637,6 +705,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DE147C0B290E6CFD0021CF98 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DE147C0C290E6CFD0021CF98 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE147C0B290E6CFD0021CF98 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DEDC39C328F6E62300D3548C /* Project object */;
 }

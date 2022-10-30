@@ -7,6 +7,12 @@
 
 import UIKit
 
+// MARK: - ShapeType
+enum ShapeType {
+    case rectangle
+    case ellipse
+}
+
 final class EditorView: UIView {
     // MARK: - Constraints
     private let editorConstraints = EditorConstraints()
@@ -51,6 +57,7 @@ final class EditorView: UIView {
         layout.scrollDirection = .horizontal
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.transform = CGAffineTransform(translationX: 0, y: 27.0)
         collectionView.backgroundColor = .clear
         
         return collectionView
@@ -80,8 +87,17 @@ final class EditorView: UIView {
     
     public let sizeImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.transform = CGAffineTransform(translationX: -130.0, y: 0.0)
         imageView.contentMode = .scaleToFill
+        
         return imageView
+    }()
+    
+    public var brushSizeView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 1.0, y: 53, width: 31.0, height: 10.0)
+        view.backgroundColor = .white
+        return view
     }()
     
     public let sizeBackButton = Button(image: UIImage(named: "back"), background: .no)
@@ -129,10 +145,8 @@ final class EditorView: UIView {
         textView.showsVerticalScrollIndicator = false
         textView.isScrollEnabled = false
         
-        textView.font = .systemFont(ofSize: 20.0)
+        textView.font = .systemFont(ofSize: 48.0)
         textView.backgroundColor = .clear
-        textView.layer.borderWidth = 1.0
-        textView.layer.borderColor = UIColor.white.cgColor
         textView.autocorrectionType = .no
         
         textView.becomeFirstResponder()
@@ -150,6 +164,7 @@ final class EditorView: UIView {
         let thumb = slider.thumbImage(radius: 28.0, thumbView: thumbView, size: size)
         
         slider.minimumValue = 1.0
+        slider.value = 10.0
         slider.maximumValue = 40.0
         slider.setThumbImage(thumb, for: .normal)
         slider.setMinimumTrackImage(UIImage(), for: .normal)
@@ -210,6 +225,7 @@ final class EditorView: UIView {
         // MARK: - Size
         addSubview(sizeView)
         sizeView.addSubview(sizeImageView)
+        sizeImageView.addSubview(brushSizeView)
         sizeView.addSubview(sizeBackButton)
         sizeView.addSubview(sizeSliderView)
         sizeView.addSubview(sizeSlider)
@@ -254,5 +270,27 @@ final class EditorView: UIView {
         editorConstraints.addConstraintsToToolButton(weightButton, textMainView: textMainView)
         editorConstraints.addConstraintsToToolButton(alignmentButton, textMainView: textMainView, parent: weightButton)
         editorConstraints.addConstraintsToFontsCollection(fontsCollectionView, textMainView: textMainView, parent: alignmentButton)
+    }
+    
+    // MARK: - Create Shape Method
+    public func createStandardShape(imageView: UIImageView, size: CGSize, type: ShapeType) {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        
+        let image = renderer.image {ctx in
+            let shape = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            
+            ctx.cgContext.setFillColor(UIColor.clear.cgColor)
+            ctx.cgContext.setStrokeColor(UIColor.white.cgColor)
+            ctx.cgContext.setLineWidth(1.0)
+            
+            switch type {
+                case .rectangle: ctx.cgContext.addRect(shape)
+                case .ellipse: ctx.cgContext.addEllipse(in: shape)
+            }
+            
+            ctx.cgContext.drawPath(using: .fillStroke)
+        }
+        
+        imageView.image = image
     }
 }

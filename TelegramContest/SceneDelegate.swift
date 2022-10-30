@@ -28,9 +28,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = .dark
         
-        let accessController = GalleryController()
-        let navController = UINavigationController(rootViewController: accessController)
-        window.rootViewController = navController
+        if !UserDefaults.standard.bool(forKey: "introLaunched") {
+            UserDefaults.standard.set(true, forKey: "introLaunched")
+            let accessController = AccessController()
+            let navController = UINavigationController(rootViewController: accessController)
+            window.rootViewController = navController
+        } else {
+            let galleryController = GalleryController()
+            let navController = UINavigationController(rootViewController: galleryController)
+            window.rootViewController = navController
+        }
         
         self.window = window
         window.makeKeyAndVisible()

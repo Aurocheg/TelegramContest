@@ -184,18 +184,18 @@ final class ColorPickerController: UIViewController {
         let sliderSize = slider.bounds.size
         
         switch type {
-        case .red:
-            leftColor = UIColor(red: 0.0, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
-            rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
-        case .green:
-            leftColor = UIColor(red: redColor, green: 0.0, blue: blueColor, alpha: 1.0).cgColor
-            rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
-        case .blue:
-            leftColor = UIColor(red: redColor, green: greenColor, blue: 0.0, alpha: 1.0).cgColor
-            rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
-        case .opacity:
-            leftColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 0.3).cgColor
-            rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
+            case .red:
+                leftColor = UIColor(red: 0.0, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
+                rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
+            case .green:
+                leftColor = UIColor(red: redColor, green: 0.0, blue: blueColor, alpha: 1.0).cgColor
+                rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
+            case .blue:
+                leftColor = UIColor(red: redColor, green: greenColor, blue: 0.0, alpha: 1.0).cgColor
+                rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
+            case .opacity:
+                leftColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 0.3).cgColor
+                rightColor = UIColor(red: redColor, green: greenColor, blue: blueColor, alpha: 1.0).cgColor
         }
         
         let gradientLayer = CAGradientLayer.createSliderGradient(colors: [leftColor, rightColor], cornerRadius: sliderRadius, size: sliderSize)
@@ -371,25 +371,36 @@ extension ColorPickerController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)!
-        
-        cell.layer.borderWidth = 3.0
-        cell.layer.borderColor = UIColor.white.cgColor
+        switch collectionView {
+            case gridColorsCollectionView:
+                let cell = collectionView.cellForItem(at: indexPath)!
+                
+                cell.layer.borderWidth = 3.0
+                cell.layer.borderColor = UIColor.white.cgColor
 
-        initOpacity()
-        
-        readDataFromPlist(cellTag: cell.tag, indexPath: indexPath)
-        color.getRed(&redColor, green: &greenColor, blue: &blueColor, alpha: &opacityPercent)
-        currentColorView.backgroundColor = color
-        ColorPickerController.brushColorDidChange?(color)
-        
-        setBackgroundGradient(to: opacitySlider, type: .opacity)
+                initOpacity()
+                
+                readDataFromPlist(cellTag: cell.tag, indexPath: indexPath)
+                color.getRed(&redColor, green: &greenColor, blue: &blueColor, alpha: &opacityPercent)
+                currentColorView.backgroundColor = color
+                ColorPickerController.brushColorDidChange?(color)
+                
+                setBackgroundGradient(to: opacitySlider, type: .opacity)
+            default:
+                break
+        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)!
         
-        cell.layer.borderColor = UIColor.clear.cgColor
-        cell.layer.borderWidth = 0.0
+        switch collectionView {
+            case gridColorsCollectionView:
+                cell.layer.borderColor = UIColor.clear.cgColor
+                cell.layer.borderWidth = 0.0
+            default:
+                break
+        }
     }
 }

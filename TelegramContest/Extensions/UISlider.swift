@@ -30,6 +30,8 @@ final class ColorSlider: UISlider {
 
     init(minValue: Float, maxValue: Float, type: SliderType = .color, value: Float) {
         super.init(frame: .zero)
+        
+        let thumbSize = CGSize(width: 29.0, height: 29.0)
                 
         self.layer.cornerRadius = 18.0
         self.minimumValue = minValue
@@ -43,13 +45,14 @@ final class ColorSlider: UISlider {
             self.setMaximumTrackImage(UIImage(named: "opacityImage"), for: .normal)
         }
         
-        let thumbView = UIView()
-        thumbView.backgroundColor = .clear
-        thumbView.layer.borderWidth = 3.0
-        thumbView.layer.borderColor = UIColor.black.cgColor
+        let thumbViewNormal = UIView()
+        thumbViewNormal.backgroundColor = .clear
+        thumbViewNormal.layer.borderWidth = 3.0
+        thumbViewNormal.layer.borderColor = UIColor.black.cgColor
         
-        let thumb = thumbImage(radius: 29.0, thumbView: thumbView, size: CGSize(width: 29.0, height: 29.0))
-        self.setThumbImage(thumb, for: .normal)
+        let thumbNormal = thumbImage(radius: 29.0, thumbView: thumbViewNormal, size: thumbSize)
+        
+        self.setThumbImage(thumbNormal, for: .normal)
     }
     
     required init?(coder: NSCoder) {

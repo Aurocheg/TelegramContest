@@ -181,24 +181,24 @@ final class EditorConstraints: UIView {
         
         textView.centerXAnchor.constraint(equalTo: canvasView.centerXAnchor).isActive = true
         textView.centerYAnchor.constraint(equalTo: canvasView.centerYAnchor).isActive = true
-        textView.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
+        textView.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
     }
     
     public func addConstraintsToTextSizeSlider(_ textSizeSlider: UISlider, canvasView: UIView, textView: UITextView) {
         textSizeSlider.translatesAutoresizingMaskIntoConstraints = false
         
-        textSizeSlider.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+//        textSizeSlider.transform = CGAffineTransform(rotationAngle: -.pi / 2)
         
-        textSizeSlider.leftAnchor.constraint(equalTo: canvasView.leftAnchor, constant: -117.0).isActive = true
+        textSizeSlider.leftAnchor.constraint(equalTo: canvasView.leftAnchor, constant: 0).isActive = true
         textSizeSlider.centerYAnchor.constraint(equalTo: textView.centerYAnchor).isActive = true
         textSizeSlider.widthAnchor.constraint(equalToConstant: 240.0).isActive = true
-        textSizeSlider.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
+//        textSizeSlider.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
     }
     
     public func addConstraintsToTextSizeSliderView(_ textSizeSliderView: UIView, textSizeSlider: UISlider) {
         textSizeSliderView.translatesAutoresizingMaskIntoConstraints = false
         
-        textSizeSliderView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+//        textSizeSliderView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
         
         textSizeSliderView.leftAnchor.constraint(equalTo: textSizeSlider.leftAnchor).isActive = true
         textSizeSliderView.topAnchor.constraint(equalTo: textSizeSlider.topAnchor).isActive = true

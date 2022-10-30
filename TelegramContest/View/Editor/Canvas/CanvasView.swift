@@ -26,6 +26,8 @@ final class CanvasView: UIView {
     public var strokeColor: UIColor = .white
     public var strokeOpacity: CGFloat = 1.0
     
+    private let screenHeight = UIScreen.main.bounds.height
+    
     init() {
         super.init(frame: .zero)
         
@@ -44,7 +46,13 @@ final class CanvasView: UIView {
         lines.forEach { (line) in
             for (i, p) in (line.points?.enumerated())! {
                 var point = p
-                point.y -= 130.0
+                
+                if screenHeight < 812 {
+                    point.y -= 74.0
+                } else {
+                    point.y -= 130.0
+                }
+                
                 if i == 0 {
                     context.move(to: point)
                 } else {
@@ -52,6 +60,7 @@ final class CanvasView: UIView {
                 }
                 context.setStrokeColor(line.color?.withAlphaComponent(line.opacity ?? 1.0).cgColor ?? UIColor.black.cgColor)
                 context.setLineWidth(line.width ?? 1.0)
+                context.setTextDrawingMode(.stroke)
             }
             context.setLineCap(.round)
             context.strokePath()

@@ -6,20 +6,19 @@
 //
 
 import UIKit
+import Lottie
 
 final class AccessView: UIView {
     // MARK: - Constraints
     private let accessConstraints = AccessConstraints()
     
     // MARK: - UI Elements
-    private let accessImageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        if let image = UIImage(named: "duck") {
-            imageView.image = image
-        }
-        
-        return imageView
+    private let accessContainerView = UIView()
+    
+    public let animationView: LottieAnimationView = {
+        let animationView = LottieAnimationView()
+        animationView.loopMode = .loop
+        return animationView
     }()
     
     private let accessLabel: UILabel = {
@@ -57,15 +56,17 @@ final class AccessView: UIView {
     
     // MARK: - Init Views Method
     private func initViews() {
-        addSubview(accessImageView)
-        addSubview(accessLabel)
-        addSubview(accessButton)
+        addSubview(accessContainerView)
+        accessContainerView.addSubview(animationView)
+        accessContainerView.addSubview(accessLabel)
+        accessContainerView.addSubview(accessButton)
     }
     
     // MARK: - Init Constraints Method
     private func initConstraints() {
-        accessConstraints.addConstraintsToImageView(accessImageView, view: self)
-        accessConstraints.addConstraintsToLabel(accessLabel, view: self, parent: accessImageView)
-        accessConstraints.addConstraintsToButton(accessButton, view: self, parent: accessLabel)
+        accessConstraints.addConstraintsToContainer(accessContainerView, view: self)
+        accessConstraints.addConstraintsToAnimationView(animationView, containerView: accessContainerView)
+        accessConstraints.addConstraintsToLabel(accessLabel, containerView: accessContainerView, parent: animationView)
+        accessConstraints.addConstraintsToButton(accessButton, containerView: accessContainerView, parent: accessLabel)
     }
 }

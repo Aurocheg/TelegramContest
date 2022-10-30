@@ -19,7 +19,9 @@ final class GalleryController: UIViewController {
     
     // MARK: - Variables
     private var images = [PHAsset]()
-    private let screenWidth = UIScreen.main.bounds.width
+    private let screenWidth = UIScreen.main.bounds.size.width
+    private let screenHeight = UIScreen.main.bounds.size.height
+    private let numberOfItems = 3
         
     // MARK: - Life Cycle Methods
     override func loadView() {
@@ -31,7 +33,7 @@ final class GalleryController: UIViewController {
         
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
-        
+                
         galleryCollectionView.register(GalleryCollectionCell.self, forCellWithReuseIdentifier: "galleryCollectionCell")
         
         populatePhotos()
@@ -40,7 +42,7 @@ final class GalleryController: UIViewController {
     // MARK: - Populate Photos Method
     private func populatePhotos() {
         if #available(iOS 14, *) {
-            PHPhotoLibrary.requestAuthorization(for: .addOnly) { [weak self] status in
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
                 if status == .authorized {
                     let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
                     
@@ -75,9 +77,9 @@ extension GalleryController: UICollectionViewDelegate {
         let options = PHImageRequestOptions()
         options.isSynchronous = true
         options.deliveryMode = .highQualityFormat
-        options.resizeMode = .exact
+        options.resizeMode = .none
         
-        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth + 1.0, height: 700), contentMode: .aspectFill, options: options) {(result, info) in
+        manager.requestImage(for: image, targetSize: CGSize(width: screenWidth + 1.0, height: screenHeight + 1.0), contentMode: .aspectFit, options: options) {(result, info) in
             if let result = result {
                 thumbnail = result
             }
@@ -97,16 +99,20 @@ extension GalleryController: UICollectionViewDelegateFlowLayout {
         1.0
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let leftAndRightPaddings: CGFloat = 3.5
-        let numberOfItemsPerRow: CGFloat = CGFloat(2)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        1.0
+    }
     
-        let bounds = UIScreen.main.bounds
-        let width = (bounds.size.width - leftAndRightPaddings * (numberOfItemsPerRow + 1)) / numberOfItemsPerRow
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
-        return layout.itemSize
+        let itemSpacing: CGFloat = 1.0
+        let itemsInOneLine: CGFloat = 3
+        flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        let width = screenWidth - itemSpacing * CGFloat(itemsInOneLine - 1)
+        flow.itemSize = CGSize(width: floor(width / itemsInOneLine), height: width / itemsInOneLine)
+        return flow.itemSize
     }
 }
 
