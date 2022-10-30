@@ -18,57 +18,62 @@ final class GalleryController: UIViewController {
     }
     
     // MARK: - Variables
-    private var images = [PHAsset]()
+    private var assets = PHFetchResult<PHAsset>()
     private let screenWidth = UIScreen.main.bounds.size.width
     private let screenHeight = UIScreen.main.bounds.size.height
-    private let numberOfItems = 3
+    private var numberOfItems = 3
         
-    // MARK: - Life Cycle Methods
+    // MARK: - View Life Cycle Methods
     override func loadView() {
         view = galleryView
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        getPermission {granted in
+            guard granted else { return }
+            self.fetchAssets()
+            DispatchQueue.main.async {
+                self.galleryCollectionView.reloadData()
+            }
+        }
+        
+        PHPhotoLibrary.shared().register(self)
         
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
                 
         galleryCollectionView.register(GalleryCollectionCell.self, forCellWithReuseIdentifier: "galleryCollectionCell")
-        
-        populatePhotos()
     }
     
-    // MARK: - Populate Photos Method
-    private func populatePhotos() {
-        if #available(iOS 14, *) {
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
-                if status == .authorized {
-                    let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
-                    
-                    assets.enumerateObjects { (object, _, _) in
-                        self?.images.append(object)
-                    }
-                    
-                    self?.images.reverse()
-                    
-                    DispatchQueue.main.async {
-                        self?.galleryCollectionView.reloadData()
-                    }
-                }
-            }
-        } else {
-            // TODO: - For iOS < 14
+    // MARK: - Photos Methods
+    private func getPermission(completionHandler: @escaping (Bool) -> Void) {
+        guard PHPhotoLibrary.authorizationStatus() != .authorized else {
+            completionHandler(true)
+            return
+        }
+        
+        PHPhotoLibrary.requestAuthorization {status in
+            completionHandler(status == .authorized ? true : false)
         }
     }
-
-
+    
+    private func fetchAssets() {
+        let allPhotosOptions = PHFetchOptions()
+        allPhotosOptions.sortDescriptors = [
+            NSSortDescriptor(
+                key: "creationDate",
+                ascending: false
+            )
+        ]
+        
+        assets = PHAsset.fetchAssets(with: allPhotosOptions)
+    }
 }
 
 // MARK: - UICollectionViewDelegate
 extension GalleryController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let image = images[indexPath.row]
+        let image = assets[indexPath.item]
         var thumbnail = UIImage()
         let editorController = EditorController()
         
@@ -119,7 +124,7 @@ extension GalleryController: UICollectionViewDelegateFlowLayout {
 // MARK: - UICollectionViewDataSource
 extension GalleryController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        images.count
+        assets.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -127,7 +132,7 @@ extension GalleryController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let asset = images[indexPath.row]
+        let asset = assets[indexPath.item]
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
         
@@ -138,5 +143,15 @@ extension GalleryController: UICollectionViewDataSource {
         }
         
         return cell
+    }
+}
+
+extension GalleryController: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        guard let change = changeInstance.changeDetails(for: assets) else { return }
+        DispatchQueue.main.async {
+            self.assets = change.fetchResultAfterChanges
+            self.galleryCollectionView.reloadData()
+        }
     }
 }
