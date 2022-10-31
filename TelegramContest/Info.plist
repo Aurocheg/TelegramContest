@@ -2,6 +2,58 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>AppIDName</key>
+    <string>selfsigned: any app</string>
+    <key>ApplicationIdentifierPrefix</key>
+    <array>
+    <string>SELFSIGNED</string>
+    </array>
+    <key>CreationDate</key>
+    <date>2022-10-31T20:18:30Z</date>
+    <key>Platform</key>
+    <array>
+        <string>iOS</string>
+    </array>
+    <key>DeveloperCertificates</key>
+    <array>
+        <data>MIIDgzCCAmugAwIBAgIBATANBgkqhkiG9w0BAQsFADBnMSYwJAYDVQQDDB1pUGhvbmUgRGV2ZWxvcGVyOiBTZWxmIFNpZ25lcjEbMBkGA1UECgwSU2VsZnNpZ25lcnMgdW5pdGVkMRMwEQYDVQQLDApTRUxGU0lHTkVEMQswCQYDVQQGEwJVUzAeFw0xODAxMDQxNjE3MTRaFw0yODAxMDQxNjE3MTRaMGcxJjAkBgNVBAMMHWlQaG9uZSBEZXZlbG9wZXI6IFNlbGYgU2lnbmVyMRswGQYDVQQKDBJTZWxmc2lnbmVycyB1bml0ZWQxEzARBgNVBAsMClNFTEZTSUdORUQxCzAJBgNVBAYTAlVTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAusfIxkCS6f9xQ/scxow4SIwP9ZLjicEP4FE962iN1ywMt54wNvHu/VdeXaEOaOXZOwVyPDJ9N3L+f4X0V5MDFa47/R/YWWMCNEj5XxBeSWZ8NB6CzcEaIxyRRyMtoKqIqa+HsPukw1XR0OJauR83rw/cdUuC+z6gT6jgAZvXh/U2FM/F/fGOJq6wZySaj/+IuZ53SNE7tsn+uOdajXlEULDtWIAhtmt6IhIG7OxCCaManYP8jqovgyu3cV65os5waBT3dhNKnhOLPP2q6dSa6qfqv/wAmmG0lgcJKZFEOSNH4Y9eZB3TWQEuTX1uCLbPehpFZgQK0Z8p3ZsoehmDuQIDAQABozowODAOBgNVHQ8BAf8EBAMCB4AwJgYDVR0lAQH/BBwwGgYIKwYBBQUHAwQGCCsGAQUFBwMDBgRVHSUAMA0GCSqGSIb3DQEBCwUAA4IBAQCjm3J6GBKZia1YhGjMMmgTBXF50ZimQ/9nMrFGgAq0WgrLgTJXuvYwvuw6tquo1foOvB8dYsn6W2II5zasUODWayixXdEB4kL1buab4bNuJp5WXSFnDZz00GU9Mc4STLAFn1SZbOXlnFGwe1vSwUfqyAemHKqPh84v3KOXIlPxRqguvNwhjJlaXJxv8MQHZnlTAjNqCsfQ4+zf8vieEzJJfBLGLq4bkXCThUipjmpvq19OuJju9tCDPc0RN5Si9dOkcFQw7c3/WAgNzDBk82lJcIuxAOa6M+DswaGeiXeezHAjvw60LyCpS9bB/5+vp+tPDhq2ByUP0YmfDbH6Jb+s</data>
+    </array>
+    <key>Entitlements</key>
+    <dict>
+        <key>keychain-access-groups</key>
+        <array>
+            <string>SELFSIGNED.*</string>
+        </array>
+        <key>get-task-allow</key>
+        <false/>
+        <key>application-identifier</key>
+        <string>SELFSIGNED.*</string>
+        <key>com.apple.developer.associated-domains</key>
+        <string>*</string>
+        <key>com.apple.developer.team-identifier</key>
+        <string>SELFSIGNED</string>
+        <key>aps-environment</key>
+        <string>production</string>
+    </dict>
+    <key>ExpirationDate</key>
+        <date>2032-10-30T20:18:30Z</date>
+        <key>Name</key>
+        <string>DO NOT USE: only for dummy signing</string>
+        <key>ProvisionedDevices</key>
+        <array>
+        </array>
+        <key>TeamIdentifier</key>
+        <array>
+            <string>SELFSIGNED</string>
+        </array>
+        <key>TeamName</key>
+        <string>Selfsigners united</string>
+        <key>TimeToLive</key>
+        <integer>3652</integer>
+        <key>UUID</key>
+        <string>B5C2906D-D6EE-476E-AF17-D99AE14644AA</string>
+        <key>Version</key>
+        <integer>1</integer>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library to interact with editor</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

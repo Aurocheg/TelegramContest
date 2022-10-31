@@ -8,21 +8,18 @@
 import UIKit
 
 final class EditorController: UIViewController {
-    // MARK: - Variables
-    static var strokeWidthDidChange: ((_ strokeWidth: CGFloat) -> ())?
-    
-    private let screenWidth = UIScreen.main.bounds.size.width
-    private let screenHeight = UIScreen.main.bounds.size.height
-    
-    private var isLineExisting = false
-    private var alignmentClicksNumber = 0
+    // MARK: - Views
+    private let editorView = EditorView()
+    private let canvasView = CanvasView()
     
     // MARK: - Constraints
     private let editorConstraints = EditorConstraints()
     
-    // MARK: - Views
-    private let editorView = EditorView()
-    private let canvasView = CanvasView()
+    // MARK: - Closure
+    static var strokeWidthDidChange: ((_ strokeWidth: CGFloat) -> ())?
+    
+    // MARK: - Transfer Data
+    public var galleryImage: UIImage! = nil
     
     // MARK: - Models Init
     private let brushesModel = BrushesModel()
@@ -30,12 +27,14 @@ final class EditorController: UIViewController {
         brushesModel.getBrushes()
     }
     private let brushesCellID = BrushesModel.cellID
-    
     private let fonts = FontsModel.getFonts()
     private let fontsCellID = FontsModel.cellID
     
-    // MARK: - Transfer Data
-    public var galleryImage: UIImage! = nil
+    // MARK: - Variables
+    private let screenWidth = UIScreen.main.bounds.size.width
+    private let screenHeight = UIScreen.main.bounds.size.height
+    private var isLineExisting = false
+    private var alignmentClicksNumber = 0
     
     // MARK: - Transition
     private let transition = PanelTransition()
@@ -47,6 +46,14 @@ final class EditorController: UIViewController {
     
     private var clearAllButton: UIButton {
         editorView.clearAllButton
+    }
+    
+    private var textCancelButton: UIButton {
+        editorView.textCancelButton
+    }
+    
+    private var textDoneButton: UIButton {
+        editorView.textDoneButton
     }
     
     // MARK: - Canvas
@@ -144,6 +151,7 @@ final class EditorController: UIViewController {
     // MARK: - Interactions
     private var sizeInteraction: UIContextMenuInteraction? = nil
     private var shapesInteraction: UIContextMenuInteraction? = nil
+    private var textViewInteraction: UIContextMenuInteraction? = nil
     
     // MARK: - View Life Cycle
     override func loadView() {
@@ -152,36 +160,74 @@ final class EditorController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // MARK: - Toolbar
         navigationController?.isNavigationBarHidden = true
         
         // MARK: - Canvas
+        setupCanvas()
+                                
+        // MARK: - Size Menu
+        setupContextMenu()
+        
+        // MARK: - Connections
+        setupConnections()
+        
+        // MARK: - Register
+        setupRegister()
+
+        // MARK: - Targets
+        setupTargets()
+        
+        // MARK: - Dispatch
+        brushColorDidChange()
+        strokeWidthDidChange()
+        lineCreating()
+        
+        textView.font = .systemFont(ofSize: CGFloat(textSizeSlider.value))
+        
+    }
+    
+    // MARK: - Setup Methods
+    private func setupCanvas() {
         imageView.image = galleryImage
         mainCanvasView.addSubview(canvasView)
+        
         editorConstraints.addConstraintsToCanvas(canvasView, view: mainCanvasView)
         
         sizeSlider.value = Float(canvasView.strokeWidth)
-                                
-        // MARK: - Size Menu
+    }
+    
+    private func setupContextMenu() {
         sizeInteraction = UIContextMenuInteraction(delegate: self)
         sizeActionButton.addInteraction(sizeInteraction!)
         
         shapesInteraction = UIContextMenuInteraction(delegate: self)
         addButton.addInteraction(shapesInteraction!)
         
-        // MARK: - Connections
+        textViewInteraction = UIContextMenuInteraction(delegate: self)
+        textView.addInteraction(textViewInteraction!)
+    }
+    
+    private func setupConnections() {
         brushesCollectionView.dataSource = self
         brushesCollectionView.delegate = self
         textView.delegate = self
         fontsCollectionView.dataSource = self
         fontsCollectionView.delegate = self
-        
-        // MARK: - Register
+    }
+    
+    private func setupRegister() {
         brushesCollectionView.register(BrushCollectionCell.self, forCellWithReuseIdentifier: brushesCellID)
         fontsCollectionView.register(FontsCollectionCell.self, forCellWithReuseIdentifier: fontsCellID)
-
-        // MARK: - Targets
+    }
+    
+    private func setupTargets() {
         undoButton.addTarget(self, action: #selector(undoButtonTapped), for: .touchUpInside)
         clearAllButton.addTarget(self, action: #selector(clearAllButtonTapped), for: .touchUpInside)
+        textCancelButton.addTarget(self, action: #selector(hideKeyboardTap(_:)), for: .touchUpInside)
+        textDoneButton.addTarget(self, action: #selector(hideKeyboardTap(_:)), for: .touchUpInside)
+        
         colorPickerButton.addTarget(self, action: #selector(colorPickerButtonTapped), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
@@ -190,10 +236,12 @@ final class EditorController: UIViewController {
         sizeSlider.addTarget(self, action: #selector(sizeSliderChanged), for: .valueChanged)
         alignmentButton.addTarget(self, action: #selector(alignmentButtonTapped), for: .touchUpInside)
         
-        // MARK: - Dispatch
-        brushColorDidChange()
-        strokeWidthDidChange()
-        lineCreating()
+        textSizeSlider.addTarget(self, action: #selector(textSizeSliderChanged(_:)), for: .valueChanged)
+
+        let dragInteraction = UIDragInteraction(delegate: self)
+        let dropInteraction = UIDropInteraction(delegate: self)
+        textView.addInteraction(dragInteraction)
+        view.addInteraction(dropInteraction)
     }
     
     // MARK: - @objc
@@ -227,8 +275,8 @@ final class EditorController: UIViewController {
             textMainView.isHidden = false
             
             canvasView.addSubview(textView)
-            canvasView.addSubview(textSizeSlider)
-            canvasView.addSubview(textSizeSliderView)
+            view.addSubview(textSizeSlider)
+            view.addSubview(textSizeSliderView)
             
             editorConstraints.addConstraintsToTextView(textView, canvasView: canvasView)
             editorConstraints.addConstraintsToTextSizeSlider(textSizeSlider, canvasView: canvasView, textView: textView)
@@ -288,7 +336,34 @@ final class EditorController: UIViewController {
         }
     }
     
-    // MARK: - Methods
+    @objc func hideKeyboardTap(_ sender: UIButton) {
+        if sender == textCancelButton {
+            
+        }
+        
+        if sender == textDoneButton {
+            
+        }
+        
+        textSizeSlider.isHidden = true
+        textSizeSliderView.isHidden = true
+        
+        textCancelButton.isHidden = true
+        textDoneButton.isHidden = true
+        
+        undoButton.isHidden = false
+        clearAllButton.isHidden = false
+        
+        view.endEditing(true)
+    }
+    
+    @objc func textSizeSliderChanged(_ sender: UISlider) {
+        let value = CGFloat(sender.value)
+        
+        textView.font = .systemFont(ofSize: value)
+    }
+    
+    // MARK: - Dispatch Methods
     private func brushColorDidChange(brushSizeView: UIView? = nil) {
         let colorPickerController = ColorPickerController.self
         colorPickerController.brushColorDidChange = {[weak self] color in
@@ -321,7 +396,7 @@ final class EditorController: UIViewController {
         canvasView.onLineCreating = {[weak self] bool in
             DispatchQueue.main.async {
                 self!.isLineExisting = bool
-                
+
                 if self!.isLineExisting {
                     self!.undoButton.isEnabled = true
                     self!.clearAllButton.isEnabled = true
@@ -335,6 +410,7 @@ final class EditorController: UIViewController {
         }
     }
     
+    // MARK: - Shapes Methods
     private func initShapeImageView(frame: CGRect) -> UIImageView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
@@ -416,6 +492,23 @@ extension EditorController: UIContextMenuInteractionDelegate {
             return UIContextMenuConfiguration(actionProvider: {_ in
                 UIMenu(title: "", children: [rectangle, ellipse, bubble, star, arrow])
             })
+        case textViewInteraction:
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) {_ in
+                self.textView.removeFromSuperview()
+            }
+            
+            let edit = UIAction(title: "Edit", image: UIImage(systemName: "pencil")) {_ in
+                self.textView.isSelectable = true
+            }
+            
+            let duplicate = UIAction(title: "Duplicate", image: UIImage(systemName: "doc.on.doc")) {_ in
+                
+            }
+            
+            return UIContextMenuConfiguration(actionProvider: {_ in
+                UIMenu(title: "", children: [delete, edit, duplicate])
+            })
+            
         default:
             return UIContextMenuConfiguration()
         }
@@ -540,5 +633,27 @@ extension EditorController: UITextViewDelegate {
         var newFrame = textView.frame
         newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
         textView.frame = newFrame
+        
+        textSizeSlider.isHidden = false
+        textSizeSliderView.isHidden = false
+        
+        undoButton.isHidden = true
+        clearAllButton.isHidden = true
+        
+        textCancelButton.isHidden = false
+        textDoneButton.isHidden = false
     }
+}
+
+extension EditorController: UIDragInteractionDelegate, UIDropInteractionDelegate {
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        
+        let provider = NSItemProvider(object: textView as! NSItemProviderWriting)
+        let item = UIDragItem(itemProvider: provider)
+        item.localObject = textView
+        
+        return [item]
+    }
+    
+    
 }

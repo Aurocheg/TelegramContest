@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIBezierPath {
+    // MARK: - Shapes for Context Menu
     static func createArrow(from start: CGPoint, to end: CGPoint, tailWidth: CGFloat, headWidth: CGFloat, headLength: CGFloat) -> UIBezierPath {
         let length = hypot(end.x - start.x, end.y - start.y)
         let tailLength = length - headLength
@@ -98,4 +99,6 @@ extension UIBezierPath {
         path.apply(transform)
         return path
     }
+    
+    // MARK: - Shapes for Brushes
 }

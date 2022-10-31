@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PencilKit
 
 // MARK: - ShapeType
 enum ShapeType {
@@ -34,6 +35,22 @@ final class EditorView: UIView {
         return button
     }()
     
+    public let textCancelButton: UIButton = {
+        let button = Button(background: .no)
+        button.isHidden = true
+        button.setTitle("Cancel", for: .normal)
+
+        return button
+    }()
+    
+    public let textDoneButton: UIButton = {
+        let button = Button(background: .no)
+        button.isHidden = true
+        button.setTitle("Done", for: .normal)
+
+        return button
+    }()
+    
     // MARK: - Image
     public let mainCanvasView = UIView()
     public let imageView: UIImageView = {
@@ -45,11 +62,8 @@ final class EditorView: UIView {
 
     // MARK: - Tools
     public let toolsView = UIView()
-    
     public let colorPickerButton = Button(image: UIImage(named: "colorPicker"), background: .no)
-    
     public let addButton = Button(image: UIImage(named: "add"), background: .dark)
-    
     public let brushesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 17.0, height: 93.0)
@@ -63,7 +77,6 @@ final class EditorView: UIView {
         return collectionView
     }()
     public let cancelButton = Button(image: UIImage(named: "cancel"), background: .no)
-    
     public let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Draw", "Text"])
         segmentedControl.selectedSegmentIndex = 0
@@ -71,7 +84,6 @@ final class EditorView: UIView {
         
         return segmentedControl
     }()
-    
     public let downloadButton: UIButton = {
         let button = Button(image: UIImage(named: "download"), background: .no)
         button.isEnabled = false
@@ -84,7 +96,6 @@ final class EditorView: UIView {
         view.isHidden = true
         return view
     }()
-    
     public let sizeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.transform = CGAffineTransform(translationX: -130.0, y: 0.0)
@@ -92,18 +103,14 @@ final class EditorView: UIView {
         
         return imageView
     }()
-    
     public var brushSizeView: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 1.0, y: 53, width: 31.0, height: 10.0)
         view.backgroundColor = .white
         return view
     }()
-    
     public let sizeBackButton = Button(image: UIImage(named: "back"), background: .no)
-    
     public let sizeSliderView = SizeSliderView()
-    
     public let sizeSlider: UISlider = {
         let slider = UISlider()
         let size = CGSize(width: 28.0, height: 28.0)
@@ -114,12 +121,13 @@ final class EditorView: UIView {
         
         slider.minimumValue = 1.0
         slider.maximumValue = 40.0
+        
+        slider.value = 20.0
         slider.setThumbImage(thumb, for: .normal)
         slider.setMinimumTrackImage(UIImage(), for: .normal)
         slider.setMaximumTrackImage(UIImage(), for: .normal)
         return slider
     }()
-    
     public let sizeActionButton: UIButton = {
         let button = UIButton()
         
@@ -131,51 +139,37 @@ final class EditorView: UIView {
         return button
     }()
     
-    // MARK: - Text
+    // MARK: - Text    
     public let textMainView: UIView = {
         let view = UIView()
         view.isHidden = true
         return view
     }()
-    
-    public let textView: UITextView = {
-        let textView = UITextView()
-
-        textView.showsHorizontalScrollIndicator = false
-        textView.showsVerticalScrollIndicator = false
-        textView.isScrollEnabled = false
-        
-        textView.font = .systemFont(ofSize: 48.0)
-        textView.backgroundColor = .clear
-        textView.autocorrectionType = .no
-        
-        textView.becomeFirstResponder()
-        
-        return textView
+    public let textView = TextView()
+    public let textSizeSliderView: UIView = {
+        let view = SizeSliderView()
+        view.isHidden = true
+        view.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+        return view
     }()
-    
-    public let textSizeSliderView = SizeSliderView()
     public let textSizeSlider: UISlider = {
         let slider = UISlider()
+        slider.isHidden = true
+        slider.transform = CGAffineTransform(rotationAngle: -.pi / 2)
         let size = CGSize(width: 28.0, height: 28.0)
         
         let thumbView = UIView()
         thumbView.backgroundColor = .white
         let thumb = slider.thumbImage(radius: 28.0, thumbView: thumbView, size: size)
         
-        slider.minimumValue = 1.0
-        slider.value = 10.0
-        slider.maximumValue = 40.0
+        slider.minimumValue = 20.0
+        slider.value = 30.0
+        slider.maximumValue = 90.0
         slider.setThumbImage(thumb, for: .normal)
-        slider.setMinimumTrackImage(UIImage(), for: .normal)
-        slider.setMaximumTrackImage(UIImage(), for: .normal)
         return slider
     }()
-    
     public let weightButton = Button(image: UIImage(named: "default"), background: .no)
-    
     public let alignmentButton = Button(image: UIImage(named: "textLeft"), background: .no)
-    
     public let fontsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = CGSize(width: 49.0, height: 30.0)
@@ -208,6 +202,8 @@ final class EditorView: UIView {
         // MARK: - Top
         addSubview(undoButton)
         addSubview(clearAllButton)
+        addSubview(textCancelButton)
+        addSubview(textDoneButton)
         
         // MARK: - Image
         addSubview(mainCanvasView)
@@ -244,10 +240,13 @@ final class EditorView: UIView {
         editorConstraints.addConstraintsToTopButton(undoButton, view: self, position: .left)
         editorConstraints.addConstraintsToTopButton(clearAllButton, view: self, position: .right)
         
+        editorConstraints.addConstraintsToTopButton(textCancelButton, view: self, position: .left, widthConstant: 53.0)
+        editorConstraints.addConstraintsToTopButton(textDoneButton, view: self, position: .right)
+        
         // MARK: - Image
         editorConstraints.addConstraintsToMainCanvas(mainCanvasView, view: self, parent: clearAllButton)
         editorConstraints.addConstraintsToCanvas(imageView, view: mainCanvasView)
-                
+        
         // MARK: - Tools
         editorConstraints.addConstraintsToToolsView(toolsView, view: self)
         editorConstraints.addConstraintsToBottomButton(colorPickerButton, view: toolsView, parent: cancelButton, bottomConstant: -16.0, position: .left)

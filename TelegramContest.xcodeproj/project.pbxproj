@@ -40,9 +40,11 @@
 		DE94C68A28FC1276008E3494 /* DismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C68928FC1276008E3494 /* DismissAnimation.swift */; };
 		DE94C69328FC3B7C008E3494 /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69228FC3B7C008E3494 /* SpectrumView.swift */; };
 		DE94C69528FC3BFF008E3494 /* SlidersConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */; };
+		DE977C02290FD8CE002D662D /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE977C01290FD8CE002D662D /* UIToolbar.swift */; };
 		DEA1082328FFCFC20043531E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1082228FFCFC20043531E /* UIImage.swift */; };
 		DEB3F9CC28FD42DE00FFAC08 /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB3F9CB28FD42DE00FFAC08 /* colorPalette.plist */; };
 		DEC2657828FF216C007E9FDB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC2657728FF216C007E9FDB /* UIColor.swift */; };
+		DECED4982910280400A9FDC9 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECED4972910280400A9FDC9 /* UITextView.swift */; };
 		DEDC39CF28F6E62300D3548C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39CE28F6E62300D3548C /* AppDelegate.swift */; };
 		DEDC39D128F6E62300D3548C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC39D028F6E62300D3548C /* SceneDelegate.swift */; };
 		DEDC39D828F6E62300D3548C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDC39D728F6E62300D3548C /* Assets.xcassets */; };
@@ -88,9 +90,11 @@
 		DE94C68928FC1276008E3494 /* DismissAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimation.swift; sourceTree = "<group>"; };
 		DE94C69228FC3B7C008E3494 /* SpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
 		DE94C69428FC3BFF008E3494 /* SlidersConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidersConstraints.swift; sourceTree = "<group>"; };
+		DE977C01290FD8CE002D662D /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
 		DEA1082228FFCFC20043531E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		DEB3F9CB28FD42DE00FFAC08 /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
 		DEC2657728FF216C007E9FDB /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		DECED4972910280400A9FDC9 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		DEDC39CB28F6E62300D3548C /* TelegramContest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramContest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDC39CE28F6E62300D3548C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEDC39D028F6E62300D3548C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				DE90C2A42900539600AA0FAF /* CAGradientLayer.swift */,
 				DE8326B92907E4D0003BE62E /* UIView.swift */,
 				DE147C09290D9E500021CF98 /* UIBezierPath.swift */,
+				DE977C01290FD8CE002D662D /* UIToolbar.swift */,
+				DECED4972910280400A9FDC9 /* UITextView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 				DE94C68628FC1246008E3494 /* PanelTransition.swift in Sources */,
 				DE94C67B28FB138F008E3494 /* UITextField.swift in Sources */,
 				DE334EE728F97B01001D5359 /* UIButton.swift in Sources */,
+				DE977C02290FD8CE002D662D /* UIToolbar.swift in Sources */,
 				DEDC39ED28F6E78F00D3548C /* AccessView.swift in Sources */,
 				DEDC39EA28F6E77700D3548C /* AccessController.swift in Sources */,
 				DE94C68128FBF224008E3494 /* ColorPickerController.swift in Sources */,
@@ -498,6 +505,7 @@
 				DE6270BB290599EB00D5941F /* ColorsCellConstraints.swift in Sources */,
 				DE59C85A28F834A0000B1D7D /* GalleryCellConstraints.swift in Sources */,
 				DE90C2A52900539600AA0FAF /* CAGradientLayer.swift in Sources */,
+				DECED4982910280400A9FDC9 /* UITextView.swift in Sources */,
 				DE90C2A3290051FD00AA0FAF /* String.swift in Sources */,
 				DE334EE428F947B3001D5359 /* EditorConstraints.swift in Sources */,
 			);
@@ -627,7 +635,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aurocheg";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A8U85SKFPU;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -659,7 +668,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aurocheg";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A8U85SKFPU;
 				GENERATE_INFOPLIST_FILE = YES;

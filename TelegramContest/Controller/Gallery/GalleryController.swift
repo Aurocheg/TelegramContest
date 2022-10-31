@@ -9,6 +9,8 @@ import UIKit
 import Photos
 
 final class GalleryController: UIViewController {
+    static var collectionViewDidResized: ((_ count: CGFloat) -> ())?
+    
     // MARK: - Gallery View
     private let galleryView = GalleryView()
     
@@ -21,7 +23,9 @@ final class GalleryController: UIViewController {
     private var assets = PHFetchResult<PHAsset>()
     private let screenWidth = UIScreen.main.bounds.size.width
     private let screenHeight = UIScreen.main.bounds.size.height
-    private var numberOfItems = 3
+    
+    private var numberOfItems: CGFloat = 2
+    private var numberOfSwipes = 0
         
     // MARK: - View Life Cycle Methods
     override func loadView() {
@@ -36,13 +40,19 @@ final class GalleryController: UIViewController {
                 self.galleryCollectionView.reloadData()
             }
         }
-        
         PHPhotoLibrary.shared().register(self)
         
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
-                
         galleryCollectionView.register(GalleryCollectionCell.self, forCellWithReuseIdentifier: "galleryCollectionCell")
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(resizeGalleryCollection(_:)))
+        galleryCollectionView.addGestureRecognizer(pinchGesture)
+    }
+    
+    // MARK: - @objc
+    @objc func resizeGalleryCollection(_ gestureRecognizer: UIPinchGestureRecognizer) {
+        
     }
     
     // MARK: - Photos Methods
@@ -112,12 +122,12 @@ extension GalleryController: UICollectionViewDelegateFlowLayout {
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         let itemSpacing: CGFloat = 1.0
-        let itemsInOneLine: CGFloat = 3
         flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-        let width = screenWidth - itemSpacing * CGFloat(itemsInOneLine - 1)
-        flow.itemSize = CGSize(width: floor(width / itemsInOneLine), height: width / itemsInOneLine)
-        return flow.itemSize
+        let width = screenWidth - itemSpacing * CGFloat(numberOfItems - 1)
+        let itemSize = CGSize(width: floor(width / numberOfItems), height: width / numberOfItems)
+        
+        return itemSize
     }
 }
 
@@ -135,6 +145,8 @@ extension GalleryController: UICollectionViewDataSource {
         let asset = assets[indexPath.item]
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
+        options.deliveryMode = .opportunistic
+        options.isSynchronous = true
         
         manager.requestImage(for: asset, targetSize: CGSize(width: screenWidth * 2, height: screenWidth * 2), contentMode: .aspectFill, options: options) {(image, _) in
             DispatchQueue.main.async {

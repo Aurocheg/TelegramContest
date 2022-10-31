@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 struct TouchPointsAndColor {
     var color: UIColor?
     var width: CGFloat?
@@ -67,20 +68,22 @@ final class CanvasView: UIView {
             CanvasView.onLineCreating?(true)
         }
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         lines.append(TouchPointsAndColor(color: UIColor(), points: [CGPoint]()))
         CanvasView.onLineCreating?(true)
     }
-    
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first?.location(in: nil) else { return }
-        
+
         guard var lastPoint = lines.popLast() else {return}
+
         lastPoint.points?.append(touch)
         lastPoint.color = strokeColor
         lastPoint.width = strokeWidth
         lastPoint.opacity = strokeOpacity
+        
         lines.append(lastPoint)
         setNeedsDisplay()
         CanvasView.onLineCreating?(true)
@@ -91,7 +94,7 @@ final class CanvasView: UIView {
         setNeedsDisplay()
         CanvasView.onLineCreating?(false)
     }
-    
+
     public func undoDraw() {
         if lines.count > 0 {
             lines.removeLast()
